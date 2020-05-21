@@ -7,6 +7,8 @@ import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.commonregistry.CommonPersonObjectClient
 import org.smartregister.dao.AbstractDao
 import org.smartregister.dao.AbstractDao.DataMap
+import java.text.SimpleDateFormat
+import java.util.*
 
 object HivDao : AbstractDao() {
     @JvmStatic
@@ -76,8 +78,18 @@ object HivDao : AbstractDao() {
                     getCursorValue(cursor, DBConstants.Key.PRIMARY_CARE_GIVER_PHONE_NUMBER, "")
                 memberObject.familyHeadPhoneNumber =
                     getCursorValue(cursor, DBConstants.Key.FAMILY_HEAD_PHONE_NUMBER, "")
+                memberObject.ctcNumber =
+                    getCursorValue(cursor, DBConstants.Key.CTC_NUMBER, "")
+                memberObject.cbhsNumber =
+                    getCursorValue(cursor, DBConstants.Key.CBHS_NUMBER, "")
+                memberObject.clientHivStatusDuringRegistration =
+                    getCursorValue(cursor, DBConstants.Key.CLIENT_HIV_STATUS_DURING_REGISTRATION, "")
+                memberObject.clientHivStatusAfterTesting =
+                    getCursorValue(cursor, DBConstants.Key.CLIENT_HIV_STATUS_AFTER_TESTING, "")
                 memberObject.hivRegistrationDate =
-                    getCursorValue(cursor, DBConstants.Key.HIV_REGISTRATION_DATE, "")
+                    getCursorValueAsDate(cursor, DBConstants.Key.HIV_REGISTRATION_DATE)
+                memberObject.isClosed =
+                    getCursorIntValue(cursor, DBConstants.Key.IS_CLOSED, 0)==1
                 var familyHeadName =
                     (getCursorValue(cursor, "family_head_first_name", "") + " "
                             + getCursorValue(cursor, "family_head_middle_name", ""))

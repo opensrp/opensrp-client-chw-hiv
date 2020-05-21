@@ -1,6 +1,7 @@
 package org.smartregister.chw.hiv.domain
 
 import java.io.Serializable
+import java.util.*
 
 
 /**
@@ -27,11 +28,10 @@ class HivMemberObject : Serializable {
     var phoneNumber: String? = null
     var familyHeadPhoneNumber: String? = null
     var otherPhoneNumber: String? = null
-    var hivStatus: String? = null
     var ctcNumber: String? = null
     var cbhsNumber: String? = null
     var clientHivStatusDuringRegistration: String? = null
     var clientHivStatusAfterTesting: String? = null
-    var hivRegistrationDate: String? = null
+    var hivRegistrationDate: Date? = null
     var isClosed: Boolean? = null
 }
