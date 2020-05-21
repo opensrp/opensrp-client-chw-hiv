@@ -33,7 +33,7 @@ open class BaseHivClientCallDialogFragment : DialogFragment(),
         inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle
     ): View {
         val dialogView = inflater.inflate(
-            R.layout.referral_member_call_widget_dialog_fragment, container, false
+            R.layout.hiv_member_call_widget_dialog_fragment, container, false
         ) as ViewGroup
         setUpPosition()
         if (listener == null) {
@@ -44,34 +44,34 @@ open class BaseHivClientCallDialogFragment : DialogFragment(),
     }
 
     private fun initUI(rootView: ViewGroup) {
-        if (StringUtils.isNotBlank(referralClientPhoneNumber)) {
-            rootView.findViewById<TextView>(R.id.call_referral_client_name)
-                ?.apply { text = referralClientName }
+        if (StringUtils.isNotBlank(hivClientPhoneNumber)) {
+            rootView.findViewById<TextView>(R.id.call_hiv_client)
+                ?.apply { text = hivClientName }
 
             rootView.findViewById<TextView>(R.id.call_hiv_client_phone)?.apply {
-                tag = referralClientPhoneNumber
-                text = Utils.getName(getString(R.string.call), referralClientPhoneNumber)
+                tag = hivClientPhoneNumber
+                text = Utils.getName(getString(R.string.call), hivClientPhoneNumber)
                 setOnClickListener(listener)
             }
 
         } else {
-            rootView.findViewById<View>(R.id.layout_malaria_client).visibility = View.GONE
+            rootView.findViewById<View>(R.id.layout_hiv_client).visibility = View.GONE
         }
-        if (StringUtils.isNotBlank(referralFamilyHeadPhone)) {
+        if (StringUtils.isNotBlank(hivFamilyPrimaryCareGiverPhone)) {
 
-            rootView.findViewById<TextView>(R.id.malaria_call_head_name)
-                ?.apply { text = referralFamilyHeadName }
+            rootView.findViewById<TextView>(R.id.hiv_call_primary_care_giver_name)
+                ?.apply { text = hivPrimaryCareGiverName }
 
-            rootView.findViewById<TextView>(R.id.hiv_call_head_phone)
+            rootView.findViewById<TextView>(R.id.hiv_call_primary_care_giver_phone_number)
                 ?.apply {
-                    tag = referralFamilyHeadPhone
-                    text = Utils.getName(getString(R.string.call), referralFamilyHeadPhone)
+                    tag = hivFamilyPrimaryCareGiverPhone
+                    text = Utils.getName(getString(R.string.call), hivFamilyPrimaryCareGiverPhone)
                     setOnClickListener(listener)
                 }
         } else {
-            rootView.findViewById<View>(R.id.malaria_layout_family_head).visibility = View.GONE
+            rootView.findViewById<View>(R.id.hiv_layout_family_primary_care_giver).visibility = View.GONE
         }
-        rootView.findViewById<View>(R.id.malaria_call_close).setOnClickListener(listener)
+        rootView.findViewById<View>(R.id.hiv_call_close).setOnClickListener(listener)
     }
 
     private fun setUpPosition() {
@@ -91,11 +91,11 @@ open class BaseHivClientCallDialogFragment : DialogFragment(),
 
     companion object {
 
-        const val DIALOG_TAG = "BaseReferralCallDialogFragment_DIALOG_TAG"
-        private var referralClientName: String? = null
-        private var referralClientPhoneNumber: String? = null
-        private var referralFamilyHeadName: String? = null
-        private var referralFamilyHeadPhone: String? = null
+        const val DIALOG_TAG = "BaseHivClientCallDialogFragment_DIALOG_TAG"
+        private var hivClientName: String? = null
+        private var hivClientPhoneNumber: String? = null
+        private var hivPrimaryCareGiverName: String? = null
+        private var hivFamilyPrimaryCareGiverPhone: String? = null
 
         fun launchDialog(
             activity: Activity, clientName: String?, referralClientPhone: String?,
@@ -104,10 +104,10 @@ open class BaseHivClientCallDialogFragment : DialogFragment(),
             val dialogFragment = newInstance()
             val ft = activity.fragmentManager.beginTransaction()
             val prev = activity.fragmentManager.findFragmentByTag(DIALOG_TAG)
-            referralClientPhoneNumber = referralClientPhone
-            referralClientName = clientName
-            referralFamilyHeadName = familyHeadName
-            referralFamilyHeadPhone = familyHeadPhone
+            hivClientPhoneNumber = referralClientPhone
+            hivClientName = clientName
+            hivPrimaryCareGiverName = familyHeadName
+            hivFamilyPrimaryCareGiverPhone = familyHeadPhone
             if (prev != null) {
                 ft.remove(prev)
             }

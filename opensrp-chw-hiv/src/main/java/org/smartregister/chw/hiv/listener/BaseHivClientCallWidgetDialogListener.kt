@@ -13,10 +13,10 @@ class BaseHivClientCallWidgetDialogListener(private val callDialogFragment: Base
     View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.malaria_call_close -> {
+            R.id.hiv_call_close -> {
                 callDialogFragment.dismiss()
             }
-            R.id.hiv_call_head_phone, R.id.call_hiv_client_phone -> {
+            R.id.hiv_call_primary_care_giver_phone_number, R.id.call_hiv_client_phone -> {
                 try {
                     val phoneNumber = view.tag as String
                     Util.launchDialer(callDialogFragment.activity, callDialogFragment, phoneNumber)
