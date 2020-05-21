@@ -67,7 +67,7 @@ open class BaseHivRegisterFragmentPresenter(
     override fun getMainTable() = Constants.Tables.HIV
 
     override fun getDueFilterCondition() =
-        "ec_hiv.hiv_status = '${Constants.HivStatus.UNKNOWN}'"
+        "ec_hiv_register.client_hiv_status_during_registration = '${Constants.HivStatus.UNKNOWN}'"
 
     init {
         config = model.defaultRegisterConfiguration()!!
