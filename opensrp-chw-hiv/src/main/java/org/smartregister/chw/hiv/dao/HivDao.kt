@@ -55,7 +55,7 @@ object HivDao : AbstractDao() {
                     where m.base_entity_id ='${baseEntityID}' """
         val dataMap =
             DataMap { cursor: Cursor? ->
-                val memberObject = HivMemberObject()
+                val memberObject = HivMemberObject(null)
                 memberObject.firstName = getCursorValue(cursor, DBConstants.Key.FIRST_NAME, "")
                 memberObject.middleName = getCursorValue(cursor, DBConstants.Key.MIDDLE_NAME, "")
                 memberObject.lastName = getCursorValue(cursor, DBConstants.Key.LAST_NAME, "")

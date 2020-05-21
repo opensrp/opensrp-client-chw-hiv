@@ -27,6 +27,7 @@ import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
 import org.smartregister.chw.hiv.dao.HivDao
+import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.interactor.BaseRegisterFormsInteractor
 import org.smartregister.chw.hiv.model.AbstractRegisterFormModel
 import org.smartregister.chw.hiv.model.BaseRegisterFormModel
@@ -74,7 +75,7 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
             action = getStringExtra(Constants.ActivityPayload.ACTION)
             formName = getStringExtra(Constants.ActivityPayload.HIV_REGISTRATION_FORM_NAME)
             useDefaultNeatFormLayout =
-                getBooleanExtra(Constants.ActivityPayload.USE_DEFAULT_NEAT_FORM_LAYOUT, false)
+                getBooleanExtra(Constants.ActivityPayload.USE_DEFAULT_NEAT_FORM_LAYOUT, true)
             try {
                 jsonForm = JSONObject(getStringExtra(Constants.ActivityPayload.JSON_FORM))
             } catch (e: JSONException) {
@@ -157,10 +158,7 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
                             ).apply {
                                 this.columnmaps = commonPersonObject.columnmaps
                             }.also {
-                                viewModel!!.hivMemberObject =
-                                    commonPersonObject.columnmaps[DBConstants.Key.BASE_ENTITY_ID]?.let { it1 ->
-                                        HivDao.getMember(it1)
-                                    }
+                                viewModel!!.hivMemberObject = HivMemberObject(it)
                             }
                         }
                 }
