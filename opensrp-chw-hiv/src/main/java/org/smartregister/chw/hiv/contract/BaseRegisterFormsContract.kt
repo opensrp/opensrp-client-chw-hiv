@@ -10,7 +10,7 @@ import org.smartregister.domain.Location
 import java.util.*
 
 /**
- * Contract for IssueReferral
+ * Contract for BaseHivRegistrationForms
  */
 interface BaseRegisterFormsContract {
 
@@ -31,7 +31,7 @@ interface BaseRegisterFormsContract {
     }
 
     /**
-     * Presenter contract for issue referral functionality
+     * Presenter contract for hiv registration forms functionality
      */
     interface Presenter {
 
@@ -73,7 +73,7 @@ interface BaseRegisterFormsContract {
     }
 
     /**
-     * Implementation for Issue referral Model
+     * Implementation for BaseHivRegistrationForms Model
      */
     interface Model {
 
