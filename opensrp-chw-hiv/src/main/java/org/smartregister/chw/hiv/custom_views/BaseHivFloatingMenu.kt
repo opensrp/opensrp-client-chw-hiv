@@ -8,7 +8,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.fragment.BaseHivClientCallDialogFragment.Companion.launchDialog
-import org.smartregister.chw.hiv.util.Util.getFullName
+import org.smartregister.chw.hiv.util.HivUtil.getFullName
 
 class BaseHivFloatingMenu(context: Context?, val hivMemberObject: HivMemberObject) :
     LinearLayout(context), View.OnClickListener {

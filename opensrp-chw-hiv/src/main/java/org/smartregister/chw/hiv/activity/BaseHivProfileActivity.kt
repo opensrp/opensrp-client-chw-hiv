@@ -22,8 +22,8 @@ import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.interactor.BaseHivProfileInteractor
 import org.smartregister.chw.hiv.presenter.BaseHivProfilePresenter
 import org.smartregister.chw.hiv.util.Constants
-import org.smartregister.chw.hiv.util.Util.fromHtml
-import org.smartregister.chw.hiv.util.Util.getMemberProfileImageResourceIDentifier
+import org.smartregister.chw.hiv.util.HivUtil.fromHtml
+import org.smartregister.chw.hiv.util.HivUtil.getMemberProfileImageResourceIDentifier
 import org.smartregister.domain.AlertStatus
 import org.smartregister.helper.ImageRenderHelper
 import org.smartregister.view.activity.BaseProfileActivity
@@ -31,7 +31,7 @@ import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BaseHivProfileActivity : BaseProfileActivity(),
+open class BaseHivProfileActivity : BaseProfileActivity(),
     BaseHivProfileContract.View {
     private var lastVisitRow: View? = null
     private var recordFollowUpVisitLayout: LinearLayout? = null
@@ -49,9 +49,9 @@ class BaseHivProfileActivity : BaseProfileActivity(),
     private var tvFamilyStatus: TextView? = null
     private var tvRecordHivFollowUp: TextView? = null
     private var tvHivRow: TextView? = null
-    private var hivProfilePresenter: BaseHivProfileContract.Presenter? = null
+    var hivProfilePresenter: BaseHivProfileContract.Presenter? = null
     private var hivFloatingMenu: BaseHivFloatingMenu? = null
-    private var hivMemberObject: HivMemberObject? = null
+    var hivMemberObject: HivMemberObject? = null
     private var numOfDays = 0
     private var progressBar: ProgressBar? = null
     private var profileImageView: CircleImageView? = null
@@ -82,7 +82,8 @@ class BaseHivProfileActivity : BaseProfileActivity(),
         if (Build.VERSION.SDK_INT >= 21) {
             appBarLayout.outlineProvider = null
         }
-        hivMemberObject = intent.getSerializableExtra(Constants.ActivityPayload.MEMBER_OBJECT) as HivMemberObject
+        hivMemberObject =
+            intent.getSerializableExtra(Constants.ActivityPayload.MEMBER_OBJECT) as HivMemberObject
         setupViews()
         initializePresenter()
         fetchProfileData()
@@ -131,7 +132,7 @@ class BaseHivProfileActivity : BaseProfileActivity(),
             BaseHivProfilePresenter(this, BaseHivProfileInteractor(), hivMemberObject!!)
     }
 
-    private fun initializeCallFAB() {
+    fun initializeCallFAB() {
         if (StringUtils.isNotBlank(hivMemberObject!!.phoneNumber)
             || StringUtils.isNotBlank(hivMemberObject!!.familyHeadPhoneNumber)
         ) {

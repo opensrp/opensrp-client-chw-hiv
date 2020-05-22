@@ -21,6 +21,7 @@ import com.google.gson.Gson
 import org.apache.commons.lang3.StringUtils
 import org.json.JSONObject
 import org.koin.core.KoinComponent
+import org.smartregister.chw.anc.domain.MemberObject
 import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseHivClientCallDialogContract
@@ -37,7 +38,7 @@ import java.util.*
 /**
  * This provides common utilities functions
  */
-object Util : KoinComponent {
+object HivUtil : KoinComponent {
 
     /**
      * Uses the [hivLibrary] client processor to to save the given OpenSRP [baseEvent]
@@ -155,5 +156,15 @@ object Util : KoinComponent {
         return nameBuilder.toString()
     }
 
+    @JvmStatic
+    fun toMember(memberObject: HivMemberObject): MemberObject? {
+        val res = MemberObject()
+        res.baseEntityId = memberObject.baseEntityId
+        res.firstName = memberObject.firstName
+        res.lastName = memberObject.lastName
+        res.middleName = memberObject.middleName
+        res.dob = memberObject.age
+        return res
+    }
 
 }

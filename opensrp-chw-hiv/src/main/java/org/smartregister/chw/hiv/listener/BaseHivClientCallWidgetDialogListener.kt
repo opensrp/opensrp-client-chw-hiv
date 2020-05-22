@@ -3,7 +3,7 @@ package org.smartregister.chw.hiv.listener
 import android.view.View
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.fragment.BaseHivClientCallDialogFragment
-import org.smartregister.chw.hiv.util.Util
+import org.smartregister.chw.hiv.util.HivUtil
 import timber.log.Timber
 
 /**
@@ -19,7 +19,7 @@ class BaseHivClientCallWidgetDialogListener(private val callDialogFragment: Base
             R.id.hiv_call_primary_care_giver_phone_number, R.id.call_hiv_client_phone -> {
                 try {
                     val phoneNumber = view.tag as String
-                    Util.launchDialer(callDialogFragment.activity, callDialogFragment, phoneNumber)
+                    HivUtil.launchDialer(callDialogFragment.activity, callDialogFragment, phoneNumber)
                     callDialogFragment.dismiss()
                 } catch (e: IllegalStateException) {
                     Timber.e(e)

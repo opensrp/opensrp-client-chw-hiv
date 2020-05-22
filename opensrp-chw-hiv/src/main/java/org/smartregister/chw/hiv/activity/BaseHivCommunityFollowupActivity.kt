@@ -42,7 +42,7 @@ import java.io.FileNotFoundException
 /**
  * The base class for hiv followup activity. implements [BaseHivFollowupContract.View]
  */
-open class BaseHivFollowupActivity : AppCompatActivity(), BaseHivFollowupContract.View {
+open class BaseHivCommunityFollowupActivity : AppCompatActivity(), BaseHivFollowupContract.View {
 
     protected var hivMemberObject: HivMemberObject? = null
     protected var formName: String? = null

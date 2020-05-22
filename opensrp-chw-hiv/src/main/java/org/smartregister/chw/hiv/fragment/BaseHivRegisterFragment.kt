@@ -1,14 +1,19 @@
 package org.smartregister.chw.hiv.fragment
 
+import android.app.Activity
 import android.content.Context
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.smartregister.chw.hiv.R
+import org.smartregister.chw.hiv.activity.BaseHivFollowUpVisitActivity
 import org.smartregister.chw.hiv.contract.BaseHivRegisterFragmentContract
+import org.smartregister.chw.hiv.dao.HivDao
+import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.model.BaseHivRegisterFragmentModel
 import org.smartregister.chw.hiv.presenter.BaseHivRegisterFragmentPresenter
 import org.smartregister.chw.hiv.provider.HivRegisterProvider
+import org.smartregister.chw.hiv.util.HivUtil
 import org.smartregister.commonregistry.CommonPersonObjectClient
 import org.smartregister.configurableviews.model.View
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter
@@ -104,17 +109,22 @@ open class BaseHivRegisterFragment : BaseRegisterFragment(),
         }
         if (view.tag is CommonPersonObjectClient && view.getTag(R.id.VIEW_ID) === CLICK_VIEW_NORMAL) {
             openProfile(view.tag as CommonPersonObjectClient)
+        } else if (view.tag is CommonPersonObjectClient && view.getTag(R.id.VIEW_ID) === FOLLOW_UP_VISIT) {
+            openFollowUpVisit(HivDao.getMember((view.tag as CommonPersonObjectClient).caseId))
         }
     }
 
     protected open fun openProfile(client: CommonPersonObjectClient?) = Unit
-
-    protected open fun openFollowUpVisit(client: CommonPersonObjectClient?) = Unit
 
     override fun showNotFoundPopup(s: String) = Unit
 
     companion object {
         const val CLICK_VIEW_NORMAL = "click_view_normal"
         const val FOLLOW_UP_VISIT = "follow_up_visit"
+    }
+
+    protected open fun openFollowUpVisit(hivMemberObject: HivMemberObject?) {
+        BaseHivFollowUpVisitActivity.startMe(activity as Activity,
+            hivMemberObject?.let { HivUtil.toMember(it) }, false)
     }
 }

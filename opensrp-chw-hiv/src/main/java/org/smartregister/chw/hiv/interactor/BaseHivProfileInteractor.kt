@@ -8,7 +8,7 @@ import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.domain.AlertStatus
 import java.util.*
 
-class BaseHivProfileInteractor @VisibleForTesting internal constructor(
+open class BaseHivProfileInteractor @VisibleForTesting internal constructor(
     var appExecutors: AppExecutors
 ) : BaseHivProfileContract.Interactor {
 

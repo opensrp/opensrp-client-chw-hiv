@@ -7,7 +7,7 @@ import org.smartregister.domain.AlertStatus
 import org.smartregister.view.contract.BaseProfileContract
 import java.util.*
 
-class BaseHivProfilePresenter(
+open class BaseHivProfilePresenter(
     override val view: BaseHivProfileContract.View?,
     val interactor: BaseHivProfileContract.Interactor,
     var hivMemberObject: HivMemberObject

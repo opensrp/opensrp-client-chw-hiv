@@ -2,12 +2,13 @@ package org.smartregister.chw.hiv.dao
 
 import android.database.Cursor
 import org.smartregister.chw.anc.domain.Visit
+import org.smartregister.chw.hiv.domain.HivAlertObject
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.util.DBConstants
-import org.smartregister.commonregistry.CommonPersonObjectClient
 import org.smartregister.dao.AbstractDao
 import org.smartregister.dao.AbstractDao.DataMap
-import java.text.SimpleDateFormat
+import timber.log.Timber
+import java.math.BigDecimal
 import java.util.*
 
 object HivDao : AbstractDao() {
@@ -83,13 +84,17 @@ object HivDao : AbstractDao() {
                 memberObject.cbhsNumber =
                     getCursorValue(cursor, DBConstants.Key.CBHS_NUMBER, "")
                 memberObject.clientHivStatusDuringRegistration =
-                    getCursorValue(cursor, DBConstants.Key.CLIENT_HIV_STATUS_DURING_REGISTRATION, "")
+                    getCursorValue(
+                        cursor,
+                        DBConstants.Key.CLIENT_HIV_STATUS_DURING_REGISTRATION,
+                        ""
+                    )
                 memberObject.clientHivStatusAfterTesting =
                     getCursorValue(cursor, DBConstants.Key.CLIENT_HIV_STATUS_AFTER_TESTING, "")
                 memberObject.hivRegistrationDate =
-                    getCursorValueAsDate(cursor, DBConstants.Key.HIV_REGISTRATION_DATE)
+                    Date(BigDecimal(getCursorValue(cursor, DBConstants.Key.HIV_REGISTRATION_DATE)).toLong())
                 memberObject.isClosed =
-                    getCursorIntValue(cursor, DBConstants.Key.IS_CLOSED, 0)==1
+                    getCursorIntValue(cursor, DBConstants.Key.IS_CLOSED, 0) == 1
                 var familyHeadName =
                     (getCursorValue(cursor, "family_head_first_name", "") + " "
                             + getCursorValue(cursor, "family_head_middle_name", ""))
@@ -115,19 +120,17 @@ object HivDao : AbstractDao() {
     }
 
     @JvmStatic
-    fun getLatestHivVisit(baseEntityId: String, entityType: String): Visit? {
+    fun getHivVisitsMedicalHistory(baseEntityId: String): List<Visit>? {
         val sql =
             """SELECT visit_date, visit_id,visit_type, parent_visit_id
                FROM Visits v
                INNER JOIN ec_hiv_register hv on hv.base_entity_id = v.base_entity_id
                WHERE v.base_entity_id = '${baseEntityId}' COLLATE NOCASE
-                    AND v.visit_type = '${entityType}' COLLATE NOCASE
                     AND strftime('%Y%d%m', (datetime(v.visit_date/1000, 'unixepoch')))  >= substr(hv.hiv_registration_date,7,4) || substr(hv.hiv_registration_date,4,2) || substr(hv.hiv_registration_date,1,2)
                "ORDER BY v.visit_date DESC"""
-        val visit = readData(sql, visitDataMap)
-        return if (visit.size == 0) {
-            null
-        } else visit[0]
+
+        val visits = readData(sql, visitDataMap)
+        return visits ?: ArrayList()
     }
 
     private val visitDataMap: DataMap<Visit>
@@ -136,7 +139,30 @@ object HivDao : AbstractDao() {
             visit.visitId = getCursorValue(c, "visit_id")
             visit.parentVisitID = getCursorValue(c, "parent_visit_id")
             visit.visitType = getCursorValue(c, "visit_type")
-            visit.date = getCursorValueAsDate(c, "visit_date")
+            visit.date = Date(BigDecimal(getCursorValue(c, "visit_date")).toLong())
             visit
         }
+
+    @JvmStatic
+    fun getHivDetails(baseEntityID: String): List<HivAlertObject?>? {
+        val sql =
+            """select hiv_registration_date from ec_hiv_register where base_entity_id = '${baseEntityID}' """
+        val hivAlertObjects: List<HivAlertObject?>? =
+            readData(sql, getVisitDetailsDataMap())
+        return if (hivAlertObjects!!.isEmpty()) {
+            null
+        } else hivAlertObjects
+    }
+
+    private fun getVisitDetailsDataMap(): DataMap<HivAlertObject>? {
+        return DataMap<HivAlertObject> { c: Cursor? ->
+            val hivAlertObject = HivAlertObject()
+            try {
+                hivAlertObject.hivStartDate = getCursorValue(c, "hiv_registration_date")
+            } catch (e: Exception) {
+                Timber.e(e.toString())
+            }
+            hivAlertObject
+        }
+    }
 }
