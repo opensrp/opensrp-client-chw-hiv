@@ -92,7 +92,14 @@ object HivDao : AbstractDao() {
                 memberObject.clientHivStatusAfterTesting =
                     getCursorValue(cursor, DBConstants.Key.CLIENT_HIV_STATUS_AFTER_TESTING, "")
                 memberObject.hivRegistrationDate =
-                    Date(BigDecimal(getCursorValue(cursor, DBConstants.Key.HIV_REGISTRATION_DATE)).toLong())
+                    Date(
+                        BigDecimal(
+                            getCursorValue(
+                                cursor,
+                                DBConstants.Key.HIV_REGISTRATION_DATE
+                            )
+                        ).toLong()
+                    )
                 memberObject.isClosed =
                     getCursorIntValue(cursor, DBConstants.Key.IS_CLOSED, 0) == 1
                 var familyHeadName =

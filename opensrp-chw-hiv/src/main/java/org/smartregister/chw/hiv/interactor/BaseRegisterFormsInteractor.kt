@@ -7,8 +7,8 @@ import org.koin.core.inject
 import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
 import org.smartregister.chw.hiv.util.Constants
-import org.smartregister.chw.hiv.util.JsonFormUtils
 import org.smartregister.chw.hiv.util.HivUtil.processEvent
+import org.smartregister.chw.hiv.util.JsonFormUtils
 import timber.log.Timber
 import java.util.*
 

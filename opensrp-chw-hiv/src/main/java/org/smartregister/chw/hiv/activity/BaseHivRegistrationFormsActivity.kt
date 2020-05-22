@@ -26,14 +26,12 @@ import org.smartregister.AllConstants
 import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
-import org.smartregister.chw.hiv.dao.HivDao
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.interactor.BaseRegisterFormsInteractor
 import org.smartregister.chw.hiv.model.AbstractRegisterFormModel
 import org.smartregister.chw.hiv.model.BaseRegisterFormModel
 import org.smartregister.chw.hiv.presenter.BaseRegisterFormsPresenter
 import org.smartregister.chw.hiv.util.Constants
-import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.chw.hiv.util.JsonFormConstants
 import org.smartregister.chw.hiv.util.JsonFormUtils.addFormMetadata
 import org.smartregister.chw.hiv.util.JsonFormUtils.getFormAsJson
