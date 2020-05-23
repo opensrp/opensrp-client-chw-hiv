@@ -172,10 +172,24 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
     override fun onCompleteStepper() {
         val formData = formBuilder!!.getFormData()
         if (formData.isNotEmpty()) {
-            //Saving HIV registration Date
-            formData[JsonFormConstants.HIV_REGISTRATION_DATE] = NFormViewData().apply {
-                value = Calendar.getInstance().timeInMillis
+            val formJsonObject: JSONObject? = jsonForm ?: getFormAsJson(formName, this)
+
+            if (formJsonObject?.getString(JsonFormConstants.ENCOUNTER_TYPE)
+                    .equals(Constants.EventType.REGISTRATION)
+            ) {
+                //Saving TB registration Date
+                formData[JsonFormConstants.HIV_REGISTRATION_DATE] = NFormViewData().apply {
+                    value = Calendar.getInstance().timeInMillis
+                }
+            } else if (formJsonObject?.getString(JsonFormConstants.ENCOUNTER_TYPE)
+                    .equals(Constants.EventType.FOLLOW_UP_VISIT)
+            ) {
+                //Saving TB followup visit Date
+                formData[JsonFormConstants.HIV_FOLLOWUP_VISIT_DATE] = NFormViewData().apply {
+                    value = Calendar.getInstance().timeInMillis
+                }
             }
+
             presenter!!.saveForm(formData, jsonForm!!)
             Timber.i("Saved data = %s", Gson().toJson(formData))
             finish()
