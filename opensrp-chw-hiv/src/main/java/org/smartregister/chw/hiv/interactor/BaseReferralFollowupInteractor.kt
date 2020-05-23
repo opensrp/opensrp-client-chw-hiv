@@ -19,7 +19,7 @@ import java.util.*
  */
 class BaseReferralFollowupInteractor : BaseHivFollowupContract.Interactor {
 
-    val referralLibrary by inject<HivLibrary>()
+    val hivLibrary by inject<HivLibrary>()
 
     @Throws(Exception::class)
     override fun saveFollowup(
@@ -34,7 +34,7 @@ class BaseReferralFollowupInteractor : BaseHivFollowupContract.Interactor {
     ) {
         val baseEvent =
             JsonFormUtils.processJsonForm(
-                referralLibrary, baseEntityId, valuesHashMap!!, jsonObject,
+                hivLibrary, baseEntityId, valuesHashMap!!, jsonObject,
                 Constants.EventType.REGISTRATION
             )
         baseEvent.eventId = UUID.randomUUID().toString()

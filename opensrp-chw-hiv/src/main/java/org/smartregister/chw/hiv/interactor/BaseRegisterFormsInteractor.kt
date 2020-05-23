@@ -4,10 +4,13 @@ import com.google.gson.Gson
 import com.nerdstone.neatformcore.domain.model.NFormViewData
 import org.json.JSONObject
 import org.koin.core.inject
+import org.smartregister.chw.anc.AncLibrary
+import org.smartregister.chw.anc.util.NCUtils
 import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.HivUtil.processEvent
+import org.smartregister.chw.hiv.util.JsonFormConstants
 import org.smartregister.chw.hiv.util.JsonFormUtils
 import timber.log.Timber
 import java.util.*
@@ -29,10 +32,21 @@ class BaseRegisterFormsInteractor : BaseRegisterFormsContract.Interactor {
         val event =
             JsonFormUtils.processJsonForm(
                 hivLibrary, baseEntityId, valuesHashMap,
-                jsonObject, Constants.EventType.REGISTRATION
+                jsonObject, jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE)
             )
         Timber.i("Event = %s", Gson().toJson(event))
         processEvent(hivLibrary, event)
+
+        when (Constants.EventType.FOLLOW_UP_VISIT) {
+            jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) -> {
+                val visit = NCUtils.eventToVisit(
+                    event,
+                    org.smartregister.chw.anc.util.JsonFormUtils.generateRandomUUIDString()
+                )
+                visit.preProcessedJson = Gson().toJson(event)
+                AncLibrary.getInstance().visitRepository().addVisit(visit)
+            }
+        }
 
         callBack.onRegistrationSaved(true)
     }
