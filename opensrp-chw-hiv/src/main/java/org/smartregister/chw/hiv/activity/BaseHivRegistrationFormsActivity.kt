@@ -32,10 +32,14 @@ import org.smartregister.chw.hiv.model.AbstractRegisterFormModel
 import org.smartregister.chw.hiv.model.BaseRegisterFormModel
 import org.smartregister.chw.hiv.presenter.BaseRegisterFormsPresenter
 import org.smartregister.chw.hiv.util.Constants
+import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.chw.hiv.util.JsonFormConstants
 import org.smartregister.chw.hiv.util.JsonFormUtils.addFormMetadata
 import org.smartregister.chw.hiv.util.JsonFormUtils.getFormAsJson
 import org.smartregister.commonregistry.CommonPersonObjectClient
+import org.smartregister.util.JsonFormUtils
+import org.smartregister.util.JsonFormUtils.OPENMRS_ENTITY
+import org.smartregister.util.JsonFormUtils.OPENMRS_ENTITY_ID
 import timber.log.Timber
 import java.util.*
 
@@ -185,9 +189,15 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
                     .equals(Constants.EventType.FOLLOW_UP_VISIT)
             ) {
                 //Saving HIV followup visit Date
-                formData[JsonFormConstants.HIV_FOLLOWUP_VISIT_DATE] = NFormViewData().apply {
-                    value = Calendar.getInstance().timeInMillis
-                }
+                formData[JsonFormConstants.HIV_FOLLOWUP_VISIT_DATE] =
+                    NFormViewData().apply {
+                        value = Calendar.getInstance().timeInMillis
+                        metadata = hashMapOf(
+                            OPENMRS_ENTITY to "concept",
+                            OPENMRS_ENTITY_ID to DBConstants.Key.HIV_FOLLOWUP_VISIT_DATE,
+                            JsonFormUtils.OPENMRS_ENTITY_PARENT to ""
+                        )
+                    }
             }
 
             presenter!!.saveForm(formData, jsonForm!!)
