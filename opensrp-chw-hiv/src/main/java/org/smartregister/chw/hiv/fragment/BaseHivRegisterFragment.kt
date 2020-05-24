@@ -12,7 +12,7 @@ import org.smartregister.chw.hiv.dao.HivDao
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.model.BaseHivRegisterFragmentModel
 import org.smartregister.chw.hiv.presenter.BaseHivRegisterFragmentPresenter
-import org.smartregister.chw.hiv.provider.HivRegisterProvider
+import org.smartregister.chw.hiv.provider.BaseHivRegisterProvider
 import org.smartregister.chw.hiv.util.HivUtil
 import org.smartregister.commonregistry.CommonPersonObjectClient
 import org.smartregister.configurableviews.model.View
@@ -34,10 +34,10 @@ open class BaseHivRegisterFragment : BaseRegisterFragment(),
 
     @Suppress("INACCESSIBLE_TYPE")
     override fun initializeAdapter(visibleColumns: Set<View>?) {
-        val referralRegisterProvider = HivRegisterProvider(
+        val referralRegisterProvider = BaseHivRegisterProvider(
             activity as Context, paginationViewHandler, registerActionHandler, visibleColumns
         )
-        clientAdapter = RecyclerViewPaginatedAdapter<HivRegisterProvider.RegisterViewHolder>(
+        clientAdapter = RecyclerViewPaginatedAdapter<BaseHivRegisterProvider.RegisterViewHolder>(
             null,
             referralRegisterProvider as RecyclerViewProvider<RecyclerView.ViewHolder>,
             context().commonrepository(tablename)

@@ -25,11 +25,11 @@ import java.text.MessageFormat
 import java.util.*
 import org.smartregister.configurableviews.model.View as ConfigurableView
 
-open class HivRegisterProvider(
+open class BaseHivRegisterProvider(
     private val context: Context, private val paginationClickListener: View.OnClickListener,
     private var onClickListener: View.OnClickListener,
     private val visibleColumns: Set<ConfigurableView>?
-) : RecyclerViewProvider<HivRegisterProvider.RegisterViewHolder> {
+) : RecyclerViewProvider<BaseHivRegisterProvider.RegisterViewHolder> {
 
     private val inflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
