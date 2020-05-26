@@ -50,7 +50,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     private var tvRecordHivFollowUp: TextView? = null
     private var tvHivRow: TextView? = null
     var hivProfilePresenter: BaseHivProfileContract.Presenter? = null
-    private var hivFloatingMenu: BaseHivFloatingMenu? = null
+    var hivFloatingMenu: BaseHivFloatingMenu? = null
     var hivMemberObject: HivMemberObject? = null
     private var numOfDays = 0
     private var progressBar: ProgressBar? = null
@@ -132,7 +132,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
             BaseHivProfilePresenter(this, BaseHivProfileInteractor(), hivMemberObject!!)
     }
 
-    fun initializeCallFAB() {
+    open fun initializeCallFAB() {
         if (StringUtils.isNotBlank(hivMemberObject!!.phoneNumber)
             || StringUtils.isNotBlank(hivMemberObject!!.familyHeadPhoneNumber)
         ) {

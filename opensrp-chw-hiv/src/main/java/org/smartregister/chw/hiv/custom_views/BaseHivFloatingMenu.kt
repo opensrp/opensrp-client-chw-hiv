@@ -10,9 +10,10 @@ import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.fragment.BaseHivClientCallDialogFragment.Companion.launchDialog
 import org.smartregister.chw.hiv.util.HivUtil.getFullName
 
-class BaseHivFloatingMenu(context: Context?, val hivMemberObject: HivMemberObject) :
+open class BaseHivFloatingMenu(context: Context?, val hivMemberObject: HivMemberObject) :
     LinearLayout(context), View.OnClickListener {
-    fun initUi() {
+
+    open fun initUi() {
         View.inflate(context, R.layout.hiv_call_floating_menu, this)
         val fab: FloatingActionButton = findViewById(R.id.hiv_fab)
         fab.setOnClickListener(this)
