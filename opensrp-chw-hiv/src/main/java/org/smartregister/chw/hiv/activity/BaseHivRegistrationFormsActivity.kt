@@ -1,13 +1,14 @@
 package org.smartregister.chw.hiv.activity
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import com.google.gson.Gson
 import com.nerdstone.neatandroidstepper.core.domain.StepperActions
 import com.nerdstone.neatandroidstepper.core.model.StepperModel
 import com.nerdstone.neatandroidstepper.core.model.StepperModel.IndicatorType
@@ -201,7 +202,8 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
             }
 
             presenter!!.saveForm(formData, jsonForm!!)
-            Timber.i("Saved data = %s", Gson().toJson(formData))
+            val intent = Intent()
+            setResult(Activity.RESULT_OK, intent);
             finish()
         }
     }
