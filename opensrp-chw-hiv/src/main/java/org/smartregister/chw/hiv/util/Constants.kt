@@ -15,7 +15,7 @@ object Constants {
         const val HIV_REGISTER = "hiv_register"
     }
 
-    object ReferralMemberObject {
+    object HivMemberObject {
         const val MEMBER_OBJECT = "memberObject"
         const val COMMON_PERSON_OBJECT = "commonPersonObjectClient"
     }

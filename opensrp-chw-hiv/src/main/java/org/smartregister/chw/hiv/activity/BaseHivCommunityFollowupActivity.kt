@@ -63,7 +63,7 @@ open class BaseHivCommunityFollowupActivity : AppCompatActivity(), BaseHivFollow
 
         with(this.intent) {
             hivMemberObject =
-                getSerializableExtra(Constants.ReferralMemberObject.MEMBER_OBJECT) as HivMemberObject
+                getSerializableExtra(Constants.HivMemberObject.MEMBER_OBJECT) as HivMemberObject
             formName = getStringExtra(Constants.ActivityPayload.HIV_FOLLOWUP_FORM_NAME)
             try {
                 jsonForm =
@@ -72,7 +72,7 @@ open class BaseHivCommunityFollowupActivity : AppCompatActivity(), BaseHivFollow
                 Timber.e(e)
             }
             hivMemberObject =
-                getSerializableExtra(Constants.ReferralMemberObject.MEMBER_OBJECT) as HivMemberObject
+                getSerializableExtra(Constants.HivMemberObject.MEMBER_OBJECT) as HivMemberObject
         }
 
         //initializing the presenter and the viewModel
