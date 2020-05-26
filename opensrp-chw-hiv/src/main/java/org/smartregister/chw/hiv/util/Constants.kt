@@ -57,6 +57,10 @@ object Constants {
         const val REGISTRATION = "REGISTRATION"
         const val FOLLOW_UP_VISIT = "FOLLOW_UP_VISIT"
     }
+
+    object FamilyMemberEntityType {
+        const val EC_INDEPENDENT_CLIENT = "ec_independent_client"
+    }
 }
 
 object DBConstants {
@@ -89,6 +93,7 @@ object DBConstants {
         const val CLIENT_HIV_STATUS_DURING_REGISTRATION = "client_hiv_status_during_registration"
         const val CLIENT_HIV_STATUS_AFTER_TESTING = "client_hiv_status_after_testing"
         const val IS_CLOSED = "is_closed"
+        const val FAMILY_MEMBER_ENTITY_TYPE = "entity_type"
         const val CHW_FOLLOWUP_DATE = "chw_followup_date"
         const val HIV_FOLLOWUP_VISIT_DATE = "hiv_followup_visit_date"
     }
