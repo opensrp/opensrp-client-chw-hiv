@@ -46,7 +46,7 @@ open class BaseHivClientCallDialogFragment : DialogFragment(),
 
             rootView.findViewById<TextView>(R.id.call_hiv_client_phone)?.apply {
                 tag = hivClientPhoneNumber
-                text = Utils.getName(getString(R.string.call), hivClientPhoneNumber)
+                text = hivClientPhoneNumber?.let { Utils.getName(getString(R.string.call), it) }
                 setOnClickListener(listener)
             }
 
@@ -61,7 +61,11 @@ open class BaseHivClientCallDialogFragment : DialogFragment(),
             rootView.findViewById<TextView>(R.id.hiv_call_primary_care_giver_phone_number)
                 ?.apply {
                     tag = hivFamilyPrimaryCareGiverPhone
-                    text = Utils.getName(getString(R.string.call), hivFamilyPrimaryCareGiverPhone)
+                    text = hivFamilyPrimaryCareGiverPhone?.let {
+                        Utils.getName(getString(R.string.call),
+                            it
+                        )
+                    }
                     setOnClickListener(listener)
                 }
         } else {
