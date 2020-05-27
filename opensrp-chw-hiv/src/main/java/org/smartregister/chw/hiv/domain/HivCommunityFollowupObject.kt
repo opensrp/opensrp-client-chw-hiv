@@ -8,7 +8,7 @@ import java.io.Serializable
 /**
  * This is the entity class for Referal Folloup and it implements [Serializable]
  */
-class ReferralFollowupObject : Serializable {
+class HivCommunityFollowupObject : Serializable {
 
     var relationalId: String? = null
     var details: String? = null

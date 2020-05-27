@@ -8,14 +8,14 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.chw.hiv.contract.BaseHivFollowupContract
 import org.smartregister.chw.hiv.domain.HivMemberObject
-import org.smartregister.chw.hiv.model.BaseReferralFollowupModel
+import org.smartregister.chw.hiv.model.BaseHivCommunityFollowupModel
 import timber.log.Timber
 import java.lang.ref.WeakReference
 import java.util.*
 
-open class BaseReferralFollowupPresenter(
+open class BaseHivCommunityFollowupPresenter(
     view: BaseHivFollowupContract.View,
-    private val viewModelClass: Class<out BaseReferralFollowupModel?>,
+    private val viewModelClass: Class<out BaseHivCommunityFollowupModel?>,
     protected var interactor: BaseHivFollowupContract.Interactor
 ) : BaseHivFollowupContract.Presenter, BaseHivFollowupContract.InteractorCallBack {
 

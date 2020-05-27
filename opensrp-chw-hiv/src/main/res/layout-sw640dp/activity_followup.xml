@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="org.smartregister.chw.hiv.model.BaseReferralFollowupModel" />
+            type="org.smartregister.chw.hiv.model.BaseHivCommunityFollowupModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

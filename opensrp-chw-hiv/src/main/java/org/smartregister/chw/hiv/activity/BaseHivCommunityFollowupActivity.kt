@@ -15,6 +15,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.gson.Gson
 import com.nerdstone.neatformcore.domain.builders.FormBuilder
 import com.nerdstone.neatformcore.form.json.JsonFormBuilder
+import com.nerdstone.neatformcore.form.json.JsonFormEmbedded
 import org.joda.time.DateTime
 import org.joda.time.Period
 import org.json.JSONException
@@ -24,9 +25,9 @@ import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseHivFollowupContract
 import org.smartregister.chw.hiv.databinding.ActivityFollowupBinding
 import org.smartregister.chw.hiv.domain.HivMemberObject
-import org.smartregister.chw.hiv.interactor.BaseReferralFollowupInteractor
-import org.smartregister.chw.hiv.model.BaseReferralFollowupModel
-import org.smartregister.chw.hiv.presenter.BaseReferralFollowupPresenter
+import org.smartregister.chw.hiv.interactor.BaseHivCommunityFollowupInteractor
+import org.smartregister.chw.hiv.model.BaseHivCommunityFollowupModel
+import org.smartregister.chw.hiv.presenter.BaseHivCommunityFollowupPresenter
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.JsonFormUtils.addFormMetadata
 import org.smartregister.chw.hiv.util.JsonFormUtils.getFormAsJson
@@ -47,7 +48,7 @@ open class BaseHivCommunityFollowupActivity : AppCompatActivity(), BaseHivFollow
     protected var hivMemberObject: HivMemberObject? = null
     protected var formName: String? = null
     protected var presenter: BaseHivFollowupContract.Presenter? = null
-    private var viewModel: BaseReferralFollowupModel? = null
+    private var viewModel: BaseHivCommunityFollowupModel? = null
     private var jsonForm: JSONObject? = null
     private var formBuilder: FormBuilder? = null
     private lateinit var textViewName: TextView
@@ -106,9 +107,11 @@ open class BaseHivCommunityFollowupActivity : AppCompatActivity(), BaseHivFollow
         }
 
         jsonForm?.also {
-//            formBuilder = JsonFormBuilder(
-//                it.toString(), this, findViewById<LinearLayout>(R.id.formLayout)
-//            ).buildForm(null, null)
+            formBuilder = JsonFormBuilder(jsonForm.toString(), this)
+            JsonFormEmbedded(
+                formBuilder as JsonFormBuilder,
+                findViewById<LinearLayout>(R.id.formLayout)
+            ).buildForm(null)
         }
     }
 
@@ -137,8 +140,8 @@ open class BaseHivCommunityFollowupActivity : AppCompatActivity(), BaseHivFollow
     }
 
     override fun presenter(): BaseHivFollowupContract.Presenter {
-        return BaseReferralFollowupPresenter(
-            this, BaseReferralFollowupModel::class.java, BaseReferralFollowupInteractor()
+        return BaseHivCommunityFollowupPresenter(
+            this, BaseHivCommunityFollowupModel::class.java, BaseHivCommunityFollowupInteractor()
         )
     }
 

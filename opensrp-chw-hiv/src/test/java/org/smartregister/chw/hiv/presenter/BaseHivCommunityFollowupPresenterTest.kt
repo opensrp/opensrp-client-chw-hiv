@@ -9,21 +9,21 @@ import org.junit.Before
 import org.junit.Test
 import org.smartregister.chw.hiv.contract.BaseHivFollowupContract
 import org.smartregister.chw.hiv.domain.HivMemberObject
-import org.smartregister.chw.hiv.model.BaseReferralFollowupModel
+import org.smartregister.chw.hiv.model.BaseHivCommunityFollowupModel
 import org.smartregister.chw.hiv.model.BaseRegisterFormModel
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.commonregistry.CommonPersonObjectClient
 
-class BaseReferralFollowupPresenterTest {
+class BaseHivCommunityFollowupPresenterTest {
 
     private val hivFollowupReferralView: BaseHivFollowupContract.View = spyk()
     private val hivFollowupReferralInteractor: BaseHivFollowupContract.Interactor = spyk()
     private val sampleBaseEntityId = "5a5mple-b35eent"
     private val hivFollowupReferralPresenter: BaseHivFollowupContract.Presenter =
         spyk(
-            BaseReferralFollowupPresenter(
+            BaseHivCommunityFollowupPresenter(
                 hivFollowupReferralView,
-                BaseReferralFollowupModel::class.java,
+                BaseHivCommunityFollowupModel::class.java,
                 hivFollowupReferralInteractor
             ),
             recordPrivateCalls = true
@@ -58,7 +58,7 @@ class BaseReferralFollowupPresenterTest {
         verifyAll {
             hivFollowupReferralInteractor.saveFollowup(
                 sampleBaseEntityId, valuesHashMap, jsonFormObject,
-                hivFollowupReferralPresenter as BaseReferralFollowupPresenter
+                hivFollowupReferralPresenter as BaseHivCommunityFollowupPresenter
             )
         }
     }
@@ -77,6 +77,6 @@ class BaseReferralFollowupPresenterTest {
     @Test
     fun initializeMemberObject() {
         hivFollowupReferralPresenter.initializeMemberObject(hivMemberObject)
-        Assert.assertNotNull((hivFollowupReferralPresenter as BaseReferralFollowupPresenter).hivMemberObject)
+        Assert.assertNotNull((hivFollowupReferralPresenter as BaseHivCommunityFollowupPresenter).hivMemberObject)
     }
 }

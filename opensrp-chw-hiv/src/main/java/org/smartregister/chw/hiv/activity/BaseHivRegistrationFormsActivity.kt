@@ -23,7 +23,6 @@ import org.joda.time.Period
 import org.json.JSONException
 import org.json.JSONObject
 import org.koin.android.ext.android.inject
-import org.smartregister.AllConstants
 import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
@@ -63,10 +62,6 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
     private lateinit var exitFormImageView: ImageView
     private lateinit var completeButton: ImageView
     val hivLibrary by inject<HivLibrary>()
-
-    protected val locationID: String
-        get() = org.smartregister.Context.getInstance().allSharedPreferences()
-            .getPreference(AllConstants.CURRENT_LOCATION_ID)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

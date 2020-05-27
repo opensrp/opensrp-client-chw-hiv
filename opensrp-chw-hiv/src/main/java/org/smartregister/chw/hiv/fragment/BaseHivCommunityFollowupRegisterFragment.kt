@@ -9,7 +9,7 @@ import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseHivRegisterFragmentContract
 import org.smartregister.chw.hiv.model.BaseHivRegisterFragmentModel
 import org.smartregister.chw.hiv.presenter.BaseHivRegisterFragmentPresenter
-import org.smartregister.chw.hiv.provider.FollowupRegisterProvider
+import org.smartregister.chw.hiv.provider.BaseHivCommunityFollowupRegisterProvider
 import org.smartregister.commonregistry.CommonPersonObjectClient
 import org.smartregister.configurableviews.model.View
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter
@@ -30,10 +30,10 @@ open class BaseFollowupRegisterFragment : BaseRegisterFragment(),
 
     @Suppress("INACCESSIBLE_TYPE")
     override fun initializeAdapter(visibleColumns: Set<View>?) {
-        val followupRegisterProvider = FollowupRegisterProvider(
+        val followupRegisterProvider = BaseHivCommunityFollowupRegisterProvider(
             (activity as Context), paginationViewHandler, registerActionHandler, visibleColumns!!
         )
-        clientAdapter = RecyclerViewPaginatedAdapter<FollowupRegisterProvider.RegisterViewHolder>(
+        clientAdapter = RecyclerViewPaginatedAdapter<BaseHivCommunityFollowupRegisterProvider.RegisterViewHolder>(
             null as Cursor?,
             followupRegisterProvider as RecyclerViewProvider<RecyclerView.ViewHolder>,
             context().commonrepository(tablename)

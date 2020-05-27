@@ -17,7 +17,7 @@ import java.util.*
  * This interactor class provides actual implementations for all the functionality used in the
  * follow up referral forms, it implements [BaseHivFollowupContract.Interactor]
  */
-class BaseReferralFollowupInteractor : BaseHivFollowupContract.Interactor {
+class BaseHivCommunityFollowupInteractor : BaseHivFollowupContract.Interactor {
 
     val hivLibrary by inject<HivLibrary>()
 

@@ -12,9 +12,5 @@
             android:name="org.smartregister.chw.hiv.activity.BaseHivProfileActivity"
             android:theme="@style/ChwHivTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="org.smartregister.chw.hiv.activity.BaseHivFollowUpVisitActivity"
-            android:theme="@style/ChwHivTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 </manifest>

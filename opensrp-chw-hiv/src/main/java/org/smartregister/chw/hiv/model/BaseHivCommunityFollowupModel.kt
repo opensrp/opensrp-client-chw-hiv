@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModel
 import org.smartregister.chw.hiv.domain.HivMemberObject
 
 
-open class BaseReferralFollowupModel : ViewModel() {
+open class BaseHivCommunityFollowupModel : ViewModel() {
     var hivMemberObject: HivMemberObject? = null
 }
