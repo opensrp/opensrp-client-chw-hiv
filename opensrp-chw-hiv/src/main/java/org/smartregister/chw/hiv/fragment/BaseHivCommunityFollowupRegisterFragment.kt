@@ -25,7 +25,7 @@ const val FOLLOW_UP_VISIT = "follow_up_visit"
 /**
  * Fragment used for referral Followup, extends OpenSRP's [BaseRegisterFragment] and implements [BaseHivRegisterFragmentContract.View]
  */
-open class BaseFollowupRegisterFragment : BaseRegisterFragment(),
+open class BaseHivCommunityFollowupRegisterFragment : BaseRegisterFragment(),
     BaseHivRegisterFragmentContract.View {
 
     @Suppress("INACCESSIBLE_TYPE")
