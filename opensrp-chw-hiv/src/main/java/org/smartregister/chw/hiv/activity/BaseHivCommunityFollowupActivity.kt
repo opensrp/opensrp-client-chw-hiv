@@ -106,9 +106,9 @@ open class BaseHivCommunityFollowupActivity : AppCompatActivity(), BaseHivFollow
         }
 
         jsonForm?.also {
-            formBuilder = JsonFormBuilder(
-                it.toString(), this, findViewById<LinearLayout>(R.id.formLayout)
-            ).buildForm(null, null)
+//            formBuilder = JsonFormBuilder(
+//                it.toString(), this, findViewById<LinearLayout>(R.id.formLayout)
+//            ).buildForm(null, null)
         }
     }
 

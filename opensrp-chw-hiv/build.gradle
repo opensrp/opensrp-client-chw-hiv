@@ -101,11 +101,12 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
     }
 
-    api("com.nerdstone:neat-form-core:1.0.11") {
+    implementation("com.nerdstone:neat-form-core:1.1.0-Testing") {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'androidx.appcompat', module: 'appcompat'
         exclude group: 'androidx.constraintlayout', module: 'constraintlayout'
+        exclude group: 'androidx.lifecycle', module: 'lifecycle-extensions'
     }
 
     api('org.smartregister:opensrp-client-chw-anc:0.1.39-SNAPSHOT@aar') {
