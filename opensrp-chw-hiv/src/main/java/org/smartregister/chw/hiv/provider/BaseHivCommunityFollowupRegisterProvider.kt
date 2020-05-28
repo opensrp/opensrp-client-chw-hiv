@@ -42,42 +42,37 @@ open class BaseHivCommunityFollowupRegisterProvider(
         pc: CommonPersonObjectClient, viewHolder: RegisterViewHolder
     ) {
         with(viewHolder) {
-            pc.let {
-                try {
-                    val firstName = Utils.getName(
-                        Utils.getValue(pc.columnmaps, DBConstants.Key.FIRST_NAME, true),
-                        Utils.getValue(pc.columnmaps, DBConstants.Key.MIDDLE_NAME, true)
-                    )
-                    val patientName = Utils.getName(
-                        firstName, Utils.getValue(pc.columnmaps, DBConstants.Key.LAST_NAME, true)
-                    )
-                    val dobString = Utils.getValue(pc.columnmaps, DBConstants.Key.DOB, false)
-                    val age = Period(DateTime(dobString), DateTime()).years
-                    this.patientName.text = "$patientName, $age"
-                    textViewVillage.text =
-                        Utils.getValue(pc.columnmaps, DBConstants.Key.VILLAGE_TOWN, true)
-                    textViewGender.text =
-                        Utils.getValue(pc.columnmaps, DBConstants.Key.GENDER, true)
+            val dobString = Utils.getValue(pc.columnmaps, DBConstants.Key.DOB, false)
+            if(dobString != "") {
+                val firstName = Utils.getName(
+                    Utils.getValue(pc.columnmaps, DBConstants.Key.FIRST_NAME, true),
+                    Utils.getValue(pc.columnmaps, DBConstants.Key.MIDDLE_NAME, true)
+                )
+                val patientName = Utils.getName(
+                    firstName, Utils.getValue(pc.columnmaps, DBConstants.Key.LAST_NAME, true)
+                )
+                val age = Period(DateTime(dobString), DateTime()).years
+                this.patientName.text = "$patientName, $age"
+                textViewVillage.text =
+                    Utils.getValue(pc.columnmaps, DBConstants.Key.VILLAGE_TOWN, true)
+                textViewGender.text = Utils.getValue(pc.columnmaps, DBConstants.Key.GENDER, true)
 
-                    patientColumn.apply {
-                        setOnClickListener(onClickListener)
-                        tag = pc
-                        setTag(R.id.VIEW_ID, BaseHivRegisterFragment.CLICK_VIEW_NORMAL)
-                    }
+                patientColumn.apply {
+                    setOnClickListener(onClickListener)
+                    tag = pc
+                    setTag(R.id.VIEW_ID, BaseHivRegisterFragment.CLICK_VIEW_NORMAL)
+                }
 
-                    dueButton.apply {
-                        setOnClickListener(onClickListener)
-                        tag = pc
-                        setTag(R.id.VIEW_ID, BaseHivRegisterFragment.FOLLOW_UP_VISIT)
-                    }
+                dueButton.apply {
+                    setOnClickListener(onClickListener)
+                    tag = pc
+                    setTag(R.id.VIEW_ID, BaseHivRegisterFragment.FOLLOW_UP_VISIT)
+                }
 
-                    registerColumns.apply {
-                        setOnClickListener(onClickListener)
-                        setOnClickListener { dueButton.performClick() }
-                        setOnClickListener { viewHolder.patientColumn.performClick() }
-                    }
-                }catch (e:Exception){
-                    Timber.e(e)
+                registerColumns.apply {
+                    setOnClickListener(onClickListener)
+                    setOnClickListener { dueButton.performClick() }
+                    setOnClickListener { viewHolder.patientColumn.performClick() }
                 }
             }
         }
