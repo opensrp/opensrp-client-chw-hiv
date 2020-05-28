@@ -75,7 +75,6 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
 
         with(this.intent) {
             baseEntityId = getStringExtra(Constants.ActivityPayload.BASE_ENTITY_ID)
-            action = getStringExtra(Constants.ActivityPayload.ACTION)
             formName = getStringExtra(Constants.ActivityPayload.HIV_REGISTRATION_FORM_NAME)
             useDefaultNeatFormLayout =
                 getBooleanExtra(Constants.ActivityPayload.USE_DEFAULT_NEAT_FORM_LAYOUT, true)

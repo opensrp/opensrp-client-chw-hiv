@@ -17,6 +17,7 @@ import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.helper.BottomNavigationHelper
 import org.smartregister.listener.BottomNavigationListener
 import org.smartregister.view.activity.BaseRegisterActivity
+import timber.log.Timber
 
 /**
  * Created by cozej4 on 2020-05-13.
@@ -33,13 +34,24 @@ open class BaseHivRegisterActivity : BaseRegisterActivity(),
 
     protected var baseEntityId: String? = null
     protected var formName: String? = null
+    protected var formAction: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         with(this.intent) {
             baseEntityId = getStringExtra(Constants.ActivityPayload.BASE_ENTITY_ID)
-            action = getStringExtra(Constants.ActivityPayload.ACTION)
-            formName = getStringExtra(Constants.ActivityPayload.HIV_FOLLOWUP_FORM_NAME)
+            formAction = getStringExtra(Constants.ActivityPayload.ACTION)
+            formName = getStringExtra(Constants.ActivityPayload.HIV_REGISTRATION_FORM_NAME)
+            onStartActivityWithAction()
+        }
+    }
+
+    /**
+     * Process a payload when an activity is started with an action
+     */
+    protected open fun onStartActivityWithAction() {
+        if (formName != null && formAction != null) {
+            startFormActivity(formName, baseEntityId, formAction)
         }
     }
 
@@ -48,12 +60,8 @@ open class BaseHivRegisterActivity : BaseRegisterActivity(),
     override fun startFormActivity(formName: String?, entityId: String?, metaData: String?) = Unit
 
     override fun startFormActivity(jsonForm: JSONObject) {
-        val intent = Intent(this, familyFormActivity)
-            .putExtra(Constants.JsonFormExtra.JSON, jsonForm.toString())
-        startActivityForResult(intent, Constants.REQUEST_CODE_GET_JSON)
+        //Implement
     }
-
-    val familyFormActivity get() = BaseHivRegisterActivity::class.java
 
     override fun onActivityResultExtended(requestCode: Int, resultCode: Int, data: Intent?) = Unit
 
