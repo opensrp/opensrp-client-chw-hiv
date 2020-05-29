@@ -59,6 +59,7 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
     private lateinit var mainLayout: LinearLayout
     private lateinit var sampleToolBar: Toolbar
     private lateinit var pageTitleTextView: TextView
+    private lateinit var clientNameTitleTextView: TextView
     private lateinit var exitFormImageView: ImageView
     private lateinit var completeButton: ImageView
     val hivLibrary by inject<HivLibrary>()
@@ -70,6 +71,7 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
         formLayout = findViewById(R.id.formLayout)
         sampleToolBar = findViewById(R.id.sampleToolBar)
         pageTitleTextView = findViewById(R.id.pageTitleTextView)
+        clientNameTitleTextView = findViewById(R.id.clientNameTitleTextView)
         exitFormImageView = findViewById(R.id.exitFormImageView)
         completeButton = findViewById(R.id.completeButton)
 
@@ -95,8 +97,11 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
 
             with(viewModel?.hivMemberObject!!) {
                 val age = Period(DateTime(this.age), DateTime()).years
-                pageTitleTextView.text =
+                clientNameTitleTextView.text =
                     "${this.firstName} ${this.middleName} ${this.lastName}, $age"
+
+                pageTitleTextView.text =
+                    jsonForm?.getJSONArray("steps")?.getJSONObject(0)?.getString("title") ?: ""
             }
 
             exitFormImageView.setOnClickListener {
