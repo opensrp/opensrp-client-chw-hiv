@@ -236,6 +236,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     }
 
     override fun setFamilyStatus(status: AlertStatus?) {
+        findViewById<View>(R.id.rlHivRegistrationDate).visibility = View.VISIBLE
         familyRow!!.visibility = View.VISIBLE
         rlFamilyServicesDue!!.visibility = View.VISIBLE
 

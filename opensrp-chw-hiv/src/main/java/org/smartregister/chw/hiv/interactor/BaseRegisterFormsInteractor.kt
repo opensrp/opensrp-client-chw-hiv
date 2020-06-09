@@ -6,6 +6,8 @@ import org.json.JSONObject
 import org.koin.core.inject
 import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
+import org.smartregister.chw.hiv.dao.HivDao
+import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.HivUtil.processEvent
 import org.smartregister.chw.hiv.util.JsonFormConstants
 import org.smartregister.chw.hiv.util.JsonFormUtils
@@ -31,6 +33,10 @@ class BaseRegisterFormsInteractor : BaseRegisterFormsContract.Interactor {
                 hivLibrary, baseEntityId, valuesHashMap,
                 jsonObject, jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE)
             )
+
+        if (jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_DANGER_SIGNS_OUTCOME)
+            event.locationId =
+                HivDao.getSyncLocationId(baseEntityId) //Necessary for syncing the event back to the chw
         Timber.i("Event = %s", Gson().toJson(event))
         processEvent(hivLibrary, event)
         callBack.onRegistrationSaved(true, jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE))

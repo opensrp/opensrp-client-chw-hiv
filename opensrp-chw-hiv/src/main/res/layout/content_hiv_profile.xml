@@ -157,7 +157,7 @@
             android:layout_below="@+id/view_hiv_visit_date_row"
             android:background="@drawable/list_item_background_selctor"
             android:padding="20dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/hiv_row_image"
