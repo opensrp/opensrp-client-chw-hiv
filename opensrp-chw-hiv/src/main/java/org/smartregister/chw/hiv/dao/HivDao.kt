@@ -54,6 +54,20 @@ object HivDao : AbstractDao() {
                     left join ec_family_member fh on fh.base_entity_id = f.family_head 
                     left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver 
                     where m.base_entity_id ='${baseEntityID}' """
+        val sqlHf =
+            """select m.base_entity_id , m.unique_id , m.relational_id as family_base_entity_id , m.dob , m.first_name , 
+                    m.middle_name , m.last_name , m.gender , m.phone_number , m.other_phone_number , m.entity_type,
+                    f.first_name family_name ,f.primary_caregiver , f.family_head , f.village_town ,
+                    fh.first_name family_head_first_name , fh.middle_name family_head_middle_name , 
+                    fh.last_name family_head_last_name, fh.phone_number family_head_phone_number, 
+                    pcg.first_name pcg_first_name , pcg.last_name pcg_last_name , pcg.middle_name pcg_middle_name , 
+                    pcg.phone_number  pcg_phone_number , mr.* 
+                    from ec_family_member m 
+                    inner join ec_family f on m.relational_id = f.base_entity_id 
+                    inner join ec_hiv_register mr on mr.base_entity_id = m.base_entity_id 
+                    left join ec_family_member fh on fh.base_entity_id = f.family_head 
+                    left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver 
+                    where m.base_entity_id ='${baseEntityID}' """
         val dataMap =
             DataMap { cursor: Cursor? ->
                 val memberObject = HivMemberObject(null)
@@ -136,7 +150,9 @@ object HivDao : AbstractDao() {
                     getCursorValue(cursor, DBConstants.Key.FAMILY_MEMBER_ENTITY_TYPE, "")
                 memberObject
             }
-        val res = readData(sql, dataMap)
+        var res = readData(sql, dataMap)
+        if (res == null)
+            res = readData(sqlHf, dataMap)
         return if (res == null || res.size != 1) null else res[0]
     }
 
