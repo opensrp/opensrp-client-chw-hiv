@@ -34,7 +34,7 @@ class BaseRegisterFormsInteractor : BaseRegisterFormsContract.Interactor {
                 jsonObject, jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE)
             )
 
-        if (jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_DANGER_SIGNS_OUTCOME)
+        if (jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_OUTCOME)
             event.locationId =
                 HivDao.getSyncLocationId(baseEntityId) //Necessary for syncing the event back to the chw
         Timber.i("Event = %s", Gson().toJson(event))
