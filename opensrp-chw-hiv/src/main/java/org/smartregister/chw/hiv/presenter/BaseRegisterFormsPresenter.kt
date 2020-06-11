@@ -71,6 +71,7 @@ open class BaseRegisterFormsPresenter(
         val toastMessage = when {
             saveSuccessful && encounterType == Constants.EventType.REGISTRATION -> context.getString(R.string.successful_registration)
             saveSuccessful && encounterType == Constants.EventType.FOLLOW_UP_VISIT -> context.getString(R.string.successful_visit)
+            saveSuccessful && encounterType == Constants.EventType.HIV_OUTCOME -> context.getString(R.string.successful_visit)
             else -> context.getString(R.string.form_not_saved)
         }
         Utils.showToast(context, toastMessage)

@@ -28,6 +28,7 @@ object Constants {
     object EventType {
         const val REGISTRATION = "HIV Registration"
         const val HIV_OUTCOME = "HIV Outcome"
+        const val HIV_COMMUNITY_FOLLOWUP = "HIV Community Followup"
         const val FOLLOW_UP_VISIT = "HIV Followup"
         const val REFERRAL_FOLLOW_UP_VISIT = "Followup Visit"
     }
@@ -42,6 +43,7 @@ object Constants {
         const val HIV = "ec_hiv_register"
         const val HIV_FOLLOW_UP = "ec_hiv_follow_up_visit"
         const val HIV_OUTCOME = "ec_hiv_outcome"
+        const val HIV_COMMUNITY_FOLLOWUP = "ec_hiv_community_followup"
         const val FAMILY_MEMBER = "ec_family_member"
     }
 

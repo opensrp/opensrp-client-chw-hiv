@@ -47,10 +47,9 @@ object HivUtil : KoinComponent {
     @Throws(Exception::class)
     fun processEvent(hivLibrary: HivLibrary, baseEvent: Event?) {
         if (baseEvent != null) {
-            JsonFormUtils.tagEvent(hivLibrary, baseEvent)
             val eventJson =
                 JSONObject(org.smartregister.util.JsonFormUtils.gson.toJson(baseEvent))
-            hivLibrary.syncHelper.addEvent(baseEvent.formSubmissionId, eventJson)
+            hivLibrary.syncHelper.addEvent(baseEvent.baseEntityId, eventJson)
             val lastSyncDate =
                 Date(hivLibrary.context.allSharedPreferences().fetchLastUpdatedAtDate(0))
             val eventClient =

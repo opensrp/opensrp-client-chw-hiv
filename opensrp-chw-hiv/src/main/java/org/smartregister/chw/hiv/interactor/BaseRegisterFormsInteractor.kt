@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.nerdstone.neatformcore.domain.model.NFormViewData
 import org.json.JSONObject
 import org.koin.core.inject
+import org.smartregister.chw.anc.util.NCUtils
 import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
 import org.smartregister.chw.hiv.dao.HivDao
@@ -33,12 +34,19 @@ class BaseRegisterFormsInteractor : BaseRegisterFormsContract.Interactor {
                 hivLibrary, baseEntityId, valuesHashMap,
                 jsonObject, jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE)
             )
-
-        if (jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_OUTCOME)
-            event.locationId =
+        JsonFormUtils.tagEvent(hivLibrary, event)
+        when {
+            jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_OUTCOME || jsonObject.getString(
+                JsonFormConstants.ENCOUNTER_TYPE
+            ) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP
+            -> event.locationId =
                 HivDao.getSyncLocationId(baseEntityId) //Necessary for syncing the event back to the chw
+        }
         Timber.i("Event = %s", Gson().toJson(event))
-        processEvent(hivLibrary, event)
+        NCUtils.processEvent(
+            event.baseEntityId,
+            JSONObject(org.smartregister.chw.anc.util.JsonFormUtils.gson.toJson(event))
+        )
         callBack.onRegistrationSaved(true, jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE))
     }
 
