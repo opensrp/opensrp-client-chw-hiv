@@ -29,6 +29,7 @@ import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.interactor.BaseRegisterFormsInteractor
 import org.smartregister.chw.hiv.presenter.BaseRegisterFormsPresenter
 import org.smartregister.chw.hiv.util.Constants
+import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.chw.hiv.util.JsonFormConstants
 import timber.log.Timber
 import java.util.*
@@ -83,11 +84,14 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
             }
             presenter = presenter()
 
-            hivMemberObject = if (jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK) {
-                HivDao.getCommunityFollowupMember(baseEntityId!!)
-            } else {
-                HivDao.getMember(baseEntityId!!)
-            }
+            Timber.e("Coze :: encounter type = " + jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE))
+            hivMemberObject =
+                if (jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK) {
+                    Timber.e("Coze :: community followup feedback ")
+                    HivDao.getCommunityFollowupMember(baseEntityId!!)
+                } else {
+                    HivDao.getMember(baseEntityId!!)
+                }
 
             with(presenter) {
                 this?.initializeMemberObject(hivMemberObject!!)
@@ -129,10 +133,9 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
 
                             if (jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK) {
                                 //Saving referral form id
-                                formData[JsonFormConstants.HIV_COMMUNITY_REFERRAL_FORM_ID] =
+                                formData[DBConstants.Key.COMMUNITY_REFERRAL_FORM_ID] =
                                     NFormViewData().apply {
-                                        value =
-                                            HivDao.getCommunityFollowupMember(baseEntityId!!)!!.communityReferralFormId
+                                        value = hivMemberObject!!.communityReferralFormId
                                     }
                             }
 

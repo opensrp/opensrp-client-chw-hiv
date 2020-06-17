@@ -45,6 +45,7 @@ object Constants {
         const val HIV_FOLLOW_UP = "ec_hiv_follow_up_visit"
         const val HIV_OUTCOME = "ec_hiv_outcome"
         const val HIV_COMMUNITY_FOLLOWUP = "ec_hiv_community_followup"
+        const val HIV_COMMUNITY_FEEDBACK = "ec_hiv_community_feedback"
         const val FAMILY_MEMBER = "ec_family_member"
     }
 
