@@ -12,27 +12,24 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.ViewModelProviders
 import com.google.gson.Gson
 import com.nerdstone.neatandroidstepper.core.domain.StepperActions
 import com.nerdstone.neatformcore.domain.builders.FormBuilder
+import com.nerdstone.neatformcore.domain.model.NFormViewData
 import com.nerdstone.neatformcore.form.json.JsonFormBuilder
 import com.nerdstone.neatformcore.form.json.JsonFormEmbedded
 import org.joda.time.DateTime
 import org.joda.time.Period
 import org.json.JSONException
 import org.json.JSONObject
-import org.koin.android.ext.android.inject
-import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
+import org.smartregister.chw.hiv.dao.HivDao
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.interactor.BaseRegisterFormsInteractor
-import org.smartregister.chw.hiv.model.AbstractRegisterFormModel
-import org.smartregister.chw.hiv.model.BaseRegisterFormModel
 import org.smartregister.chw.hiv.presenter.BaseRegisterFormsPresenter
 import org.smartregister.chw.hiv.util.Constants
-import org.smartregister.commonregistry.CommonPersonObjectClient
+import org.smartregister.chw.hiv.util.JsonFormConstants
 import timber.log.Timber
 import java.util.*
 
@@ -51,7 +48,6 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
     protected var presenter: BaseRegisterFormsContract.Presenter? = null
     protected var baseEntityId: String? = null
     protected var formName: String? = null
-    private var viewModel: AbstractRegisterFormModel? = null
     private var formBuilder: FormBuilder? = null
     private var jsonForm: JSONObject? = null
     private var useDefaultNeatFormLayout: Boolean? = null
@@ -62,7 +58,7 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
     private lateinit var clientNameTitleTextView: TextView
     private lateinit var exitFormImageView: ImageView
     private lateinit var completeButton: ImageView
-    val hivLibrary by inject<HivLibrary>()
+    var hivMemberObject: HivMemberObject? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,16 +82,19 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
                 Timber.e(e)
             }
             presenter = presenter()
-            viewModel =
-                ViewModelProviders.of(this@BaseHivRegistrationFormsActivity)
-                    .get(presenter!!.getViewModel<AbstractRegisterFormModel>())
-            updateMemberObject()
-            with(presenter) {
-                this?.initializeMemberObject(viewModel?.hivMemberObject!!)
-                this?.fillClientData(viewModel?.hivMemberObject!!)
+
+            hivMemberObject = if (jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK) {
+                HivDao.getCommunityFollowupMember(baseEntityId!!)
+            } else {
+                HivDao.getMember(baseEntityId!!)
             }
 
-            with(viewModel?.hivMemberObject!!) {
+            with(presenter) {
+                this?.initializeMemberObject(hivMemberObject!!)
+                this?.fillClientData(hivMemberObject!!)
+            }
+
+            with(hivMemberObject!!) {
                 val age = Period(DateTime(this.age), DateTime()).years
                 clientNameTitleTextView.text =
                     "${this.firstName} ${this.middleName} ${this.lastName}, $age"
@@ -127,15 +126,23 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
 
                         val formData = formBuilder!!.getFormData()
                         if (formData.isNotEmpty()) {
-                            Timber.e("Coze:: saved data = " + Gson().toJson(formData))
-                            presenter!!.saveForm(formData, jsonForm!!)
 
+                            if (jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK) {
+                                //Saving referral form id
+                                formData[JsonFormConstants.HIV_COMMUNITY_REFERRAL_FORM_ID] =
+                                    NFormViewData().apply {
+                                        value =
+                                            HivDao.getCommunityFollowupMember(baseEntityId!!)!!.communityReferralFormId
+                                    }
+                            }
+
+                            presenter!!.saveForm(formData, jsonForm!!)
                             Toast.makeText(
                                 applicationContext,
                                 getString(R.string.successful_registration),
                                 Toast.LENGTH_LONG
                             ).show()
-                            Timber.d("Saved Data = %s", formBuilder?.getFormDataAsJson())
+                            Timber.d("Saved Data = %s", Gson().toJson(formData))
                             val intent = Intent()
                             setResult(Activity.RESULT_OK, intent);
                             finish()
@@ -173,35 +180,10 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
     }
 
     override fun presenter() = BaseRegisterFormsPresenter(
-        baseEntityId!!, this, BaseRegisterFormModel::class.java, BaseRegisterFormsInteractor()
+        baseEntityId!!, this, BaseRegisterFormsInteractor()
     )
 
 
     override fun setProfileViewWithData() = Unit
-
-    @Throws(Exception::class)
-    private fun updateMemberObject() {
-        with(presenter!!) {
-            val query = viewModel!!.mainSelect(getMainTable(), getMainCondition())
-            Timber.d("Query for the family member = %s", query)
-            val commonRepository = hivLibrary.context.commonrepository(getMainTable())
-            with(commonRepository.rawCustomQueryForAdapter(query)) {
-                if (moveToFirst()) {
-                    commonRepository.readAllcommonforCursorAdapter(this)
-                        .also { commonPersonObject ->
-                            CommonPersonObjectClient(
-                                commonPersonObject.caseId, commonPersonObject.details, ""
-                            ).apply {
-                                this.columnmaps = commonPersonObject.columnmaps
-                            }.also {
-                                viewModel!!.hivMemberObject = HivMemberObject(it)
-                            }
-                        }
-                }
-
-            }
-        }
-    }
-
 
 }

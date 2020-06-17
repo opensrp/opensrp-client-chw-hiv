@@ -35,6 +35,11 @@ data class HivMemberObject(val client: CommonPersonObjectClient?) : Serializable
     var clientHivStatusDuringRegistration: String? = client?.columnmaps?.get(DBConstants.Key.CLIENT_HIV_STATUS_DURING_REGISTRATION)
     var clientHivStatusAfterTesting: String? = client?.columnmaps?.get(DBConstants.Key.CLIENT_HIV_STATUS_AFTER_TESTING)
     var hivRegistrationDate: Date? = null
+    var hivCommunityReferralDate: Date? = null
+    var lastFacilityVisitDate: Date? = null
     var familyMemberEntityType: String? = client?.columnmaps?.get(DBConstants.Key.FAMILY_MEMBER_ENTITY_TYPE)
+    var reasonsForIssuingCommunityFollowupReferral: String? = client?.columnmaps?.get(DBConstants.Key.REASONS_FOR_ISSUING_COMMUNITY_REFERRAL)
+    var comment: String? = client?.columnmaps?.get(DBConstants.Key.COMMENTS)
     var isClosed: Boolean? = client?.columnmaps?.get(DBConstants.Key.IS_CLOSED) == "1"
+    var communityReferralFormId: String? = client?.columnmaps?.get(DBConstants.Key.COMMUNITY_REFERRAL_FORM_ID)
 }

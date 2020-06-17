@@ -7,7 +7,7 @@ import org.json.JSONObject
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.smartregister.chw.hiv.contract.BaseHivFollowupContract
+import org.smartregister.chw.hiv.contract.BaseHivCommunityFollowupContract
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.model.BaseHivCommunityFollowupModel
 import org.smartregister.chw.hiv.model.BaseRegisterFormModel
@@ -16,15 +16,15 @@ import org.smartregister.commonregistry.CommonPersonObjectClient
 
 class BaseHivCommunityFollowupPresenterTest {
 
-    private val hivFollowupReferralView: BaseHivFollowupContract.View = spyk()
-    private val hivFollowupReferralInteractor: BaseHivFollowupContract.Interactor = spyk()
+    private val hivCommunityFollowupReferralView: BaseHivCommunityFollowupContract.View = spyk()
+    private val hivCommunityFollowupReferralInteractor: BaseHivCommunityFollowupContract.Interactor = spyk()
     private val sampleBaseEntityId = "5a5mple-b35eent"
-    private val hivFollowupReferralPresenter: BaseHivFollowupContract.Presenter =
+    private val hivCommunityFollowupReferralPresenter: BaseHivCommunityFollowupContract.Presenter =
         spyk(
             BaseHivCommunityFollowupPresenter(
-                hivFollowupReferralView,
+                hivCommunityFollowupReferralView,
                 BaseHivCommunityFollowupModel::class.java,
-                hivFollowupReferralInteractor
+                hivCommunityFollowupReferralInteractor
             ),
             recordPrivateCalls = true
         )
@@ -53,30 +53,30 @@ class BaseHivCommunityFollowupPresenterTest {
     fun `Should call save followup method of interactor`() {
         val valuesHashMap = hashMapOf<String, NFormViewData>()
         val jsonFormObject = JSONObject()
-        hivFollowupReferralPresenter.initializeMemberObject(hivMemberObject)
-        hivFollowupReferralPresenter.saveForm(valuesHashMap, jsonFormObject)
+        hivCommunityFollowupReferralPresenter.initializeMemberObject(hivMemberObject)
+        hivCommunityFollowupReferralPresenter.saveForm(valuesHashMap, jsonFormObject)
         verifyAll {
-            hivFollowupReferralInteractor.saveFollowup(
+            hivCommunityFollowupReferralInteractor.saveFollowup(
                 sampleBaseEntityId, valuesHashMap, jsonFormObject,
-                hivFollowupReferralPresenter as BaseHivCommunityFollowupPresenter
+                hivCommunityFollowupReferralPresenter as BaseHivCommunityFollowupPresenter
             )
         }
     }
 
     @Test
     fun `Should return view`() {
-        Assert.assertNotNull(hivFollowupReferralPresenter.getView())
+        Assert.assertNotNull(hivCommunityFollowupReferralPresenter.getView())
     }
 
     @Test
     fun `Should call set profile view data`() {
-        hivFollowupReferralPresenter.fillProfileData(spyk(hivMemberObject))
-        verifyAll { hivFollowupReferralView.setProfileViewWithData() }
+        hivCommunityFollowupReferralPresenter.fillProfileData(spyk(hivMemberObject))
+        verifyAll { hivCommunityFollowupReferralView.setProfileViewWithData() }
     }
 
     @Test
     fun initializeMemberObject() {
-        hivFollowupReferralPresenter.initializeMemberObject(hivMemberObject)
-        Assert.assertNotNull((hivFollowupReferralPresenter as BaseHivCommunityFollowupPresenter).hivMemberObject)
+        hivCommunityFollowupReferralPresenter.initializeMemberObject(hivMemberObject)
+        Assert.assertNotNull((hivCommunityFollowupReferralPresenter as BaseHivCommunityFollowupPresenter).hivMemberObject)
     }
 }

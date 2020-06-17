@@ -1,119 +1,25 @@
 package org.smartregister.chw.hiv.fragment
 
-import android.content.Context
-import android.database.Cursor
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseHivRegisterFragmentContract
-import org.smartregister.chw.hiv.model.BaseHivRegisterFragmentModel
-import org.smartregister.chw.hiv.presenter.BaseHivRegisterFragmentPresenter
-import org.smartregister.chw.hiv.provider.BaseHivCommunityFollowupRegisterProvider
+import org.smartregister.chw.hiv.model.BaseHivCommunityFollowupModel
+import org.smartregister.chw.hiv.presenter.BaseHivCommunityFollowupPresenter
 import org.smartregister.commonregistry.CommonPersonObjectClient
-import org.smartregister.configurableviews.model.View
-import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter
-import org.smartregister.cursoradapter.RecyclerViewProvider
-import org.smartregister.view.customcontrols.CustomFontTextView
-import org.smartregister.view.customcontrols.FontVariant
 import org.smartregister.view.fragment.BaseRegisterFragment
-import java.util.*
-
-const val CLICK_VIEW_NORMAL = "click_view_normal"
-const val FOLLOW_UP_VISIT = "follow_up_visit"
 
 /**
- * Fragment used for referral Followup, extends OpenSRP's [BaseRegisterFragment] and implements [BaseHivRegisterFragmentContract.View]
+ * This register displays list of all the referred clients, it implements [BaseHivRegisterFragmentContract.View] and extends
+ * OpenSRP's [BaseRegisterFragment] which provides common functionality and consistency when creating
+ * register.
+ *
  */
-open class BaseHivCommunityFollowupRegisterFragment : BaseRegisterFragment(),
-    BaseHivRegisterFragmentContract.View {
-
-    @Suppress("INACCESSIBLE_TYPE")
-    override fun initializeAdapter(visibleColumns: Set<View>?) {
-        val followupRegisterProvider = BaseHivCommunityFollowupRegisterProvider(
-            (activity as Context), paginationViewHandler, registerActionHandler, visibleColumns!!
-        )
-        clientAdapter = RecyclerViewPaginatedAdapter<BaseHivCommunityFollowupRegisterProvider.RegisterViewHolder>(
-            null as Cursor?,
-            followupRegisterProvider as RecyclerViewProvider<RecyclerView.ViewHolder>,
-            context().commonrepository(tablename)
-        )
-        clientAdapter.setCurrentlimit(20)
-        clientsView.adapter = clientAdapter
-    }
-
-    override fun setupViews(view: android.view.View) {
-        super.setupViews(view)
-        // Update title name
-        view.findViewById<CustomFontTextView>(R.id.txt_title_label)?.apply {
-            visibility = android.view.View.VISIBLE
-            text = getString(R.string.followup_referral)
-            setFontVariant(FontVariant.REGULAR)
-        }
-        view.findViewById<ImageView>(org.smartregister.R.id.opensrp_logo_image_view)?.apply {
-            visibility = android.view.View.GONE
-        }
-        // Update Search bar
-        view.findViewById<android.view.View>(org.smartregister.R.id.search_bar_layout).apply {
-            setBackgroundResource(R.color.customAppThemeBlue)
-        }
-        getSearchView()?.apply {
-            setBackgroundResource(R.color.white)
-            setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_search, 0, 0, 0)
-        }
-        // Update top left icon
-        view.findViewById<ImageView>(org.smartregister.R.id.scanQrCode)?.apply {
-            visibility = android.view.View.GONE
-        }
-        // Update sort filter
-        view.findViewById<TextView>(org.smartregister.R.id.filter_text_view)?.apply {
-            text = getString(R.string.sort)
-        }
-    }
-
-    override fun setUniqueID(s: String) {
-        if (getSearchView() != null) {
-            getSearchView().setText(s)
-        }
-    }
-
-    override fun presenter() = presenter as BaseHivRegisterFragmentContract.Presenter
-
+open class BaseHivCommunityFollowupRegisterFragment : BaseHivRegisterFragment() {
     override fun initializePresenter() {
         if (activity == null) {
             return
         }
         presenter =
-            BaseHivRegisterFragmentPresenter(this, BaseHivRegisterFragmentModel(), null)
+            BaseHivCommunityFollowupPresenter(this, BaseHivCommunityFollowupModel(), null)
     }
 
-    override fun getDefaultSortQuery() = presenter().getDefaultSortQuery()
-
-    override fun getMainCondition() = presenter().getMainCondition()
-
-    override fun setAdvancedSearchFormData(hashMap: HashMap<String, String>) = Unit
-
-    override fun startRegistration() = Unit
-
-    override fun onViewClicked(view: android.view.View) {
-        if (activity == null) {
-            return
-        }
-        if (view.tag is CommonPersonObjectClient) {
-            when {
-                view.getTag(R.id.VIEW_ID) === CLICK_VIEW_NORMAL -> {
-                    openProfile(view.tag as CommonPersonObjectClient)
-                }
-                view.getTag(R.id.VIEW_ID) === FOLLOW_UP_VISIT -> {
-                    openFollowUpVisit(view.tag as CommonPersonObjectClient)
-                }
-            }
-        }
-    }
-
-    override fun showNotFoundPopup(s: String) = Unit
-
-    protected open fun openProfile(client: CommonPersonObjectClient?) = Unit
-
-    protected open fun openFollowUpVisit(client: CommonPersonObjectClient?) = Unit
+    override fun openProfile(client: CommonPersonObjectClient?) = Unit
 }

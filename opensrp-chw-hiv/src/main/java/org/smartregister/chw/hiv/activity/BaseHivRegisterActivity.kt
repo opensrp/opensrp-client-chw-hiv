@@ -9,6 +9,7 @@ import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import org.json.JSONObject
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseHivRegisterContract
+import org.smartregister.chw.hiv.fragment.BaseHivCommunityFollowupRegisterFragment
 import org.smartregister.chw.hiv.fragment.BaseHivRegisterFragment
 import org.smartregister.chw.hiv.listener.HivBottomNavigationListener
 import org.smartregister.chw.hiv.model.BaseHivRegisterModel
@@ -99,7 +100,7 @@ open class BaseHivRegisterActivity : BaseRegisterActivity(),
 
     override fun getRegisterFragment() = BaseHivRegisterFragment()
 
-    override fun getOtherFragments() = arrayOf(Fragment())
+    override fun getOtherFragments() = arrayOf(BaseHivCommunityFollowupRegisterFragment())
 
     override fun presenter() = presenter as BaseHivRegisterContract.Presenter
 }

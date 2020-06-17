@@ -8,4 +8,5 @@ object JsonFormConstants {
     const val HIV_REGISTRATION_DATE = "hiv_registration_date"
     const val HIV_FOLLOWUP_VISIT_DATE = "hiv_followup_visit_date"
     const val ENCOUNTER_TYPE = "encounter_type"
+    const val HIV_COMMUNITY_REFERRAL_FORM_ID = "hiv_community_referral_form_id"
 }
