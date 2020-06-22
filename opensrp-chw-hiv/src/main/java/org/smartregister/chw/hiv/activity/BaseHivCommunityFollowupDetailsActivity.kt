@@ -99,7 +99,7 @@ open class BaseHivCommunityFollowupDetailsActivity : SecuredActivity(), View.OnC
             locationName.text = it.address
 
             referralType.text = it.reasonsForIssuingCommunityFollowupReferral
-            if (!it.primaryCareGiver.isNullOrEmpty() && clientAge.toInt() < 5)
+            if (!it.primaryCareGiver.isNullOrEmpty())
                 careGiverName.text = String.format("CG : %s", it.primaryCareGiver)
             else
                 careGiverName.visibility = View.GONE
@@ -134,6 +134,9 @@ open class BaseHivCommunityFollowupDetailsActivity : SecuredActivity(), View.OnC
                 }
                 StringUtils.isNoneEmpty(memberObject!!.familyHeadPhoneNumber) -> {
                     phoneNumber = memberObject!!.familyHeadPhoneNumber
+                }
+                StringUtils.isNoneEmpty(memberObject!!.primaryCareGiverPhoneNumber) -> {
+                    phoneNumber = memberObject!!.primaryCareGiverPhoneNumber
                 }
             }
             return phoneNumber
