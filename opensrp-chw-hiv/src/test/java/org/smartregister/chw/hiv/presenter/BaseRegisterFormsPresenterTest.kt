@@ -1,6 +1,5 @@
 package org.smartregister.chw.hiv.presenter
 
-import androidx.lifecycle.ViewModel
 import com.nerdstone.neatformcore.domain.model.NFormViewData
 import io.mockk.spyk
 import io.mockk.verifyAll
@@ -8,14 +7,19 @@ import org.json.JSONObject
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+import org.smartregister.chw.hiv.TestHivApp
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
 import org.smartregister.chw.hiv.domain.HivMemberObject
-import org.smartregister.chw.hiv.model.AbstractRegisterFormModel
-import org.smartregister.chw.hiv.model.BaseRegisterFormModel
+import org.smartregister.chw.hiv.model.BaseHivRegisterFragmentModel
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.commonregistry.CommonPersonObjectClient
 
+@RunWith(RobolectricTestRunner::class)
+@Config(application = TestHivApp::class)
 class BaseRegisterFormsPresenterTest {
 
     private val registerFormsView: BaseRegisterFormsContract.View = spyk()
@@ -24,7 +28,7 @@ class BaseRegisterFormsPresenterTest {
     private val baseRegisterFormsPresenter: BaseRegisterFormsContract.Presenter =
         spyk(
             BaseRegisterFormsPresenter(
-                sampleBaseEntityId, registerFormsView, AbstractRegisterFormModel::class.java,
+                sampleBaseEntityId, registerFormsView,
                 registerFormsInteractor
             ),
             recordPrivateCalls = true
@@ -33,7 +37,7 @@ class BaseRegisterFormsPresenterTest {
 
     @Before
     fun `Just before tests`() {
-        val columnNames = BaseRegisterFormModel()
+        val columnNames = BaseHivRegisterFragmentModel()
             .mainColumns(Constants.Tables.FAMILY_MEMBER).map {
                 it.replace("${Constants.Tables.FAMILY_MEMBER}.", "")
             }.toTypedArray()
@@ -53,11 +57,6 @@ class BaseRegisterFormsPresenterTest {
     @Test
     fun `Should return view`() {
         Assert.assertNotNull(baseRegisterFormsPresenter.getView())
-    }
-
-    @Test
-    fun `Should return the view model`() {
-        Assert.assertNotNull(baseRegisterFormsPresenter.getViewModel<AbstractRegisterFormModel>() is ViewModel)
     }
 
     @Test
