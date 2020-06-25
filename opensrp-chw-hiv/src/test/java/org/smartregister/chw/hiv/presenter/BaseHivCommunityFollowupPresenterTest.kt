@@ -23,7 +23,7 @@ class BaseHivCommunityFollowupPresenterTest {
     private val hivCommunityFollowupView: BaseHivRegisterFragmentContract.View = spyk()
     private val hivCommunityFollowupModel = BaseHivCommunityFollowupModel()
     private val sampleBaseEntityId = "5a5mple-b35eent"
-    private val hivCommunityFollowupReferralPresenter: BaseHivRegisterFragmentPresenter =
+    private val hivCommunityFollowupPresenter: BaseHivRegisterFragmentPresenter =
         spyk(
             BaseHivCommunityFollowupPresenter(
                 hivCommunityFollowupView,
@@ -56,8 +56,8 @@ class BaseHivCommunityFollowupPresenterTest {
     @Test
     fun `Should call initialize query parameters on the view`() {
         val condition = "is_closed = 0"
-        val mainTable = hivCommunityFollowupReferralPresenter.getMainTable();
-        hivCommunityFollowupReferralPresenter.initializeQueries(condition)
+        val mainTable = hivCommunityFollowupPresenter.getMainTable();
+        hivCommunityFollowupPresenter.initializeQueries(condition)
         verify {
             hivCommunityFollowupView.initializeQueryParams(
                 mainTable,
@@ -72,19 +72,19 @@ class BaseHivCommunityFollowupPresenterTest {
 
     @Test
     fun `Should return view`() {
-        Assert.assertNotNull(hivCommunityFollowupReferralPresenter.getView())
+        Assert.assertNotNull(hivCommunityFollowupPresenter.getView())
     }
 
     @Test
     fun `Should return sort query`() {
-        Assert.assertNotNull(hivCommunityFollowupReferralPresenter.getDefaultSortQuery())
+        Assert.assertNotNull(hivCommunityFollowupPresenter.getDefaultSortQuery())
     }
 
     @Test
     fun `Should return main table`() {
         Assert.assertEquals(
             Constants.Tables.HIV_COMMUNITY_FOLLOWUP,
-            hivCommunityFollowupReferralPresenter.getMainTable()
+            hivCommunityFollowupPresenter.getMainTable()
         )
     }
 }
