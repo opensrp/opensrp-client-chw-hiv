@@ -1,0 +1,20 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.smartregister.chw.hiv">
+
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+
+    <application>
+        <activity
+            android:name="org.smartregister.chw.hiv.activity.BaseHivRegistrationFormsActivity"
+            android:theme="@style/ChwHivTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name="org.smartregister.chw.hiv.activity.BaseHivProfileActivity"
+            android:theme="@style/ChwHivTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name="org.smartregister.chw.hiv.activity.BaseHivCommunityFollowupDetailsActivity"
+            android:theme="@style/ChwHivTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+    </application>
+</manifest>
