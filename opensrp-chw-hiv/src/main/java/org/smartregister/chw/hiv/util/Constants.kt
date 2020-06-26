@@ -102,7 +102,7 @@ object DBConstants {
         const val IS_CLOSED = "is_closed"
         const val FAMILY_MEMBER_ENTITY_TYPE = "entity_type"
         const val CHW_FOLLOWUP_DATE = "chw_followup_date"
-        const val HIV_FOLLOWUP_VISIT_DATE = "hiv_followup_visit_date"
+        const val HIV_COMMUNITY_FOLLOWUP_VISIT_DATE = "hiv_community_followup_visit_date"
         const val REASONS_FOR_ISSUING_COMMUNITY_REFERRAL = "reasons_for_issuing_community_referral"
         const val HIV_COMMUNITY_REFERRAL_DATE = "hiv_community_referral_date"
         const val LAST_INTERACTED_WITH = "last_interacted_with"
