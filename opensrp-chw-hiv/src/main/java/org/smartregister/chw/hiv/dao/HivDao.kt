@@ -1,7 +1,6 @@
 package org.smartregister.chw.hiv.dao
 
 import android.database.Cursor
-import com.google.gson.Gson
 import org.smartregister.chw.anc.domain.Visit
 import org.smartregister.chw.hiv.domain.HivAlertObject
 import org.smartregister.chw.hiv.domain.HivMemberObject

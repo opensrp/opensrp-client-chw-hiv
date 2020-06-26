@@ -9,7 +9,6 @@ import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
 import org.smartregister.chw.hiv.dao.HivDao
 import org.smartregister.chw.hiv.util.Constants
-import org.smartregister.chw.hiv.util.HivUtil.processEvent
 import org.smartregister.chw.hiv.util.JsonFormConstants
 import org.smartregister.chw.hiv.util.JsonFormUtils
 import timber.log.Timber
