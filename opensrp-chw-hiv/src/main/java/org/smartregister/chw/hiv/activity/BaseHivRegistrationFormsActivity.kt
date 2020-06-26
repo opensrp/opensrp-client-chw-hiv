@@ -22,6 +22,8 @@ import org.joda.time.DateTime
 import org.joda.time.Period
 import org.json.JSONException
 import org.json.JSONObject
+import org.koin.core.inject
+import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
 import org.smartregister.chw.hiv.dao.HivDao
@@ -60,6 +62,7 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
     private lateinit var exitFormImageView: ImageView
     private lateinit var completeButton: ImageView
     var hivMemberObject: HivMemberObject? = null
+    val hivLibrary by inject<HivLibrary>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,10 +87,8 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
             }
             presenter = presenter()
 
-            Timber.e("Coze :: encounter type = " + jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE))
             hivMemberObject =
                 if (jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK) {
-                    Timber.e("Coze :: community followup feedback ")
                     HivDao.getCommunityFollowupMember(baseEntityId!!)
                 } else {
                     HivDao.getMember(baseEntityId!!)
@@ -136,6 +137,15 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
                                 formData[DBConstants.Key.COMMUNITY_REFERRAL_FORM_ID] =
                                     NFormViewData().apply {
                                         value = hivMemberObject!!.communityReferralFormId
+                                    }
+
+                                //Saving chw names
+                                val allSharedPreferences = hivLibrary.context.allSharedPreferences()
+                                formData[DBConstants.Key.CHW_NAME] =
+                                    NFormViewData().apply {
+                                        value = allSharedPreferences.getANMPreferredName(
+                                            allSharedPreferences.fetchRegisteredANM()
+                                        )
                                     }
                             }
 
