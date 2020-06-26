@@ -3,7 +3,7 @@
     <string name="error_unable_to_start_form">An error occurred when starting the form</string>
     <string name="error_unable_to_save_form">An error occurred when saving the form</string>
     <string name="hiv_clients">HIV Clients</string>
-    <string name="hiv_community_followup_clients">HIV Community Followup Clients</string>
+    <string name="hiv_community_followup_clients">Followup Clients</string>
     <string name="followup_referral">HIV Followup Referrals</string>
 
     <!-- menu -->
