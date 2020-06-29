@@ -20,11 +20,6 @@ object Constants {
         const val COMMON_PERSON_OBJECT = "commonPersonObjectClient"
     }
 
-    object JsonFormExtra {
-        const val JSON = "json"
-        const val ENCOUNTER_TYPE = "encounter_type"
-    }
-
     object EventType {
         const val REGISTRATION = "HIV Registration"
         const val HIV_OUTCOME = "HIV Outcome"

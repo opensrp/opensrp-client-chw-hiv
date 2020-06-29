@@ -69,7 +69,16 @@ open class BaseRegisterFormsPresenter(
                 R.string.successful_visit
             )
             saveSuccessful && encounterType == Constants.EventType.HIV_OUTCOME -> context.getString(
-                R.string.successful_visit
+                R.string.hiv_outcome_saved
+            )
+            saveSuccessful && encounterType == Constants.EventType.HIV_COMMUNITY_FOLLOWUP -> context.getString(
+                R.string.hiv_community_followup_referral_issued
+            )
+            saveSuccessful && encounterType == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK -> context.getString(
+                R.string.hiv_community_followup_feedback_saved
+            )
+            saveSuccessful -> context.getString(
+                R.string.form_saved
             )
             else -> context.getString(R.string.form_not_saved)
         }
