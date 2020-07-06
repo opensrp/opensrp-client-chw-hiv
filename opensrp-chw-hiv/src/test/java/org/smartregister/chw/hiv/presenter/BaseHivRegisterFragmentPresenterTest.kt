@@ -13,6 +13,9 @@ import org.smartregister.chw.hiv.model.BaseHivRegisterFragmentModel
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
 
+/**
+ * Test class for testing various methods in BaseHivRegisterFragmentPresenter
+ */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestHivApp::class)
 class BaseHivRegisterFragmentPresenterTest {

@@ -18,6 +18,9 @@ import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.commonregistry.CommonPersonObjectClient
 
+/**
+ * Test class for testing various methods in BaseRegisterFormsPresenterTest
+ */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestHivApp::class)
 class BaseRegisterFormsPresenterTest {

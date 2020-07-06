@@ -10,6 +10,9 @@ import org.smartregister.chw.hiv.TestHivApp
 import org.smartregister.chw.hiv.contract.BaseHivRegisterContract
 import org.smartregister.chw.hiv.model.BaseHivRegisterModel
 
+/**
+ * Test class for testing various methods in BaseHIVRegisterPresenter
+ */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestHivApp::class)
 class BaseHivRegisterPresenterTest {

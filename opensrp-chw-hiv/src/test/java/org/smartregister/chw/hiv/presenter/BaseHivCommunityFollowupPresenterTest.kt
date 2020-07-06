@@ -16,6 +16,9 @@ import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.commonregistry.CommonPersonObjectClient
 import java.util.*
 
+/**
+ * Test class for testing various methods in BaseHIVCommunityFollowup Presenter
+ */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestHivApp::class)
 class BaseHivCommunityFollowupPresenterTest {
