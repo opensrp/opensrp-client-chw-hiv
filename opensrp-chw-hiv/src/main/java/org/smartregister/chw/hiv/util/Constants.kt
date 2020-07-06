@@ -20,11 +20,6 @@ object Constants {
         const val COMMON_PERSON_OBJECT = "commonPersonObjectClient"
     }
 
-    object JsonFormExtra {
-        const val JSON = "json"
-        const val ENCOUNTER_TYPE = "encounter_type"
-    }
-
     object EventType {
         const val REGISTRATION = "HIV Registration"
         const val HIV_OUTCOME = "HIV Outcome"
@@ -102,13 +97,14 @@ object DBConstants {
         const val IS_CLOSED = "is_closed"
         const val FAMILY_MEMBER_ENTITY_TYPE = "entity_type"
         const val CHW_FOLLOWUP_DATE = "chw_followup_date"
-        const val HIV_FOLLOWUP_VISIT_DATE = "hiv_followup_visit_date"
+        const val HIV_COMMUNITY_FOLLOWUP_VISIT_DATE = "hiv_community_followup_visit_date"
         const val REASONS_FOR_ISSUING_COMMUNITY_REFERRAL = "reasons_for_issuing_community_referral"
         const val HIV_COMMUNITY_REFERRAL_DATE = "hiv_community_referral_date"
         const val LAST_INTERACTED_WITH = "last_interacted_with"
         const val LAST_FACILITY_VISIT_DATE = "last_client_visit_date"
         const val COMMENTS = "comment"
         const val COMMUNITY_REFERRAL_FORM_ID = "community_referral_form_id"
+        const val CHW_NAME = "chw_name"
     }
 }
 

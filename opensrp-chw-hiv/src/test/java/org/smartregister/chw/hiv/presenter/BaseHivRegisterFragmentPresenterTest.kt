@@ -2,20 +2,22 @@ package org.smartregister.chw.hiv.presenter
 
 import io.mockk.spyk
 import io.mockk.verifySequence
-import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.smartregister.chw.hiv.TestReferralApp
+import org.smartregister.chw.hiv.TestHivApp
 import org.smartregister.chw.hiv.contract.BaseHivRegisterFragmentContract
 import org.smartregister.chw.hiv.model.BaseHivRegisterFragmentModel
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
 
+/**
+ * Test class for testing various methods in BaseHivRegisterFragmentPresenter
+ */
 @RunWith(RobolectricTestRunner::class)
-@Config(application = TestReferralApp::class)
+@Config(application = TestHivApp::class)
 class BaseHivRegisterFragmentPresenterTest {
 
     private val hivRegisterFragmentView: BaseHivRegisterFragmentContract.View = spyk()
@@ -31,14 +33,14 @@ class BaseHivRegisterFragmentPresenterTest {
 
     @Test
     fun `Should initialize the queries on the view`() {
-        hivRegisterFragmentPresenter.initializeQueries("ec_hiv.hiv_status")
+        hivRegisterFragmentPresenter.initializeQueries("ec_hiv_register.hiv_status = 'UNKNOWN'")
         val visibleColumns =
             (hivRegisterFragmentPresenter as BaseHivRegisterFragmentPresenter).visibleColumns
         verifySequence {
             hivRegisterFragmentView.initializeQueryParams(
-                "ec_hiv",
-                "SELECT COUNT(*) FROM ec_hiv WHERE ec_hiv.hiv_status ",
-                "Select ec_hiv.id as _id , ec_hiv.relationalid FROM ec_hiv WHERE ec_hiv.hiv_status "
+                "ec_hiv_register",
+                "SELECT COUNT(*) FROM ec_hiv_register WHERE ec_hiv_register.hiv_status = 'UNKNOWN' ",
+                "Select ec_hiv_register.id as _id , ec_hiv_register.relationalid FROM ec_hiv_register WHERE ec_hiv_register.hiv_status = 'UNKNOWN' "
             )
             hivRegisterFragmentView.initializeAdapter(visibleColumns)
             hivRegisterFragmentView.countExecute()
@@ -59,8 +61,8 @@ class BaseHivRegisterFragmentPresenterTest {
     @Test
     fun `Should return the due filter query`() {
         assertEquals(
-            hivRegisterFragmentPresenter.getDueFilterCondition(),
-            "ec_hiv.hiv_status = '${Constants.HivStatus.UNKNOWN}'"
+            "ec_hiv_register.client_hiv_status_during_registration = '${Constants.HivStatus.UNKNOWN}'",
+            hivRegisterFragmentPresenter.getDueFilterCondition()
         )
     }
 

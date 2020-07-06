@@ -1,30 +1,37 @@
 package org.smartregister.chw.hiv.presenter
 
-import com.nerdstone.neatformcore.domain.model.NFormViewData
 import io.mockk.spyk
-import io.mockk.verifyAll
-import org.json.JSONObject
+import io.mockk.verify
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.smartregister.chw.hiv.contract.BaseHivCommunityFollowupContract
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+import org.smartregister.chw.hiv.TestHivApp
+import org.smartregister.chw.hiv.contract.BaseHivRegisterFragmentContract
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.model.BaseHivCommunityFollowupModel
-import org.smartregister.chw.hiv.model.BaseRegisterFormModel
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.commonregistry.CommonPersonObjectClient
+import java.util.*
 
+/**
+ * Test class for testing various methods in BaseHIVCommunityFollowup Presenter
+ */
+@RunWith(RobolectricTestRunner::class)
+@Config(application = TestHivApp::class)
 class BaseHivCommunityFollowupPresenterTest {
 
-    private val hivCommunityFollowupReferralView: BaseHivCommunityFollowupContract.View = spyk()
-    private val hivCommunityFollowupReferralInteractor: BaseHivCommunityFollowupContract.Interactor = spyk()
+    private val hivCommunityFollowupView: BaseHivRegisterFragmentContract.View = spyk()
+    private val hivCommunityFollowupModel = BaseHivCommunityFollowupModel()
     private val sampleBaseEntityId = "5a5mple-b35eent"
-    private val hivCommunityFollowupReferralPresenter: BaseHivCommunityFollowupContract.Presenter =
+    private val hivCommunityFollowupPresenter: BaseHivRegisterFragmentPresenter =
         spyk(
             BaseHivCommunityFollowupPresenter(
-                hivCommunityFollowupReferralView,
-                BaseHivCommunityFollowupModel::class.java,
-                hivCommunityFollowupReferralInteractor
+                hivCommunityFollowupView,
+                hivCommunityFollowupModel,
+                "null"
             ),
             recordPrivateCalls = true
         )
@@ -32,7 +39,7 @@ class BaseHivCommunityFollowupPresenterTest {
 
     @Before
     fun `Before test`() {
-        val columnNames = BaseRegisterFormModel()
+        val columnNames = BaseHivCommunityFollowupModel()
             .mainColumns(Constants.Tables.FAMILY_MEMBER).map {
                 it.replace("${Constants.Tables.FAMILY_MEMBER}.", "")
             }.toTypedArray()
@@ -50,33 +57,37 @@ class BaseHivCommunityFollowupPresenterTest {
     }
 
     @Test
-    fun `Should call save followup method of interactor`() {
-        val valuesHashMap = hashMapOf<String, NFormViewData>()
-        val jsonFormObject = JSONObject()
-        hivCommunityFollowupReferralPresenter.initializeMemberObject(hivMemberObject)
-        hivCommunityFollowupReferralPresenter.saveForm(valuesHashMap, jsonFormObject)
-        verifyAll {
-            hivCommunityFollowupReferralInteractor.saveFollowup(
-                sampleBaseEntityId, valuesHashMap, jsonFormObject,
-                hivCommunityFollowupReferralPresenter as BaseHivCommunityFollowupPresenter
+    fun `Should call initialize query parameters on the view`() {
+        val condition = "is_closed = 0"
+        val mainTable = hivCommunityFollowupPresenter.getMainTable();
+        hivCommunityFollowupPresenter.initializeQueries(condition)
+        verify {
+            hivCommunityFollowupView.initializeQueryParams(
+                mainTable,
+                "SELECT COUNT(*) FROM ec_hiv_community_followup WHERE is_closed = 0 ",
+                "Select ec_hiv_community_followup.id as _id , ec_hiv_community_followup.relationalid FROM ec_hiv_community_followup WHERE is_closed = 0 "
             )
+            hivCommunityFollowupView.initializeAdapter(TreeSet())
+            hivCommunityFollowupView.countExecute()
+            hivCommunityFollowupView.filterandSortInInitializeQueries()
         }
     }
 
     @Test
     fun `Should return view`() {
-        Assert.assertNotNull(hivCommunityFollowupReferralPresenter.getView())
+        Assert.assertNotNull(hivCommunityFollowupPresenter.getView())
     }
 
     @Test
-    fun `Should call set profile view data`() {
-        hivCommunityFollowupReferralPresenter.fillProfileData(spyk(hivMemberObject))
-        verifyAll { hivCommunityFollowupReferralView.setProfileViewWithData() }
+    fun `Should return sort query`() {
+        Assert.assertNotNull(hivCommunityFollowupPresenter.getDefaultSortQuery())
     }
 
     @Test
-    fun initializeMemberObject() {
-        hivCommunityFollowupReferralPresenter.initializeMemberObject(hivMemberObject)
-        Assert.assertNotNull((hivCommunityFollowupReferralPresenter as BaseHivCommunityFollowupPresenter).hivMemberObject)
+    fun `Should return main table`() {
+        Assert.assertEquals(
+            Constants.Tables.HIV_COMMUNITY_FOLLOWUP,
+            hivCommunityFollowupPresenter.getMainTable()
+        )
     }
 }

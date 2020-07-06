@@ -1,9 +1,12 @@
 package org.smartregister.chw.hiv.fragment
 
+import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseHivRegisterFragmentContract
 import org.smartregister.chw.hiv.model.BaseHivCommunityFollowupModel
 import org.smartregister.chw.hiv.presenter.BaseHivCommunityFollowupPresenter
 import org.smartregister.commonregistry.CommonPersonObjectClient
+import org.smartregister.view.customcontrols.CustomFontTextView
+import org.smartregister.view.customcontrols.FontVariant
 import org.smartregister.view.fragment.BaseRegisterFragment
 
 /**
@@ -13,6 +16,15 @@ import org.smartregister.view.fragment.BaseRegisterFragment
  *
  */
 open class BaseHivCommunityFollowupRegisterFragment : BaseHivRegisterFragment() {
+    override fun setupViews(view: android.view.View) {
+        super.setupViews(view)
+        view.findViewById<CustomFontTextView>(R.id.txt_title_label)?.apply {
+            visibility = android.view.View.VISIBLE
+            text = getString(R.string.hiv_community_followup_clients)
+            setFontVariant(FontVariant.REGULAR)
+        }
+    }
+
     override fun initializePresenter() {
         if (activity == null) {
             return

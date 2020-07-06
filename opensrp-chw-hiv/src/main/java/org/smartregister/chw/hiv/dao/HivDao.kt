@@ -1,10 +1,10 @@
 package org.smartregister.chw.hiv.dao
 
 import android.database.Cursor
-import com.google.gson.Gson
 import org.smartregister.chw.anc.domain.Visit
 import org.smartregister.chw.hiv.domain.HivAlertObject
 import org.smartregister.chw.hiv.domain.HivMemberObject
+import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.dao.AbstractDao
 import org.smartregister.dao.AbstractDao.DataMap
@@ -182,7 +182,7 @@ object HivDao : AbstractDao() {
         var res = readData(sql, dataMap)
         if (res == null)
             res = readData(sqlHf, dataMap)
-        return if (res == null || res.size != 1) null else res[0]
+        return if (res == null || res.size == 0) null else res[0]
     }
 
     @JvmStatic
@@ -201,10 +201,10 @@ object HivDao : AbstractDao() {
                     inner join ec_hiv_community_followup mr on mr.entity_id = m.base_entity_id 
                     left join ec_family_member fh on fh.base_entity_id = f.family_head 
                     left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver 
-                    where mr.base_entity_id ='${baseEntityID}' OR mr.entity_id ='${baseEntityID}' """
-
+                    where mr.base_entity_id ='${baseEntityID}' OR mr.entity_id ='${baseEntityID}' AND
+                    mr.base_entity_id NOT IN (SELECT community_referral_form_id FROM ec_hiv_community_feedback)"""
         val res = readData(sql, dataMap)
-        return if (res == null || res.size != 1) null else res[0]
+        return if (res == null || res.size == 0) null else res[0]
     }
 
     @JvmStatic
