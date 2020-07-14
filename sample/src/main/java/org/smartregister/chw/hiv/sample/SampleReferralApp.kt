@@ -1,12 +1,9 @@
 package org.smartregister.chw.hiv.sample
 
-import android.app.Application
-import android.content.Context
-import androidx.multidex.MultiDex
+import org.smartregister.view.activity.DrishtiApplication
 
-class SampleReferralApp : Application() {
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        MultiDex.install(this)
+class SampleHivApp : DrishtiApplication() {
+    override fun logoutCurrentUser() {
+        //Overridden
     }
 }

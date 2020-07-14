@@ -4,7 +4,7 @@
   "encounter_type": "HIV Followup",
   "entity_id": "",
   "relational_id": "",
-  "rules_file": "rule/hiv_followup_form_rules.yml",
+  "rules_file": "rules/hiv_followup_form_rules.yml",
   "metadata": {
     "start": {
       "openmrs_entity_parent": "",
