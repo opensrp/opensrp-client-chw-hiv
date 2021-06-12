@@ -13,6 +13,7 @@ object Constants {
 
     object Configuration {
         const val HIV_REGISTER = "hiv_register"
+        const val HIV_INDEX_REGISTER = "hiv_index_register"
     }
 
     object HivMemberObject {
@@ -37,6 +38,7 @@ object Constants {
 
     object Tables {
         const val HIV = "ec_hiv_register"
+        const val HIV_INDEX = "ec_hiv_index"
         const val HIV_FOLLOW_UP = "ec_hiv_follow_up_visit"
         const val HIV_OUTCOME = "ec_hiv_outcome"
         const val HIV_COMMUNITY_FOLLOWUP = "ec_hiv_community_followup"
@@ -105,6 +107,14 @@ object DBConstants {
         const val COMMENTS = "comment"
         const val COMMUNITY_REFERRAL_FORM_ID = "community_referral_form_id"
         const val CHW_NAME = "chw_name"
+        const val HIV_CLIENT_ID = "hiv_client_id"
+        const val READINESS_TO_TEST_FOR_HIV = "readiness_to_test_for_hiv"
+        const val HAS_STARTED_MEDICATION = "has_started_medication"
+        const val GBV_ANALYSIS = "gbv_analysis"
+        const val NOTIFICATION_METHOD = "notification_method"
+        const val HAS_THE_CLIENT_BEEN_TESTED_FOR_HIV = "has_the_client_been_tested_for_hiv"
+        const val HAS_JOINED_HOME_BASED_SERVICES = "has_joined_home_based_services"
+        const val HIV_INDEX_REGISTRATION_DATE = "hiv_index_registration_date"
     }
 }
 
