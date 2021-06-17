@@ -3,7 +3,7 @@
     <string name="error_unable_to_start_form">An error occurred when starting the form</string>
     <string name="error_unable_to_save_form">An error occurred when saving the form</string>
     <string name="hiv_clients">HIV Clients</string>
-    <string name="hiv_index_clients">Index Clients</string>
+    <string name="hiv_index_clients_contacts">Index Clients Contacts</string>
     <string name="hiv_community_followup_clients">Followup Clients</string>
     <string name="followup_referral">HIV Followup Referrals</string>
 
@@ -115,6 +115,6 @@
     <string name="form_saved">Form saved successfully</string>
     <string name="hiv_positive_status">HIV Positive</string>
     <string name="hiv_negative_status">HIV Negative</string>
-    <string name="hiv_client_has_registered_indexes">Client has registered Indexes</string>
-    <string name="go_to_client_index_list">Go to client Index List</string>
+    <string name="index_client_has_registered_contacts">Index Client has registered contacts</string>
+    <string name="go_to_index_client_contact_list">Go to client Index Contacts List</string>
 </resources>
