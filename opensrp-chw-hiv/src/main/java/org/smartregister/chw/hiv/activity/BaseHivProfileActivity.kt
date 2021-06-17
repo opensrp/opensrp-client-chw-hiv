@@ -43,6 +43,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     private var rlLastVisitLayout: RelativeLayout? = null
     private var rlUpcomingServices: RelativeLayout? = null
     private var rlFamilyServicesDue: RelativeLayout? = null
+    private var rlIndexClients: RelativeLayout? = null
     private var tvLastVisitDay: TextView? = null
     private var tvViewMedicalHistory: TextView? = null
     private var tvUpComingServices: TextView? = null
@@ -112,6 +113,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
         tvViewMedicalHistory = findViewById(R.id.textview_medical_history)
         rlUpcomingServices = findViewById(R.id.rlUpcomingServices)
         rlFamilyServicesDue = findViewById(R.id.rlFamilyServicesDue)
+        rlIndexClients = findViewById(R.id.rlIndexClients)
         progressBar = findViewById(R.id.progress_bar)
         tickImage = findViewById(R.id.tick_image)
         tvVisitDone = findViewById(R.id.textview_visit_done)
@@ -126,6 +128,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
         findViewById<View>(R.id.rl_last_visit_layout).setOnClickListener(this)
         findViewById<View>(R.id.rlUpcomingServices).setOnClickListener(this)
         findViewById<View>(R.id.rlFamilyServicesDue).setOnClickListener(this)
+        findViewById<View>(R.id.rlIndexClients).setOnClickListener(this)
         findViewById<View>(R.id.rlHivRegistrationDate).setOnClickListener(this)
     }
 
@@ -167,6 +170,8 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
             openUpcomingServices()
         } else if (id == R.id.rlFamilyServicesDue) {
             openFamilyDueServices()
+        } else if (id == R.id.rlIndexClients) {
+            openIndexClientsList(hivMemberObject)
         } else if (id == R.id.textview_record_reccuring_visit) {
             openFollowUpVisitForm(false)
         } else if (id == R.id.textview_edit) {
@@ -199,6 +204,10 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
 
     override fun openFamilyDueServices() {
         // TODO :: Show family due services
+    }
+
+    override fun openIndexClientsList(hivMemberObject: HivMemberObject?) {
+        // TODO :: Open Index List
     }
 
     override fun openFollowUpVisitForm(isEdit: Boolean) {
@@ -234,6 +243,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
             )
         }
     }
+
 
     override fun setFamilyStatus(status: AlertStatus?) {
         findViewById<View>(R.id.rlHivRegistrationDate).visibility = View.VISIBLE
@@ -309,6 +319,17 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
         if (StringUtils.isNotBlank(hivMemberObject.primaryCareGiver) && hivMemberObject.primaryCareGiver == hivMemberObject.baseEntityId) {
             findViewById<View>(R.id.hiv_primary_caregiver).visibility = View.VISIBLE
         }
+
+
+    }
+
+    override fun setIndexClientsStatus(boolean: Boolean) {
+        if (boolean) {
+            rlIndexClients?.visibility = View.VISIBLE
+        } else {
+            rlIndexClients?.visibility = View.GONE
+        }
+
     }
 
     private fun formatTime(dateTime: String): CharSequence? {

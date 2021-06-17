@@ -115,4 +115,6 @@
     <string name="form_saved">Form saved successfully</string>
     <string name="hiv_positive_status">HIV Positive</string>
     <string name="hiv_negative_status">HIV Negative</string>
+    <string name="hiv_client_has_registered_indexes">Client has registered Indexes</string>
+    <string name="go_to_client_index_list">Go to client Index List</string>
 </resources>

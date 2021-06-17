@@ -18,7 +18,7 @@ data class HivIndexObject(val client: CommonPersonObjectClient?) : Serializable 
     var address: String? = client?.columnmaps?.get(DBConstants.Key.VILLAGE_TOWN) ?: ""
     var gender: String? = client?.columnmaps?.get(DBConstants.Key.GENDER) ?: ""
     var uniqueId: String? = client?.columnmaps?.get(DBConstants.Key.UNIQUE_ID)
-    var age: String? = client?.columnmaps?.get(DBConstants.Key.DOB) ?: ""
+    var dob: String? = client?.columnmaps?.get(DBConstants.Key.DOB) ?: ""
     var relationalid: String? = client?.columnmaps?.get(DBConstants.Key.RELATIONAL_ID)
     var baseEntityId: String? = client?.columnmaps?.get(DBConstants.Key.BASE_ENTITY_ID)
     var relationalId: String? = client?.columnmaps?.get(DBConstants.Key.RELATIONAL_ID)

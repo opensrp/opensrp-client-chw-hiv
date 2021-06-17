@@ -268,6 +268,56 @@
             android:background="@color/light_grey"
             android:visibility="gone" />
 
+        <RelativeLayout
+            android:id="@+id/rlIndexClients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_most_due_overdue_row"
+            android:background="@drawable/list_item_background_selctor"
+            android:padding="20dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/index_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/hiv_registration_row" />
+
+            <ImageView
+                android:id="@+id/iv_index_clients_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/row_goto" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/textview_client_has_registered_indexes"
+                style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/index_image"
+                android:gravity="center_horizontal"
+                android:text="@string/hiv_client_has_registered_indexes"
+                android:textColor="@android:color/black" />
+
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/text_view_index_list"
+                style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textview_client_has_registered_indexes"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/index_image"
+                android:text="@string/go_to_client_index_list"
+                android:textColor="@android:color/darker_gray" />
+
+        </RelativeLayout>
+
+
     </LinearLayout>
 
     <ProgressBar

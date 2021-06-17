@@ -6,6 +6,7 @@ import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.dao.AbstractDao
 import org.smartregister.dao.AbstractDao.DataMap
 import java.math.BigDecimal
+import java.text.SimpleDateFormat
 import java.util.*
 
 object HivIndexDao : AbstractDao() {
@@ -18,7 +19,7 @@ object HivIndexDao : AbstractDao() {
             memberObject.address = getCursorValue(cursor, DBConstants.Key.VILLAGE_TOWN, "")
             memberObject.gender = getCursorValue(cursor, DBConstants.Key.GENDER)!!
             memberObject.uniqueId = getCursorValue(cursor, DBConstants.Key.UNIQUE_ID, "")
-            memberObject.age = getCursorValue(cursor, DBConstants.Key.DOB)!!
+            memberObject.dob = getCursorValue(cursor, DBConstants.Key.DOB)!!
             memberObject.familyBaseEntityId =
                 getCursorValue(cursor, DBConstants.Key.FAMILY_BASE_ENTITY_ID, "")
             memberObject.relationalId =
@@ -48,15 +49,13 @@ object HivIndexDao : AbstractDao() {
                 getCursorValue(cursor, DBConstants.Key.CLIENT_HIV_STATUS_AFTER_TESTING, "")
 
 
-            memberObject.hivIndexRegistrationDate =
-                Date(
-                    BigDecimal(
-                        getCursorValue(
-                            cursor,
-                            DBConstants.Key.HIV_INDEX_REGISTRATION_DATE, "0"
-                        )
-                    ).toLong()
-                )
+            val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+            sdf.timeZone = TimeZone.getTimeZone("+03:00")
+
+            memberObject.hivIndexRegistrationDate = sdf.parse(getCursorValue(
+                cursor,
+                DBConstants.Key.HIV_INDEX_REGISTRATION_DATE, ""
+            ))
 
             memberObject.comments =
                 getCursorValue(cursor, DBConstants.Key.COMMENTS, "")
@@ -139,20 +138,41 @@ object HivIndexDao : AbstractDao() {
     }
 
     @JvmStatic
-    fun getSyncLocationId(baseEntityId: String?): String? {
-        val sql = String.format(
-            "SELECT sync_location_id FROM ec_family_member WHERE base_entity_id = '%s'",
-            baseEntityId
-        )
-        val dataMap =
-            DataMap { cursor: Cursor? ->
-                getCursorValue(
-                    cursor,
-                    "sync_location_id"
-                )
-            }
-        val res =
-            readData(sql, dataMap)
-        return if (res == null || res.size != 1) null else res[0]
+    fun getHivClientIndexes(baseEntityID: String): List<HivIndexObject>? {
+        val sql =
+            """select m.base_entity_id , m.unique_id , m.relational_id as family_base_entity_id , m.dob , m.first_name , 
+                    m.middle_name , m.last_name , m.gender , m.phone_number , m.other_phone_number , m.entity_type, m.has_primary_caregiver, m.has_primary_caregiver, m.primary_caregiver_name,
+                    f.first_name family_name ,f.primary_caregiver , f.family_head , f.village_town ,
+                    fh.first_name family_head_first_name , fh.middle_name family_head_middle_name , 
+                    fh.last_name family_head_last_name, fh.phone_number family_head_phone_number, 
+                    pcg.first_name pcg_first_name , pcg.last_name pcg_last_name , pcg.middle_name pcg_middle_name , 
+                    pcg.phone_number  pcg_phone_number , mr.*
+
+                from ec_family_member m 
+                    inner join ec_family f on m.relational_id = f.base_entity_id 
+                    inner join ec_hiv_index mr on mr.base_entity_id = m.base_entity_id 
+                    left join ec_family_member fh on fh.base_entity_id = f.family_head 
+                    left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver 
+                    where mr.hiv_client_id ='${baseEntityID}' """
+        val sqlHf =
+            """select m.base_entity_id , m.unique_id , m.relational_id as family_base_entity_id , m.dob , m.first_name , 
+                    m.middle_name , m.last_name , m.gender , m.phone_number , m.other_phone_number , m.entity_type,
+                    f.first_name family_name ,f.primary_caregiver , f.family_head , f.village_town ,
+                    fh.first_name family_head_first_name , fh.middle_name family_head_middle_name , 
+                    fh.last_name family_head_last_name, fh.phone_number family_head_phone_number, 
+                    pcg.first_name pcg_first_name , pcg.last_name pcg_last_name , pcg.middle_name pcg_middle_name , 
+                    pcg.phone_number  pcg_phone_number , mr.* 
+                    from ec_family_member m 
+                    inner join ec_family f on m.relational_id = f.base_entity_id 
+                    inner join ec_hiv_index mr on mr.base_entity_id = m.base_entity_id 
+                    left join ec_family_member fh on fh.base_entity_id = f.family_head 
+                    left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver 
+                    where mr.hiv_client_id ='${baseEntityID}' """
+
+        var res = readData(sql, dataMap)
+        if (res == null)
+            res = readData(sqlHf, dataMap)
+        return if (res == null || res.size == 0) null else res
     }
+
 }
