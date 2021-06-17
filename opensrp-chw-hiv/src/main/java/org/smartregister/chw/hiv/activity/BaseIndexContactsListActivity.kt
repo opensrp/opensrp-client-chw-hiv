@@ -12,34 +12,33 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
 import org.smartregister.chw.anc.domain.MemberObject
 import org.smartregister.chw.anc.util.Constants.ANC_MEMBER_OBJECTS
 import org.smartregister.chw.hiv.R
-import org.smartregister.chw.hiv.contract.BaseIndexClientsListContract
-import org.smartregister.chw.hiv.domain.HivIndexObject
+import org.smartregister.chw.hiv.contract.BaseIndexClientsContactListContract
+import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import org.smartregister.chw.hiv.domain.HivMemberObject
-import org.smartregister.chw.hiv.interactor.BaseHivClientIndexListInteractor
-import org.smartregister.chw.hiv.presenter.BaseHivClientIndexListPresenter
-import org.smartregister.chw.hiv.provider.IndexClientsAdapter
+import org.smartregister.chw.hiv.interactor.BaseHivIndexContactsListInteractor
+import org.smartregister.chw.hiv.presenter.BaseHivIndexcContactsListPresenter
+import org.smartregister.chw.hiv.provider.IndexContactsListAdapter
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.view.activity.SecuredActivity
 import timber.log.Timber
 
 
-open class BaseHivClientIndexListActivity : SecuredActivity(),
-    BaseIndexClientsListContract.View {
+open class BaseIndexContactsListActivity : SecuredActivity(),
+    BaseIndexClientsContactListContract.View {
     var memberObject: HivMemberObject? = null
     override fun initializePresenter() {
         TODO("Not yet implemented")
     }
 
-    override var presenter: BaseIndexClientsListContract.Presenter? = null
+    override var presenter: BaseIndexClientsContactListContract.Presenter? = null
     var linearLayout: LinearLayout? = null
     var tvTitle: TextView? = null
     var progressBar: ProgressBar? = null
 
-    protected var hivIndexList: MutableList<HivIndexObject?> = arrayListOf()
+    protected var hivIndexContactList: MutableList<HivIndexContactObject?> = arrayListOf()
 
     private var mAdapter: RecyclerView.Adapter<*>? = null
     private var recyclerView: RecyclerView? = null
@@ -88,7 +87,7 @@ open class BaseHivClientIndexListActivity : SecuredActivity(),
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
         recyclerView!!.layoutManager = layoutManager
 
-        mAdapter = IndexClientsAdapter(this, hivIndexList)
+        mAdapter = IndexContactsListAdapter(this, hivIndexContactList)
         recyclerView!!.adapter = mAdapter
     }
 
@@ -117,9 +116,9 @@ open class BaseHivClientIndexListActivity : SecuredActivity(),
 
         presenter = memberObject?.baseEntityId?.let { it1 ->
             Timber.d("Base Entity Id = "+memberObject!!.baseEntityId)
-            BaseHivClientIndexListPresenter(
+            BaseHivIndexcContactsListPresenter(
                 it1,
-                BaseHivClientIndexListInteractor(),
+                BaseHivIndexContactsListInteractor(),
                 this
             )
         }
@@ -134,16 +133,16 @@ open class BaseHivClientIndexListActivity : SecuredActivity(),
         progressBar!!.visibility = if (state) View.VISIBLE else View.GONE
     }
 
-    override fun refreshIndexList(hivIndexObjects: List<HivIndexObject?>) {
-        hivIndexList.clear()
-        hivIndexList.addAll(hivIndexObjects)
+    override fun refreshIndexList(hivIndexContactObjects: List<HivIndexContactObject?>) {
+        hivIndexContactList.clear()
+        hivIndexContactList.addAll(hivIndexContactObjects)
         mAdapter!!.notifyDataSetChanged()
         recyclerView!!.adapter = mAdapter
     }
 
     companion object {
         fun startMe(activity: Activity, memberObject: MemberObject?) {
-            val intent = Intent(activity, BaseHivClientIndexListActivity::class.java)
+            val intent = Intent(activity, BaseIndexContactsListActivity::class.java)
             intent.putExtra(ANC_MEMBER_OBJECTS.MEMBER_PROFILE_OBJECT, memberObject)
             activity.startActivity(intent)
         }

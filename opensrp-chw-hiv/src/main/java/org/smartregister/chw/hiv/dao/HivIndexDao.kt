@@ -1,18 +1,17 @@
 package org.smartregister.chw.hiv.dao
 
 import android.database.Cursor
-import org.smartregister.chw.hiv.domain.HivIndexObject
+import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.dao.AbstractDao
 import org.smartregister.dao.AbstractDao.DataMap
-import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
 object HivIndexDao : AbstractDao() {
     private val dataMap =
         DataMap { cursor: Cursor? ->
-            val memberObject = HivIndexObject(null)
+            val memberObject = HivIndexContactObject(null)
             memberObject.firstName = getCursorValue(cursor, DBConstants.Key.FIRST_NAME, "")
             memberObject.middleName = getCursorValue(cursor, DBConstants.Key.MIDDLE_NAME, "")
             memberObject.lastName = getCursorValue(cursor, DBConstants.Key.LAST_NAME, "")
@@ -100,7 +99,7 @@ object HivIndexDao : AbstractDao() {
     }
 
     @JvmStatic
-    fun getMember(baseEntityID: String): HivIndexObject? {
+    fun getMember(baseEntityID: String): HivIndexContactObject? {
         val sql =
             """select m.base_entity_id , m.unique_id , m.relational_id as family_base_entity_id , m.dob , m.first_name , 
                     m.middle_name , m.last_name , m.gender , m.phone_number , m.other_phone_number , m.entity_type, m.has_primary_caregiver, m.has_primary_caregiver, m.primary_caregiver_name,
@@ -138,7 +137,7 @@ object HivIndexDao : AbstractDao() {
     }
 
     @JvmStatic
-    fun getHivClientIndexes(baseEntityID: String): List<HivIndexObject>? {
+    fun getIndexContacts(baseEntityID: String): List<HivIndexContactObject>? {
         val sql =
             """select m.base_entity_id , m.unique_id , m.relational_id as family_base_entity_id , m.dob , m.first_name , 
                     m.middle_name , m.last_name , m.gender , m.phone_number , m.other_phone_number , m.entity_type, m.has_primary_caregiver, m.has_primary_caregiver, m.primary_caregiver_name,

@@ -4,21 +4,21 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import com.google.gson.Gson
 import org.smartregister.chw.anc.util.AppExecutors
-import org.smartregister.chw.hiv.contract.BaseIndexClientsListContract
+import org.smartregister.chw.hiv.contract.BaseIndexClientsContactListContract
 import org.smartregister.chw.hiv.dao.HivIndexDao
-import org.smartregister.chw.hiv.domain.HivIndexObject
+import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import timber.log.Timber
 
-open class BaseHivClientIndexListInteractor @VisibleForTesting internal constructor(
+open class BaseHivIndexContactsListInteractor @VisibleForTesting internal constructor(
     var appExecutors: AppExecutors
-) : BaseIndexClientsListContract.Interactor {
+) : BaseIndexClientsContactListContract.Interactor {
 
     constructor() : this(AppExecutors()) {}
 
     override fun getClientIndexes(
         hivClientBaseEntityId: String?,
         context: Context?,
-        callBack: BaseIndexClientsListContract.InteractorCallBack?
+        callBack: BaseIndexClientsContactListContract.InteractorCallBack?
     ) {
         val runnable = Runnable {
             val indexClients = getIndexClient(context, hivClientBaseEntityId)
@@ -34,14 +34,14 @@ open class BaseHivClientIndexListInteractor @VisibleForTesting internal construc
     protected fun getIndexClient(
         context: Context?,
         hivClientBaseEntityId: String?
-    ): List<HivIndexObject?> {
+    ): List<HivIndexContactObject?> {
         try {
             Thread.sleep(2000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
 
-        return hivClientBaseEntityId?.let { HivIndexDao.getHivClientIndexes(it) }!!
+        return hivClientBaseEntityId?.let { HivIndexDao.getIndexContacts(it) }!!
 
     }
 

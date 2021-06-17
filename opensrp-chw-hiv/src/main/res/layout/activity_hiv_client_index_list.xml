@@ -50,7 +50,7 @@
             android:layout_marginStart="18dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/hiv_index_clients"
+            android:text="@string/hiv_index_clients_contacts"
             android:textColor="@color/black"
             android:textSize="18sp" />
 

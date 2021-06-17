@@ -10,7 +10,7 @@ import org.smartregister.configurableviews.model.View
 import java.lang.ref.WeakReference
 import java.util.*
 
-open class BaseHivIndexRegisterFragmentPresenter(
+open class BaseHivIndexContactsRegisterFragmentPresenter(
     view: BaseHivRegisterFragmentContract.View,
     protected var model: BaseHivRegisterFragmentContract.Model,
     protected var viewConfigurationIdentifier: String?

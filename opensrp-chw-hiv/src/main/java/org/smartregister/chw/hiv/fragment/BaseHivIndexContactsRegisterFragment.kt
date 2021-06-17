@@ -1,12 +1,10 @@
 package org.smartregister.chw.hiv.fragment
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.model.BaseHivRegisterFragmentModel
-import org.smartregister.chw.hiv.presenter.BaseHivIndexRegisterFragmentPresenter
-import org.smartregister.chw.hiv.presenter.BaseHivRegisterFragmentPresenter
+import org.smartregister.chw.hiv.presenter.BaseHivIndexContactsRegisterFragmentPresenter
 import org.smartregister.view.customcontrols.CustomFontTextView
 import org.smartregister.view.customcontrols.FontVariant
 
@@ -16,7 +14,7 @@ import org.smartregister.view.customcontrols.FontVariant
  * registers.
  *
  */
-open class BaseHivIndexRegisterFragment : BaseHivRegisterFragment() {
+open class BaseHivIndexContactsRegisterFragment : BaseHivRegisterFragment() {
 
 
     override fun setupViews(view: android.view.View) {
@@ -47,7 +45,7 @@ open class BaseHivIndexRegisterFragment : BaseHivRegisterFragment() {
             }
         view.findViewById<CustomFontTextView>(R.id.txt_title_label)?.apply {
             visibility = android.view.View.VISIBLE
-            text = getString(R.string.hiv_index_clients)
+            text = getString(R.string.hiv_index_clients_contacts)
             setFontVariant(FontVariant.REGULAR)
         }
     }
@@ -57,6 +55,6 @@ open class BaseHivIndexRegisterFragment : BaseHivRegisterFragment() {
             return
         }
         presenter =
-            BaseHivIndexRegisterFragmentPresenter(this, BaseHivRegisterFragmentModel(), null)
+            BaseHivIndexContactsRegisterFragmentPresenter(this, BaseHivRegisterFragmentModel(), null)
     }
 }

@@ -4,8 +4,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseHivRegisterContract
-import org.smartregister.chw.hiv.fragment.BaseHivCommunityFollowupRegisterFragment
-import org.smartregister.chw.hiv.fragment.BaseHivIndexRegisterFragment
+import org.smartregister.chw.hiv.fragment.BaseHivIndexContactsRegisterFragment
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.helper.BottomNavigationHelper
 
@@ -19,7 +18,7 @@ import org.smartregister.helper.BottomNavigationHelper
  * This class is for displaying register for all the hiv index clients
  * it implements [BaseHivRegisterContract.View]
  */
-open class BaseHivIndexRegisterActivity : BaseHivRegisterActivity(),
+open class BaseHivIndexContactsRegisterActivity : BaseHivRegisterActivity(),
     BaseHivRegisterContract.View {
 
     override fun getViewIdentifiers(): List<String> =
@@ -45,7 +44,7 @@ open class BaseHivIndexRegisterActivity : BaseHivRegisterActivity(),
         }
     }
 
-    override fun getRegisterFragment() = BaseHivIndexRegisterFragment()
+    override fun getRegisterFragment() = BaseHivIndexContactsRegisterFragment()
 
     override fun getOtherFragments() = arrayOf(Fragment())
 

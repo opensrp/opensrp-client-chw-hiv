@@ -10,15 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import org.joda.time.DateTime
 import org.joda.time.Period
 import org.smartregister.chw.hiv.R
-import org.smartregister.chw.hiv.domain.HivIndexObject
-import org.smartregister.chw.hiv.util.DBConstants
+import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import org.smartregister.util.Utils
 import timber.log.Timber
 
-class IndexClientsAdapter(
+class IndexContactsListAdapter(
     private val context: Context,
-    private val indexClientsList: List<HivIndexObject?>
-) : RecyclerView.Adapter<IndexClientsAdapter.MyViewHolder>() {
+    private val indexContactClientsList: List<HivIndexContactObject?>
+) : RecyclerView.Adapter<IndexContactsListAdapter.MyViewHolder>() {
     private var layoutInflater: LayoutInflater? = null
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MyViewHolder {
         layoutInflater = LayoutInflater.from(viewGroup.context)
@@ -27,7 +26,7 @@ class IndexClientsAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, i: Int) {
-        val client = indexClientsList[i]
+        val client = indexContactClientsList[i]
         //      TODO refactor this
 
         try {
@@ -61,7 +60,7 @@ class IndexClientsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return indexClientsList.size
+        return indexContactClientsList.size
     }
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {

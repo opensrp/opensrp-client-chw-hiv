@@ -117,4 +117,5 @@
     <string name="hiv_negative_status">HIV Negative</string>
     <string name="index_client_has_registered_contacts">Index Client has registered contacts</string>
     <string name="go_to_index_client_contact_list">Go to client Index Contacts List</string>
+    <string name="associated_index_client">Associated Index Client</string>
 </resources>

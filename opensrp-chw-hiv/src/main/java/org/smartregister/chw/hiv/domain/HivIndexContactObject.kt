@@ -10,7 +10,7 @@ import java.util.*
  * This class wraps [client] into a new entity class used to pass data between activities,
  * it implements [Serializable]
  */
-data class HivIndexObject(val client: CommonPersonObjectClient?) : Serializable {
+data class HivIndexContactObject(val client: CommonPersonObjectClient?) : Serializable {
 
     var firstName: String? = client?.columnmaps?.get(DBConstants.Key.FIRST_NAME) ?: ""
     var middleName: String? = client?.columnmaps?.get(DBConstants.Key.MIDDLE_NAME) ?: ""
