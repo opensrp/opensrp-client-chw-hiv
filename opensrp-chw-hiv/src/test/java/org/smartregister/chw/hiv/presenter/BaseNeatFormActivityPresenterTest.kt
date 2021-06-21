@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.smartregister.chw.hiv.TestHivApp
-import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
+import org.smartregister.chw.hiv.contract.BaseNeatFormsContract
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.model.BaseHivRegisterFragmentModel
 import org.smartregister.chw.hiv.util.Constants
@@ -23,16 +23,16 @@ import org.smartregister.commonregistry.CommonPersonObjectClient
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestHivApp::class)
-class BaseRegisterFormsPresenterTest {
+class BaseNeatFormActivityPresenterTest {
 
-    private val registerFormsView: BaseRegisterFormsContract.View = spyk()
-    private val registerFormsInteractor: BaseRegisterFormsContract.Interactor = spyk()
+    private val neatFormsView: BaseNeatFormsContract.View = spyk()
+    private val neatFormsInteractor: BaseNeatFormsContract.Interactor = spyk()
     private val sampleBaseEntityId = "5a5mple-b35eent"
-    private val baseRegisterFormsPresenter: BaseRegisterFormsContract.Presenter =
+    private val baseNeatFormsPresenter: BaseNeatFormsContract.Presenter =
         spyk(
-            BaseRegisterFormsPresenter(
-                sampleBaseEntityId, registerFormsView,
-                registerFormsInteractor
+            BaseNeatFormActivityPresenter(
+                sampleBaseEntityId, neatFormsView,
+                neatFormsInteractor
             ),
             recordPrivateCalls = true
         )
@@ -59,42 +59,42 @@ class BaseRegisterFormsPresenterTest {
 
     @Test
     fun `Should return view`() {
-        Assert.assertNotNull(baseRegisterFormsPresenter.getView())
+        Assert.assertNotNull(baseNeatFormsPresenter.getView())
     }
 
     @Test
     fun `Should return main condition with the base entity id`() {
         Assert.assertTrue(
-            baseRegisterFormsPresenter.getMainCondition() == "${Constants.Tables.FAMILY_MEMBER}.${DBConstants.Key.BASE_ENTITY_ID}  = '$sampleBaseEntityId'"
+            baseNeatFormsPresenter.getMainCondition() == "${Constants.Tables.FAMILY_MEMBER}.${DBConstants.Key.BASE_ENTITY_ID}  = '$sampleBaseEntityId'"
         )
     }
 
     @Test
     fun `Should return ec_family_member as the main table`() {
-        Assert.assertTrue(baseRegisterFormsPresenter.getMainTable() == Constants.Tables.FAMILY_MEMBER)
+        Assert.assertTrue(baseNeatFormsPresenter.getMainTable() == Constants.Tables.FAMILY_MEMBER)
     }
 
     @Test
     fun `Should set profile with data  `() {
-        baseRegisterFormsPresenter.fillClientData(hivMemberObject)
-        verifyAll { registerFormsView.setProfileViewWithData() }
+        baseNeatFormsPresenter.fillClientData(hivMemberObject)
+        verifyAll { neatFormsView.setProfileViewWithData() }
     }
 
     @Test
     fun `Should update the member object`() {
-        baseRegisterFormsPresenter.initializeMemberObject(hivMemberObject)
-        Assert.assertNotNull((baseRegisterFormsPresenter as BaseRegisterFormsPresenter).hivMemberObject)
+        baseNeatFormsPresenter.initializeMemberObject(hivMemberObject)
+        Assert.assertNotNull((baseNeatFormsPresenter as BaseNeatFormActivityPresenter).hivMemberObject)
     }
 
     @Test
     fun `Should call save registration method of interactor`() {
         val valuesHashMap = hashMapOf<String, NFormViewData>()
         val jsonFormObject = JSONObject()
-        baseRegisterFormsPresenter.saveForm(valuesHashMap, jsonFormObject)
+        baseNeatFormsPresenter.saveForm(valuesHashMap, jsonFormObject)
         verifyAll {
-            registerFormsInteractor.saveRegistration(
+            neatFormsInteractor.saveRegistration(
                 sampleBaseEntityId, valuesHashMap, jsonFormObject,
-                baseRegisterFormsPresenter as BaseRegisterFormsPresenter
+                baseNeatFormsPresenter as BaseNeatFormActivityPresenter
             )
         }
     }
