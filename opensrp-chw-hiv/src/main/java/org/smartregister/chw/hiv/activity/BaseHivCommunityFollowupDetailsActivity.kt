@@ -14,7 +14,7 @@ import org.joda.time.DateTime
 import org.joda.time.Period
 import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.domain.HivMemberObject
-import org.smartregister.chw.hiv.util.Constants
+import org.smartregister.chw.hiv.util.Constants.ActivityPayload.HIV_MEMBER_OBJECT
 import org.smartregister.view.activity.SecuredActivity
 import org.smartregister.view.customcontrols.CustomFontTextView
 import java.text.SimpleDateFormat
@@ -44,7 +44,7 @@ open class BaseHivCommunityFollowupDetailsActivity : SecuredActivity(), View.OnC
         setContentView(R.layout.hiv_community_followup_details_activity)
         inflateToolbar()
         memberObject =
-            intent.getSerializableExtra(Constants.HivMemberObject.MEMBER_OBJECT) as HivMemberObject
+            intent.getSerializableExtra(HIV_MEMBER_OBJECT) as HivMemberObject
         setUpViews()
     }
 
@@ -153,7 +153,7 @@ open class BaseHivCommunityFollowupDetailsActivity : SecuredActivity(), View.OnC
         fun startReferralDetailsViewActivity(activity: Activity, memberObject: HivMemberObject?) {
             activity.startActivity(
                 Intent(activity, BaseHivCommunityFollowupDetailsActivity::class.java).apply {
-                    putExtra(Constants.HivMemberObject.MEMBER_OBJECT, memberObject)
+                    putExtra(HIV_MEMBER_OBJECT, memberObject)
                 }
             )
         }

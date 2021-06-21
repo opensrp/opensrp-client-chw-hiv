@@ -28,9 +28,9 @@
             android:paddingTop="10dp"
             android:paddingRight="30dp"
             android:paddingBottom="10dp"
-            android:text="@string/record_hiv_followup"
+            android:text="@string/record_index_contact_followup"
             android:textColor="@color/white"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
     </LinearLayout>
 
@@ -60,7 +60,7 @@
             android:layout_toLeftOf="@+id/textview_undo"
             android:layout_toRightOf="@+id/tick_image"
             android:padding="10dp"
-            android:text="@string/hiv_visit_done"
+            android:text="@string/index_contact_visit_done"
             android:textColor="@color/black" />
 
         <org.smartregister.view.customcontrols.CustomFontTextView

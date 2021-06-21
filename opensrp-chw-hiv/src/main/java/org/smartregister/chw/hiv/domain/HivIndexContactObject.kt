@@ -31,16 +31,16 @@ data class HivIndexContactObject(val client: CommonPersonObjectClient?) : Serial
     var ctcNumber: String? = client?.columnmaps?.get(DBConstants.Key.CTC_NUMBER)
 
 
-    var clientHivStatusAfterTesting: String? = client?.columnmaps?.get(DBConstants.Key.CLIENT_HIV_STATUS_AFTER_TESTING)
+    var hivStatus: String? = client?.columnmaps?.get(DBConstants.Key.HIV_STATUS)
+    var testResults: String? = client?.columnmaps?.get(DBConstants.Key.TEST_RESULTS)
     var hivClientId: String? = client?.columnmaps?.get(DBConstants.Key.HIV_CLIENT_ID)
 
-    var readinessToTestForHiv: Boolean? = client?.columnmaps?.get(DBConstants.Key.READINESS_TO_TEST_FOR_HIV) == "1"
-    var hasJoinedHomeBasedServices: Boolean? = client?.columnmaps?.get(DBConstants.Key.HAS_JOINED_HOME_BASED_SERVICES) == "1"
-    var hasStartedMediation: Boolean? = client?.columnmaps?.get(DBConstants.Key.HAS_STARTED_MEDICATION) == "1"
-    var hasClientBeenTestedForHiv: Boolean? = client?.columnmaps?.get(DBConstants.Key.HAS_THE_CLIENT_BEEN_TESTED_FOR_HIV) == "1"
+    var needToTestForHiv: Boolean? = client?.columnmaps?.get(DBConstants.Key.NEED_TO_TEST) == "yes"
+    var enrolledToClinic: Boolean? = client?.columnmaps?.get(DBConstants.Key.ENROLLED_TO_CLINIC) == "yes"
+    var hasStartedMediation: Boolean? = client?.columnmaps?.get(DBConstants.Key.HAS_STARTED_MEDICATION) == "yes"
+    var hasTheContactClientBeenTested: String? = client?.columnmaps?.get(DBConstants.Key.HAS_THE_CONTACT_CLIENT_BEEN_TESTED)
 
-    var gbvAnalysis: String? = client?.columnmaps?.get(DBConstants.Key.GBV_ANALYSIS)
-    var notificationMethod: String? = client?.columnmaps?.get(DBConstants.Key.NOTIFICATION_METHOD)
+    var contactClientNotificationMethod: String? = client?.columnmaps?.get(DBConstants.Key.HOW_TO_NOTIFY_CONTACT_CLIENT)
     var comments: String? = client?.columnmaps?.get(DBConstants.Key.COMMENTS)
 
     var hivIndexRegistrationDate: Date? = null

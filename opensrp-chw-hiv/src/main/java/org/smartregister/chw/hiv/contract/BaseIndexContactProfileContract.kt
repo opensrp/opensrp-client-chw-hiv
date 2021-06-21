@@ -24,6 +24,7 @@ interface BaseIndexContactProfileContract {
         fun updateLastVisitRow(lastVisitDate: Date?)
         fun setFollowUpButtonOverdue()
         fun setFollowUpButtonDue()
+        fun checkFollowupStatus()
         fun hideFollowUpVisitButton()
         fun showFollowUpVisitButton(status: Boolean)
         fun showProgressBar(status: Boolean)

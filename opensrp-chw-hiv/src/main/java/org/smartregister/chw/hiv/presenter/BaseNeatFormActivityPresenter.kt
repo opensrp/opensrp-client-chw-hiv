@@ -8,7 +8,7 @@ import org.apache.commons.lang3.tuple.Triple
 import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.chw.hiv.R
-import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
+import org.smartregister.chw.hiv.contract.BaseNeatFormsContract
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
@@ -17,16 +17,16 @@ import timber.log.Timber
 import java.lang.ref.WeakReference
 import java.util.*
 
-open class BaseRegisterFormsPresenter(
+open class BaseNeatFormActivityPresenter(
     val baseEntityID: String,
-    view: BaseRegisterFormsContract.View,
-    protected var interactor: BaseRegisterFormsContract.Interactor
-) : BaseRegisterFormsContract.Presenter, BaseRegisterFormsContract.InteractorCallBack {
+    view: BaseNeatFormsContract.View,
+    protected var interactor: BaseNeatFormsContract.Interactor
+) : BaseNeatFormsContract.Presenter, BaseNeatFormsContract.InteractorCallBack {
 
     var hivMemberObject: HivMemberObject? = null
     private var viewReference = WeakReference(view)
 
-    override fun getView(): BaseRegisterFormsContract.View? {
+    override fun getView(): BaseNeatFormsContract.View? {
         return viewReference.get()
     }
 

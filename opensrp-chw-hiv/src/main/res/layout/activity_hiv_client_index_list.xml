@@ -45,7 +45,8 @@
 
         <org.smartregister.view.customcontrols.CustomFontTextView
             android:id="@+id/index_list"
-            style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+            style="@style/CustomFontTextViewStyle.ClientList.Bold"
+            android:textAllCaps="true"
             android:layout_width="match_parent"
             android:layout_marginStart="18dp"
             android:layout_height="wrap_content"

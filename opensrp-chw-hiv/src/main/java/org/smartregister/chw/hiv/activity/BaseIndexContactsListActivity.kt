@@ -19,7 +19,7 @@ import org.smartregister.chw.hiv.contract.BaseIndexClientsContactListContract
 import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.interactor.BaseHivIndexContactsListInteractor
-import org.smartregister.chw.hiv.presenter.BaseHivIndexcContactsListPresenter
+import org.smartregister.chw.hiv.presenter.BaseHivIndexContactsListPresenter
 import org.smartregister.chw.hiv.provider.IndexContactsListAdapter
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.view.activity.SecuredActivity
@@ -49,7 +49,7 @@ open class BaseIndexContactsListActivity : SecuredActivity(),
         val extras = intent.extras
         if (extras != null) {
             memberObject =
-                intent.getSerializableExtra(Constants.HivMemberObject.MEMBER_OBJECT) as HivMemberObject
+                intent.getSerializableExtra(Constants.ActivityPayload.HIV_MEMBER_OBJECT) as HivMemberObject
         }
 
         setUpView()
@@ -112,11 +112,11 @@ open class BaseIndexContactsListActivity : SecuredActivity(),
 
     fun setUpPresenter() {
         Timber.d("initializing presenter")
-        Timber.d("Base Entity Id = "+memberObject!!.baseEntityId)
+        Timber.d("Base Entity Id = " + memberObject!!.baseEntityId)
 
         presenter = memberObject?.baseEntityId?.let { it1 ->
-            Timber.d("Base Entity Id = "+memberObject!!.baseEntityId)
-            BaseHivIndexcContactsListPresenter(
+            Timber.d("Base Entity Id = " + memberObject!!.baseEntityId)
+            BaseHivIndexContactsListPresenter(
                 it1,
                 BaseHivIndexContactsListInteractor(),
                 this

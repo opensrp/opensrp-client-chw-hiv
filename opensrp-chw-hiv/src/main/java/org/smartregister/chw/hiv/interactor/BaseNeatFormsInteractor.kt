@@ -6,7 +6,7 @@ import org.json.JSONObject
 import org.koin.core.inject
 import org.smartregister.chw.anc.util.NCUtils
 import org.smartregister.chw.hiv.HivLibrary
-import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
+import org.smartregister.chw.hiv.contract.BaseNeatFormsContract
 import org.smartregister.chw.hiv.dao.HivDao
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.JsonFormConstants
@@ -16,9 +16,9 @@ import java.util.*
 
 /**
  * This interactor class provides actual implementations for all the functionality used in the
- * Referral forms, it implements [BaseRegisterFormsContract.Interactor]
+ * Referral forms, it implements [BaseNeatFormsContract.Interactor]
  */
-class BaseRegisterFormsInteractor : BaseRegisterFormsContract.Interactor {
+open class BaseNeatFormsInteractor : BaseNeatFormsContract.Interactor {
 
     val hivLibrary by inject<HivLibrary>()
 
@@ -26,7 +26,7 @@ class BaseRegisterFormsInteractor : BaseRegisterFormsContract.Interactor {
     @Throws(Exception::class)
     override fun saveRegistration(
         baseEntityId: String, valuesHashMap: HashMap<String, NFormViewData>,
-        jsonObject: JSONObject, callBack: BaseRegisterFormsContract.InteractorCallBack
+        jsonObject: JSONObject, callBack: BaseNeatFormsContract.InteractorCallBack
     ) {
         val event =
             JsonFormUtils.processJsonForm(

@@ -20,6 +20,7 @@ interface BaseIndexClientsContactListContract {
     interface Presenter {
         fun initialize()
         val view: View?
+        fun openIndexContactProfile(hivIndexContactObject:HivIndexContactObject?)
     }
 
     interface View {

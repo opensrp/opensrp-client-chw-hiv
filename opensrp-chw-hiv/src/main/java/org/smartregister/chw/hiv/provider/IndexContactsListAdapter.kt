@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import org.joda.time.DateTime
 import org.joda.time.Period
 import org.smartregister.chw.hiv.R
+import org.smartregister.chw.hiv.contract.BaseIndexClientsContactListContract
 import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import org.smartregister.util.Utils
 import timber.log.Timber
+import java.util.*
 
 class IndexContactsListAdapter(
     private val context: Context,
@@ -21,13 +23,12 @@ class IndexContactsListAdapter(
     private var layoutInflater: LayoutInflater? = null
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): MyViewHolder {
         layoutInflater = LayoutInflater.from(viewGroup.context)
-        val v = layoutInflater!!.inflate(R.layout.hiv_register_list_row_item, viewGroup, false)
+        val v = layoutInflater!!.inflate(R.layout.hiv_index_contact_list_row_item, viewGroup, false)
         return MyViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, i: Int) {
         val client = indexContactClientsList[i]
-        //      TODO refactor this
 
         try {
             val age = Period(DateTime(client?.dob), DateTime()).years
@@ -43,6 +44,7 @@ class IndexContactsListAdapter(
                 )
                 textViewGender.text = client?.gender ?: ""
                 val village = client?.address
+                val testResult = client?.testResults
                 when {
                     village?.isNotEmpty()!! -> {
                         textViewVillage.text = java.text.MessageFormat.format(
@@ -52,8 +54,34 @@ class IndexContactsListAdapter(
                     }
                 }
 
-                dueWrapper.visibility = View.GONE
+                when {
+                    testResult?.isNotEmpty()!! -> {
+                        if (testResult.toLowerCase(Locale.ROOT) == "positive") {
+                            hivStatus.text = java.text.MessageFormat.format(
+                                context.getString(R.string.separator),
+                                context.getString(R.string.hiv_positive_status)
+                            )
+                            hivStatus.setTextColor(context.resources.getColor(R.color.colorRed))
+                        } else {
+                            hivStatus.text = java.text.MessageFormat.format(
+                                context.getString(R.string.separator),
+                                context.getString(R.string.hiv_negative_status)
+                            )
+                            hivStatus.setTextColor(context.resources.getColor(R.color.accent))
+                        }
+
+                    }
+                }
+
+
             }
+
+
+            holder.view.setOnClickListener(View.OnClickListener {
+                (context as BaseIndexClientsContactListContract.View).presenter!!.openIndexContactProfile(
+                    indexContactClientsList[i]
+                )
+            })
         } catch (e: IllegalStateException) {
             Timber.e(e)
         }
@@ -71,13 +99,13 @@ class IndexContactsListAdapter(
         var linearLayoutSubTitles: LinearLayout? = null
         var view: View
         var patientColumn: View? = null
-        var dueWrapper: View
+        var hivStatus: TextView
 
         init {
             patientName = view.findViewById(R.id.patient_name_age)
             textViewVillage = view.findViewById(R.id.text_view_village)
             textViewGender = view.findViewById(R.id.text_view_gender)
-            dueWrapper = view.findViewById(R.id.due_button_wrapper)
+            hivStatus = view.findViewById(R.id.hiv_status)
             this.view = view
         }
     }

@@ -38,38 +38,36 @@ object HivIndexDao : AbstractDao() {
             memberObject.ctcNumber =
                 getCursorValue(cursor, DBConstants.Key.CTC_NUMBER, "")
 
-            memberObject.gbvAnalysis =
-                getCursorValue(cursor, DBConstants.Key.CBHS_NUMBER, "")
+            memberObject.contactClientNotificationMethod =
+                getCursorValue(cursor, DBConstants.Key.HOW_TO_NOTIFY_CONTACT_CLIENT, "")
 
-            memberObject.notificationMethod =
-                getCursorValue(cursor, DBConstants.Key.NOTIFICATION_METHOD, "")
+            memberObject.hivStatus =
+                getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "")
 
-            memberObject.clientHivStatusAfterTesting =
-                getCursorValue(cursor, DBConstants.Key.CLIENT_HIV_STATUS_AFTER_TESTING, "")
+            memberObject.testResults =
+                getCursorValue(cursor, DBConstants.Key.TEST_RESULTS, "")
 
 
             val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
             sdf.timeZone = TimeZone.getTimeZone("+03:00")
 
-            memberObject.hivIndexRegistrationDate = sdf.parse(getCursorValue(
-                cursor,
-                DBConstants.Key.HIV_INDEX_REGISTRATION_DATE, ""
-            ))
+            memberObject.hivIndexRegistrationDate = sdf.parse(
+                getCursorValue(
+                    cursor,
+                    DBConstants.Key.HIV_INDEX_REGISTRATION_DATE, ""
+                )
+            )
 
             memberObject.comments =
                 getCursorValue(cursor, DBConstants.Key.COMMENTS, "")
-            memberObject.readinessToTestForHiv =
-                getCursorIntValue(cursor, DBConstants.Key.READINESS_TO_TEST_FOR_HIV, 0) == 1
-            memberObject.hasJoinedHomeBasedServices =
-                getCursorIntValue(cursor, DBConstants.Key.HAS_JOINED_HOME_BASED_SERVICES, 0) == 1
+            memberObject.needToTestForHiv =
+                getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("yes")
+            memberObject.enrolledToClinic =
+                getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("yes")
             memberObject.hasStartedMediation =
-                getCursorIntValue(cursor, DBConstants.Key.HAS_STARTED_MEDICATION, 0) == 1
-            memberObject.hasClientBeenTestedForHiv =
-                getCursorIntValue(
-                    cursor,
-                    DBConstants.Key.HAS_THE_CLIENT_BEEN_TESTED_FOR_HIV,
-                    0
-                ) == 1
+                getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("yes")
+            memberObject.hasTheContactClientBeenTested =
+                getCursorValue(cursor, DBConstants.Key.HAS_THE_CONTACT_CLIENT_BEEN_TESTED, "")
             memberObject.isClosed =
                 getCursorIntValue(cursor, DBConstants.Key.IS_CLOSED, 0) == 1
             var familyHeadName =

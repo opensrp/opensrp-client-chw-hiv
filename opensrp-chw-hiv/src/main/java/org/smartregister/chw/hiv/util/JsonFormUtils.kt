@@ -45,6 +45,9 @@ object JsonFormUtils : JsonFormUtils() {
             Constants.EventType.HIV_COMMUNITY_FOLLOWUP -> {
                 Tables.HIV_COMMUNITY_FOLLOWUP
             }
+            Constants.EventType.HIV_INDEX_CONTACT_TESTING_FOLLOWUP -> {
+                Tables.HIV_INDEX
+            }
             else -> null
         }
         return createEvent(

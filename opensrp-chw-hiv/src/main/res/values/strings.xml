@@ -70,8 +70,11 @@
     <string name="call_hiv_client">Call HIV client</string>
 
     <string name="hiv_return_to_previous_page">Return to all hiv clients</string>
+    <string name="hiv_return_to_index_contacts_page">Return to Index Contacts List</string>
     <string name="record_hiv_followup">Record hiv follow-up visit</string>
+    <string name="record_index_contact_followup">Record HIV Index Contact follow-up visit</string>
     <string name="hiv_visit_done">Hiv follow-up visit done</string>
+    <string name="index_contact_visit_done">Index Contact testing follow-up done</string>
     <string name="hiv_visit_edit">Edit</string>
     <string name="last_visit">Last visit</string>
     <string name="view_hiv_registration">View HIV registration</string>
@@ -115,7 +118,9 @@
     <string name="form_saved">Form saved successfully</string>
     <string name="hiv_positive_status">HIV Positive</string>
     <string name="hiv_negative_status">HIV Negative</string>
-    <string name="index_client_has_registered_contacts">Index Client has registered contacts</string>
-    <string name="go_to_index_client_contact_list">Go to client Index Contacts List</string>
+    <string name="index_client_has_registered_contacts">Has registered contacts</string>
+    <string name="go_to_index_client_contact_list">View contacts list</string>
     <string name="associated_index_client">Associated Index Client</string>
+
+    <string name="client_was_not_tested">Client was not tested</string>
 </resources>

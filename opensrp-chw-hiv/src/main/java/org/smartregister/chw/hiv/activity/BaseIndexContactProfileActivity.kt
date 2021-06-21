@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.NavUtils
 import androidx.viewpager.widget.ViewPager
 import de.hdodenhof.circleimageview.CircleImageView
 import org.apache.commons.lang3.StringUtils
@@ -62,10 +63,11 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
     private var tvGender: TextView? = null
     private var tvLocation: TextView? = null
     private var tvUniqueID: TextView? = null
+    private var testResults: TextView? = null
     private var overDueRow: View? = null
     private var familyRow: View? = null
     override fun onCreation() {
-        setContentView(R.layout.activity_base_hiv_profile)
+        setContentView(R.layout.activity_base_hiv_index_contact_profile)
         val toolbar =
             findViewById<Toolbar>(R.id.collapsing_toolbar)
         setSupportActionBar(toolbar)
@@ -80,13 +82,15 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
             )
             actionBar.setHomeAsUpIndicator(upArrow)
         }
-        toolbar.setNavigationOnClickListener { v: View? -> finish() }
+        toolbar.setNavigationOnClickListener {
+            NavUtils.navigateUpFromSameTask(this)
+        }
         appBarLayout = findViewById(R.id.collapsing_toolbar_appbarlayout)
         if (Build.VERSION.SDK_INT >= 21) {
             appBarLayout.outlineProvider = null
         }
         hivIndexContactObject =
-            intent.getSerializableExtra(Constants.ActivityPayload.MEMBER_OBJECT) as HivIndexContactObject
+            intent.getSerializableExtra(Constants.ActivityPayload.HIV_MEMBER_OBJECT) as HivIndexContactObject
         setupViews()
         initializePresenter()
         fetchProfileData()
@@ -120,6 +124,7 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
         tvVisitDone = findViewById(R.id.textview_visit_done)
         tvEditVisit = findViewById(R.id.textview_edit)
         tvUndo = findViewById(R.id.textview_undo)
+        testResults = findViewById(R.id.test_results)
         profileImageView =
             findViewById(R.id.imageview_profile)
         tvRecordHivFollowUp = findViewById(R.id.textview_record_reccuring_visit)
@@ -135,7 +140,11 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
 
     override fun initializePresenter() {
         hivContactProfilePresenter =
-            BaseIndexContactProfilePresenter(this, BaseIndexContactProfileInteractor(), hivIndexContactObject!!)
+            BaseIndexContactProfilePresenter(
+                this,
+                BaseIndexContactProfileInteractor(),
+                hivIndexContactObject!!
+            )
     }
 
     open fun initializeCallFAB() {
@@ -179,15 +188,15 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
         }
     }
 
-    override fun setupFollowupVisitEditViews(isWithin24Hours: Boolean) {
-        if (isWithin24Hours) {
+    override fun setupFollowupVisitEditViews(visitDone: Boolean) {
+        if (visitDone) {
             recordFollowUpVisitLayout!!.visibility = View.GONE
-//            recordVisitStatusBarLayout.setVisibility(View.VISIBLE);
-//            tvEditVisit.setVisibility(View.VISIBLE);
+            recordVisitStatusBarLayout!!.visibility = View.VISIBLE
+//            tvEditVisit!!.visibility = View.VISIBLE
         } else {
-            tvEditVisit!!.visibility = View.GONE
-            recordFollowUpVisitLayout!!.visibility = View.VISIBLE
+//            tvEditVisit!!.visibility = View.GONE
             recordVisitStatusBarLayout!!.visibility = View.GONE
+            recordFollowUpVisitLayout!!.visibility = View.VISIBLE
         }
     }
 
@@ -279,14 +288,29 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
             hivIndexContactObject.hivIndexRegistrationDate
         )
 
+        if (hivIndexContactObject.hasTheContactClientBeenTested.equals("yes", ignoreCase = true)) {
+            testResults!!.visibility = View.VISIBLE
+            if (hivIndexContactObject.testResults.equals("positive", ignoreCase = true)) {
+                testResults!!.text = resources.getString(R.string.hiv_positive_status)
+                testResults!!.setTextColor(context.resources.getColor(R.color.colorRed))
+            } else {
+                testResults!!.text = resources.getString(R.string.hiv_negative_status)
+                testResults!!.setTextColor(context.resources.getColor(R.color.accent))
+            }
+        } else if (hivIndexContactObject.hasTheContactClientBeenTested != "") {
+            testResults!!.visibility = View.VISIBLE
+            testResults!!.text = resources.getString(R.string.client_was_not_tested)
+            testResults!!.setTextColor(context.resources.getColor(R.color.colorRed))
+        } else {
+            testResults!!.visibility = View.GONE
+        }
 
         hivIndexContactObject.hivClientId?.let {
             val hivMemberObject = HivDao.getMember(it)
 
-            val tvIndexNameTitle = findViewById<View>(R.id.hiv_family_head) as TextView
-            tvIndexNameTitle.text = getString(R.string.associated_index_client)
+            val tvIndexNameTitle = findViewById<View>(R.id.associated_hiv_index_title) as TextView
 
-            val tvIndexName = findViewById<View>(R.id.hiv_primary_caregiver) as TextView
+            val tvIndexName = findViewById<View>(R.id.associated_hiv_index_name) as TextView
             if (hivMemberObject != null) {
                 tvIndexNameTitle.visibility = View.VISIBLE
                 tvIndexName.visibility = View.VISIBLE
@@ -344,6 +368,10 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
         tvRecordHivFollowUp!!.background = resources.getDrawable(R.drawable.record_hiv_followup)
     }
 
+    override fun checkFollowupStatus() {
+        //Implement this
+    }
+
     override fun setFollowUpButtonOverdue() {
         showFollowUpVisitButton(true)
         tvRecordHivFollowUp!!.background =
@@ -368,7 +396,7 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
     companion object {
         fun startProfileActivity(activity: Activity, hivIndexContactObject: HivIndexContactObject) {
             val intent = Intent(activity, BaseIndexContactProfileActivity::class.java)
-            intent.putExtra(Constants.ActivityPayload.MEMBER_OBJECT, hivIndexContactObject)
+            intent.putExtra(Constants.ActivityPayload.HIV_MEMBER_OBJECT, hivIndexContactObject)
             activity.startActivity(intent)
         }
     }

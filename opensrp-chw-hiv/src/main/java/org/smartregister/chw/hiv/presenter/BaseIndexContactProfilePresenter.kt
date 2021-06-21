@@ -5,6 +5,7 @@ import org.smartregister.chw.hiv.contract.BaseIndexContactProfileContract.Intera
 import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import org.smartregister.domain.AlertStatus
 import org.smartregister.view.contract.BaseProfileContract
+import timber.log.Timber
 import java.util.*
 
 open class BaseIndexContactProfilePresenter(
@@ -14,6 +15,7 @@ open class BaseIndexContactProfilePresenter(
 ) : BaseProfileContract, BaseIndexContactProfileContract.Presenter,
     InteractorCallback {
     override fun refreshProfileData() {
+        Timber.d("RefreshProfileData")
         view?.showFollowUpVisitButton(true)
         interactor.refreshProfileView(hivIndexContactObject, false, this)
     }
@@ -28,6 +30,7 @@ open class BaseIndexContactProfilePresenter(
 
     override fun refreshProfileTopSection(hivIndexContactObject: HivIndexContactObject?) {
         view?.setProfileViewDetails(hivIndexContactObject)
+        view?.checkFollowupStatus()
         view?.showProgressBar(false)
     }
 

@@ -16,15 +16,11 @@ object Constants {
         const val HIV_INDEX_REGISTER = "hiv_index_register"
     }
 
-    object HivMemberObject {
-        const val MEMBER_OBJECT = "memberObject"
-        const val COMMON_PERSON_OBJECT = "commonPersonObjectClient"
-    }
-
     object EventType {
         const val REGISTRATION = "HIV Registration"
         const val HIV_OUTCOME = "HIV Outcome"
         const val HIV_COMMUNITY_FOLLOWUP = "HIV Community Followup"
+        const val HIV_INDEX_CONTACT_TESTING_FOLLOWUP = "HIV Index Contact Testing Followup"
         const val HIV_COMMUNITY_FOLLOWUP_FEEDBACK = "HIV Community Followup Feedback"
         const val FOLLOW_UP_VISIT = "HIV Followup"
         const val REFERRAL_FOLLOW_UP_VISIT = "Followup Visit"
@@ -48,7 +44,7 @@ object Constants {
 
     object ActivityPayload {
         const val BASE_ENTITY_ID = "BASE_ENTITY_ID"
-        const val MEMBER_OBJECT = "MEMBER_OBJECT"
+        const val HIV_MEMBER_OBJECT = "HIV_MEMBER_OBJECT"
         const val ACTION = "ACTION"
         const val HIV_REGISTRATION_FORM_NAME = "HIV_REGISTRATION_FORM_NAME"
         const val USE_DEFAULT_NEAT_FORM_LAYOUT = "use_default_neat_form_layout"
@@ -108,13 +104,14 @@ object DBConstants {
         const val COMMUNITY_REFERRAL_FORM_ID = "community_referral_form_id"
         const val CHW_NAME = "chw_name"
         const val HIV_CLIENT_ID = "hiv_client_id"
-        const val READINESS_TO_TEST_FOR_HIV = "readiness_to_test_for_hiv"
+        const val NEED_TO_TEST = "need_to_test"
         const val HAS_STARTED_MEDICATION = "has_started_medication"
-        const val GBV_ANALYSIS = "gbv_analysis"
-        const val NOTIFICATION_METHOD = "notification_method"
-        const val HAS_THE_CLIENT_BEEN_TESTED_FOR_HIV = "has_the_client_been_tested_for_hiv"
-        const val HAS_JOINED_HOME_BASED_SERVICES = "has_joined_home_based_services"
+        const val HOW_TO_NOTIFY_CONTACT_CLIENT = "how_to_notify_the_contact_client"
+        const val HAS_THE_CONTACT_CLIENT_BEEN_TESTED = "has_the_contact_client_been_tested"
+        const val ENROLLED_TO_CLINIC = "enrolled_to_clinic"
         const val HIV_INDEX_REGISTRATION_DATE = "hiv_index_registration_date"
+        const val TEST_RESULTS = "test_results"
+        const val PLACE_WHERE_TEST_WAS_CONDUCTED = "place_where_test_was_conducted"
     }
 }
 

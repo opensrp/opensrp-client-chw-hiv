@@ -5,7 +5,7 @@ import org.smartregister.chw.hiv.contract.BaseIndexClientsContactListContract
 import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import timber.log.Timber
 
-open class BaseHivIndexcContactsListPresenter(
+open class BaseHivIndexContactsListPresenter(
     val hivClientBaseEntityId: String,
     val interactor: BaseIndexClientsContactListContract.Interactor,
     override val view: BaseIndexClientsContactListContract.View
@@ -23,6 +23,10 @@ open class BaseHivIndexcContactsListPresenter(
             (view as BaseIndexContactsListActivity?)!!.viewContext,
             this
         )
+    }
+
+    override fun openIndexContactProfile(hivIndexContactObject: HivIndexContactObject?) {
+        TODO("Not yet implemented")
     }
 
 

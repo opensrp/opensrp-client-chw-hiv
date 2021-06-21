@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
@@ -25,11 +24,11 @@ import org.json.JSONObject
 import org.koin.core.inject
 import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.R
-import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
+import org.smartregister.chw.hiv.contract.BaseNeatFormsContract
 import org.smartregister.chw.hiv.dao.HivDao
 import org.smartregister.chw.hiv.domain.HivMemberObject
-import org.smartregister.chw.hiv.interactor.BaseRegisterFormsInteractor
-import org.smartregister.chw.hiv.presenter.BaseRegisterFormsPresenter
+import org.smartregister.chw.hiv.interactor.BaseNeatFormsInteractor
+import org.smartregister.chw.hiv.presenter.BaseNeatFormActivityPresenter
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.chw.hiv.util.JsonFormConstants
@@ -42,13 +41,13 @@ import java.util.*
  * @cozej4 https://github.com/cozej4
  */
 /**
- * This is the activity for loading hiv registration and followup JSON forms. It implements [BaseRegisterFormsContract.View]
+ * This is the activity for loading hiv registration and followup JSON forms. It implements [BaseNeatFormsContract.View]
  * and [StepperActions] (which is from the neat form library) that provides callback methods from the
  * form builder. It exposes a method to receiving the data from the views and exiting the activity
  */
-open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterFormsContract.View {
+open class BaseHivNeatFormsActivity : AppCompatActivity(), BaseNeatFormsContract.View {
 
-    protected var presenter: BaseRegisterFormsContract.Presenter? = null
+    protected var presenter: BaseNeatFormsContract.Presenter? = null
     protected var baseEntityId: String? = null
     protected var formName: String? = null
     private var formBuilder: FormBuilder? = null
@@ -111,7 +110,7 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
             exitFormImageView.setOnClickListener {
                 if (it.id == R.id.exitFormImageView) {
                     AlertDialog.Builder(
-                        this@BaseHivRegistrationFormsActivity,
+                        this@BaseHivNeatFormsActivity,
                         R.style.AlertDialogTheme
                     )
                         .setTitle(getString(R.string.confirm_form_close))
@@ -152,7 +151,12 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
                             presenter!!.saveForm(formData, jsonForm!!)
                             Timber.d("Saved Data = %s", Gson().toJson(formData))
                             val intent = Intent()
-                            setResult(Activity.RESULT_OK, intent);
+                            setDataToBePassedBackToCallingActivityAsResults(
+                                intent,
+                                jsonForm!!,
+                                formData
+                            )
+                            setResult(Activity.RESULT_OK, intent)
                             finish()
                         }
 
@@ -165,8 +169,6 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
 
             createViewsFromJson()
         }
-
-
     }
 
     private fun createViewsFromJson() {
@@ -187,11 +189,18 @@ open class BaseHivRegistrationFormsActivity : AppCompatActivity(), BaseRegisterF
         }
     }
 
-    override fun presenter() = BaseRegisterFormsPresenter(
-        baseEntityId!!, this, BaseRegisterFormsInteractor()
+    override fun presenter() = BaseNeatFormActivityPresenter(
+        baseEntityId!!, this, BaseNeatFormsInteractor()
     )
 
 
     override fun setProfileViewWithData() = Unit
+    override fun setDataToBePassedBackToCallingActivityAsResults(
+        intent: Intent,
+        jsonForm: JSONObject,
+        formData: HashMap<String, NFormViewData>
+    ) {
+        //TODO to be implemented where required
+    }
 
 }

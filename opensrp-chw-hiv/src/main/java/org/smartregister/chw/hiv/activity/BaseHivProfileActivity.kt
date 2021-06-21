@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.NavUtils
 import androidx.viewpager.widget.ViewPager
 import de.hdodenhof.circleimageview.CircleImageView
 import org.apache.commons.lang3.StringUtils
@@ -79,13 +80,13 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
             )
             actionBar.setHomeAsUpIndicator(upArrow)
         }
-        toolbar.setNavigationOnClickListener { v: View? -> finish() }
+        toolbar.setNavigationOnClickListener { NavUtils.navigateUpFromSameTask(this) }
         appBarLayout = findViewById(R.id.collapsing_toolbar_appbarlayout)
         if (Build.VERSION.SDK_INT >= 21) {
             appBarLayout.outlineProvider = null
         }
         hivMemberObject =
-            intent.getSerializableExtra(Constants.ActivityPayload.MEMBER_OBJECT) as HivMemberObject
+            intent.getSerializableExtra(Constants.ActivityPayload.HIV_MEMBER_OBJECT) as HivMemberObject
         setupViews()
         initializePresenter()
         fetchProfileData()
@@ -399,7 +400,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     companion object {
         fun startProfileActivity(activity: Activity, memberObject: HivMemberObject) {
             val intent = Intent(activity, BaseHivProfileActivity::class.java)
-            intent.putExtra(Constants.ActivityPayload.MEMBER_OBJECT, memberObject)
+            intent.putExtra(Constants.ActivityPayload.HIV_MEMBER_OBJECT, memberObject)
             activity.startActivity(intent)
         }
     }
