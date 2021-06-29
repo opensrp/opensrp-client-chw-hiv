@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">opensrp rufaa za WAJA</string>
+    <string name="error_unable_to_start_form">Tatizo limetokea wakati wa kufunguwa fomu</string>
+    <string name="error_unable_to_save_form">Tatizo limetokea wakati wakuhifadh fomu</string>
+    <string name="hiv_clients">Wateja wa Ukimwi</string>
+    <string name="followup_referral">Rufa za ufatiliaji za ukimwi</string>
+
+    <!-- menu -->
+    <string name="add_member">Sajili mwanafamilia</string>
+    <string name="sort">Panga </string>
+    <string name="home">Nyumbani</string>
+    <string name="add_family">Sajili Kaya</string>
+    <string name="scan_qr">soma QR</string>
+    <string name="job_aids">Vitendea kazi</string>
+    <string name="saving_dialog_title">Unahifathiwa</string>
+    <string name="referral_followup_visit">Ufatiliaji\kutemebelea</string>
+    <string name="record_followup">Hifadh taarifa za ufatiliaji</string>
+    <string name="return_to_previous">Rudisha rufaa zote za wateja</string>
+    <string name="last_visit_40_days_ago">Mara ya mwisho kumtembelea %1$s</string>
+    <string name="view_medical_history">Angalia Tarifa za Matibabu</string>
+    <string name="view_upcoming_services">Angalia Huduma zinazofuwata</string>
+    <string name="family_has_nothing_due">hakuna huduma iliyobakia</string>
+    <string name="client_has_nothing_due">hakuna huduma iliyobakia</string>
+    <string name="go_to_family_s_profile">Nenda kwenye Ukurasa wa taarifa za familiya</string>
+    <string name="go_to_client_s_profile">Nenda kwenye ukurasa wa taarifa za mteja</string>
+    <string name="family_has_services_due">Familia ina huduma iliyobakia kutolewa</string>
+    <string name="client_has_services_due">Mteja ana huduma </string>
+    <string name="primary_care_giver">Mtoaji wa huduma kituoni </string>
+    <string name="family_head">Mkuu wa familiya</string>
+    <string name="family_has_service_overdue"><![CDATA[Familia ina huduma <font color=#FF0000>ambayo haijatolwa</font></b>]]></string>
+    <string name="client_has_service_overdue"><![CDATA[Mteja ana <font color=#FF0000>huduma iliyobakia kutolewa kituoni</font></b>]]></string>
+    <string name="vaccine_service_upcoming"><![CDATA[%1$s<font color=#7f7f7f>inayokuja(%2$s)</font></b>]]></string>
+    <string name="vaccine_service_overdue"><![CDATA[%1$s<font color=#f04646>imepitiliza (%2$s)</font></b>]]></string>
+    <string name="vaccine_service_due"><![CDATA[%1$s<font color=#000000>ipo kwenye wakati(%2$s)</font></b>]]></string>
+    <string name="call_referral_client">Piga simu kwa mteja wa rufaa</string>
+    <string name="head_of_family">Mkuu wa Familiya</string>
+    <string name="referral_client">Mteja wa rufaa</string>
+    <string name="copy_to_clipboard">copi kwenye ubao nakili</string>
+    <string name="copied_phone_number">Namba ya simu imenakiliwa </string>
+    <string name="call">Piga simu</string>
+    <string name="record_anc">rekodi taarifa za ufatiliyaji wa ANC</string>
+    <string name="record_anc_visit_not_done">Ufatiliyaji wa ANC hujafanyika</string>
+    <string name="action_hiv_clients">Wateja wa Ukimwi</string>
+    <string name="action_received_hiv_followup_referrals">Ufatiliyaji</string>
+
+    <string name="referral_information">Taarifa za rufaa</string>
+    <string name="visit_facility_hint">Jaza jina la Kituo cha afya </string>
+    <string name="referral_reason">Sababu za rufaa</string>
+
+
+    <string name="followup_feedback">Mrejesho wa ufatiliyaji</string>
+    <string name="hint_missing_reasons">Chaguwa Mrejesho</string>
+    <string name="other_followup_feedback_information">Taharifa za dhihada </string>
+    <string name="referral_date_label">Tarehe ya rufaa</string>
+    <string name="gender">Jinsia </string>
+    <string name="patient_name_age">jina la mteja na umri</string>
+    <string name="missing_client_condition_during_visit">jaza tarifa ya mteja wakati wa kumtemebelea </string>
+    <string name="missing_feedback">chaguwa mrejesho</string>
+    <string name="complete">Imefanyikiwa</string>
+    <string name="finish">Imemaliza</string>
+    <string name="back_to_referrals">rudi nyuma kwenye rufaa</string>
+    <string name="phone">simu</string>
+    <string name="problem">Tatizo</string>
+    <string name="referral_date">Tarehe ya rufaa</string>
+    <string name="hiv_on">Washa</string>
+    <string name="hiv_client_registered_text">mteja amesajiliwa %s %s</string>
+    <string name="call_hiv_client">Mpigiye simu mteja wa VVU</string>
+
+    <string name="hiv_return_to_previous_page">Rudi kwenye wateja wa HIV</string>
+    <string name="record_hiv_followup">Rikodi ufatiliyaji wa VVU</string>
+    <string name="hiv_visit_done">Ufatiliyaji wa VVU umefanyika</string>
+    <string name="hiv_visit_edit">hariri</string>
+    <string name="last_visit">mara ya mwisho kumtembelea</string>
+    <string name="view_hiv_registration">Angalia rejista ya VVU</string>
+    <string name="last_visit_n_days_ago">hudhurio la mwisho %1$s zilizopita</string>
+    <string name="less_than_twenty_four">chini ya masaa 24</string>
+    <string name="hiv_upcoming_visit"><![CDATA[%1$s 1 kufuwatia (%2$s)<font color=#7f7f7f></b> ]]></string>
+    <string name="hiv_service_due"><![CDATA[%1$s <font color=#000000>zimepita (%2$s)</font></b>]]></string>
+
+
+    <!--Referral Strings -->
+    <string name="confirm_form_close">hakikisha kua fomu imefika mwisho</string>
+    <string name="confirm_form_close_explanation">Una hakika kua unataka kurudi nyuma? Taarifa zote katika fomu hii zitafutika</string>
+    <string name="yes">Ndiyo</string>
+    <string name="no">Hapana</string>
+    <string name="empty_value">Hakuna</string>
+    <string name="save">Hifadhi</string>
+
+    <string name="hiv_follow_up_visit">Ufatiliaju wa VVU</string>
+    <string name="hiv_visit_day_due">%ssiku zilizobaki kabla ya muda </string>
+    <string name="hiv_visit_day_due_today">leo ndio siku ya hudhurio</string>
+    <string name="hiv_visit_day_next_due">siku ingine ya hudhurio%s</string>
+    <string name="hiv_visit_day_overdue">%ssiku zilizopitiliza toka hudhurio lililotakiwa</string>
+    <string name="hiv_visit_day_overdue_today">leo ndio siku ya hudhurio</string>
+    <string name="successful_registration">Umefanyikiwa kumsajili mteja wa VVU</string>
+    <string name="successful_visit">Umefanukiwa kumtembelea mteja wa VVU</string>
+    <string name="form_not_saved">Fomu haijahifadhiwa</string>
+
+    <string name="phone_not_provided">Numba ya simu haijatolewa</string>
+    <string name="reasons_for_referral">Sababu za rufaa</string>
+    <string name="last_facility_visit_date">Tarehe ya mwisho kutembelea  kituo cha afya</string>
+    <string name="comments_label">Maoni</string>
+    <string name="chw">WAJA</string>
+    <string name="chw_phone">Namba ya shimu ya muhudumu</string>
+    <string name="fill_followup_form">Jaza fomu ya ufatiliyaji</string>
+    <string name="view_profile">angalia taarifa</string>
+    <string name="separator">- {0}</string>
+</resources>
