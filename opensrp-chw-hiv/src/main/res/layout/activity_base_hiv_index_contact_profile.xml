@@ -46,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:background="@color/other_member_profile_bg"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingTop="10dp"
@@ -53,25 +54,22 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageview_profile"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="@dimen/client_profile_pic_width"
+                    android:layout_height="@dimen/client_profile_pic_height"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/ic_member"
-                    app:civ_border_color="@color/transparent"
-                    app:civ_border_width="3dp" />
+                    app:civ_border_color="#FFFFFFFF"
+                    app:civ_border_width="0dp" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                     android:id="@+id/textview_name"
-                    style="@style/CustomFontTextViewStyle.ClientList"
+                    style="@style/CustomFontTextViewStyle.ClientList.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="0dp"
-                    android:text="Patient Name, Age"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/register_member_name_size" />
+                    android:paddingLeft="0dp"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/activity_title_size" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -82,69 +80,62 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
+
                     <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/textview_gender"
                         style="@style/CustomFontTextViewStyle.ClientList.Light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="Gender"
+                        android:paddingLeft="0dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/register_member_village_size" />
+                        android:textColor="@color/text_black" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/profile_dot_separator_margin"
                         android:layout_marginRight="@dimen/profile_dot_separator_margin"
-                        android:text="@string/interpunct"
-                        android:textColor="@android:color/black" />
+                        android:text="\u00b7"
+                        android:textColor="@color/text_black" />
 
                     <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/textview_address"
                         style="@style/CustomFontTextViewStyle.ClientList.Light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="0dp"
-                        android:text="Address #24"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingLeft="0dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/register_member_village_size" />
+                        android:textColor="@color/text_black"
+                        android:visibility="visible" />
 
                     <TextView
+                        android:id="@+id/village_town_dot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/profile_dot_separator_margin"
                         android:layout_marginRight="@dimen/profile_dot_separator_margin"
-                        android:text="@string/interpunct"
-                        android:textColor="@android:color/black"
-                        android:visibility="gone" />
-
+                        android:text="\u00b7"
+                        android:textColor="@color/text_black"
+                        android:visibility="visible" />
 
                     <org.smartregister.view.customcontrols.CustomFontTextView
                         android:id="@+id/textview_unique_id"
                         style="@style/CustomFontTextViewStyle.ClientList.Light"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="0dp"
-                        android:text="ID:123456"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:paddingLeft="0dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/register_member_village_size"
-                        android:visibility="gone" />
+                        android:textColor="@color/text_black" />
                 </LinearLayout>
+
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                     android:id="@+id/test_results"
-                    style="@style/CustomFontTextViewStyle.ClientList.Bold"
+                    style="@style/CustomFontTextViewStyle.ClientList.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -160,7 +151,7 @@
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                     android:id="@+id/associated_hiv_index_title"
-                    style="@style/CustomFontTextViewStyle.ClientList.Bold"
+                    style="@style/CustomFontTextViewStyle.ClientList.Medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="0dp"
@@ -182,6 +173,12 @@
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/register_list_desc_size"
                     android:visibility="gone" />
+                <View
+                    android:id="@+id/view_record_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/light_grey" />
             </LinearLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

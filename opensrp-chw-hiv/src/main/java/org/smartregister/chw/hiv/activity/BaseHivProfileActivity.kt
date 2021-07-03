@@ -36,6 +36,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     BaseHivProfileContract.View {
     private var lastVisitRow: View? = null
     private var recordFollowUpVisitLayout: LinearLayout? = null
+    protected var recordIndexContactLayout: LinearLayout? = null
     private var recordVisitStatusBarLayout: RelativeLayout? = null
     private var tickImage: ImageView? = null
     private var tvEditVisit: TextView? = null
@@ -102,6 +103,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
         recordVisitStatusBarLayout =
             findViewById(R.id.record_visit_status_bar_layout)
         recordFollowUpVisitLayout = findViewById(R.id.record_recurring_layout)
+        recordIndexContactLayout = findViewById(R.id.record_index_contact_layout)
         lastVisitRow = findViewById(R.id.view_last_visit_row)
         overDueRow = findViewById(R.id.view_most_due_overdue_row)
         familyRow = findViewById(R.id.view_family_row)
@@ -131,6 +133,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
         findViewById<View>(R.id.rlFamilyServicesDue).setOnClickListener(this)
         findViewById<View>(R.id.rlIndexClients).setOnClickListener(this)
         findViewById<View>(R.id.rlHivRegistrationDate).setOnClickListener(this)
+        findViewById<View>(R.id.textview_record_index_contact_visit).setOnClickListener(this)
     }
 
     override fun initializePresenter() {
@@ -177,6 +180,8 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
             openFollowUpVisitForm(false)
         } else if (id == R.id.textview_edit) {
             openFollowUpVisitForm(true)
+        } else if (id == R.id.textview_record_index_contact_visit) {
+            openIndexContactRegistration()
         }
     }
 
@@ -212,6 +217,10 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     }
 
     override fun openFollowUpVisitForm(isEdit: Boolean) {
+        // TODO :: Open follow-up visit form for editing
+    }
+
+    override fun openIndexContactRegistration() {
         // TODO :: Open follow-up visit form for editing
     }
 

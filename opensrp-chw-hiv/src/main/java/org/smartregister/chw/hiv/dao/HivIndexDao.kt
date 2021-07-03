@@ -58,9 +58,11 @@ object HivIndexDao : AbstractDao() {
                 )
             )
 
+            memberObject.relationship =
+                getCursorValue(cursor, DBConstants.Key.RELATIONSHIP, "")
             memberObject.comments =
                 getCursorValue(cursor, DBConstants.Key.COMMENTS, "")
-            memberObject.needToTestForHiv =
+            memberObject.hivTestEligibility =
                 getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("yes")
             memberObject.enrolledToClinic =
                 getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("yes")

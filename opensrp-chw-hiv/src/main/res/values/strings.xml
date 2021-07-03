@@ -123,4 +123,5 @@
     <string name="associated_index_client">Associated Index Client</string>
 
     <string name="client_was_not_tested">Client was not tested</string>
+    <string name="register_contacts">Register Contacts</string>
 </resources>

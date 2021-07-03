@@ -32,6 +32,7 @@ interface BaseHivProfileContract {
         fun showFollowUpVisitButton(status: Boolean)
         fun showProgressBar(status: Boolean)
         fun onMemberDetailsReloaded(hivMemberObject: HivMemberObject?)
+        fun openIndexContactRegistration()
     }
 
     interface Presenter {
