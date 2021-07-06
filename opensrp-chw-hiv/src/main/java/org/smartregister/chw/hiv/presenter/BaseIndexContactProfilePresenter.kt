@@ -20,29 +20,9 @@ open class BaseIndexContactProfilePresenter(
         interactor.refreshProfileView(hivIndexContactObject, false, this)
     }
 
-    override fun refreshProfileHivStatusInfo() {
-        interactor.updateProfileHivStatusInfo(hivIndexContactObject, this)
-    }
-
-    override fun refreshLastVisit(lastVisitDate: Date?) {
-        view?.updateLastVisitRow(lastVisitDate)
-    }
-
     override fun refreshProfileTopSection(hivIndexContactObject: HivIndexContactObject?) {
         view?.setProfileViewDetails(hivIndexContactObject)
         view?.checkFollowupStatus()
         view?.showProgressBar(false)
-    }
-
-    override fun refreshUpComingServicesStatus(
-        service: String?,
-        status: AlertStatus?,
-        date: Date?
-    ) {
-        view?.setUpComingServicesStatus(service, status, date)
-    }
-
-    override fun refreshFamilyStatus(status: AlertStatus?) {
-        view?.setFamilyStatus(status)
     }
 }

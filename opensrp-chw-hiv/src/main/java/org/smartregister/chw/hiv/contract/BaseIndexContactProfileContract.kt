@@ -9,19 +9,9 @@ import java.util.*
 interface BaseIndexContactProfileContract {
     interface View : BaseProfileContract.View {
         val context: Context?
-        fun openFamilyDueServices()
-        fun openHivRegistrationForm()
         fun openFollowUpVisitForm(isEdit: Boolean)
-        fun setUpComingServicesStatus(
-            service: String?,
-            status: AlertStatus?,
-            date: Date?
-        )
-
-        fun setFamilyStatus(status: AlertStatus?)
         fun setProfileViewDetails(hivIndexContactObject: HivIndexContactObject?)
         fun setupFollowupVisitEditViews(isWithin24Hours: Boolean)
-        fun updateLastVisitRow(lastVisitDate: Date?)
         fun setFollowUpButtonOverdue()
         fun setFollowUpButtonDue()
         fun checkFollowupStatus()
@@ -34,7 +24,6 @@ interface BaseIndexContactProfileContract {
     interface Presenter {
         val view: View?
         fun refreshProfileData()
-        fun refreshProfileHivStatusInfo()
     }
 
     interface Interactor {
@@ -43,22 +32,9 @@ interface BaseIndexContactProfileContract {
             isForEdit: Boolean,
             callback: InteractorCallback?
         )
-
-        fun updateProfileHivStatusInfo(
-            hivIndexContactObject: HivIndexContactObject?,
-            callback: InteractorCallback?
-        )
     }
 
     interface InteractorCallback {
         fun refreshProfileTopSection(hivIndexContactObject: HivIndexContactObject?)
-        fun refreshUpComingServicesStatus(
-            service: String?,
-            status: AlertStatus?,
-            date: Date?
-        )
-
-        fun refreshFamilyStatus(status: AlertStatus?)
-        fun refreshLastVisit(lastVisitDate: Date?)
     }
 }

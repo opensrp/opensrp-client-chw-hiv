@@ -5,7 +5,7 @@
 
     <application>
         <activity
-            android:name="org.smartregister.chw.hiv.activity.BaseHivNeatFormsActivity"
+            android:name="org.smartregister.chw.hiv.activity.BaseHivFormsActivity"
             android:theme="@style/ChwHivTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity

@@ -12,7 +12,7 @@ import java.util.*
 /**
  * Contract for BaseHivRegistrationForms
  */
-interface BaseNeatFormsContract {
+interface BaseHivFormsContract {
 
     /**
      * defines methods to implement for the view, also extends [KoinComponent]

@@ -24,10 +24,10 @@ import org.json.JSONObject
 import org.koin.core.inject
 import org.smartregister.chw.hiv.HivLibrary
 import org.smartregister.chw.hiv.R
-import org.smartregister.chw.hiv.contract.BaseNeatFormsContract
+import org.smartregister.chw.hiv.contract.BaseHivFormsContract
 import org.smartregister.chw.hiv.dao.HivDao
 import org.smartregister.chw.hiv.domain.HivMemberObject
-import org.smartregister.chw.hiv.interactor.BaseNeatFormsInteractor
+import org.smartregister.chw.hiv.interactor.BaseHivFormsInteractor
 import org.smartregister.chw.hiv.presenter.BaseNeatFormActivityPresenter
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
@@ -41,13 +41,13 @@ import java.util.*
  * @cozej4 https://github.com/cozej4
  */
 /**
- * This is the activity for loading hiv registration and followup JSON forms. It implements [BaseNeatFormsContract.View]
+ * This is the activity for loading hiv registration and followup JSON forms. It implements [BaseHivFormsContract.View]
  * and [StepperActions] (which is from the neat form library) that provides callback methods from the
  * form builder. It exposes a method to receiving the data from the views and exiting the activity
  */
-open class BaseHivNeatFormsActivity : AppCompatActivity(), BaseNeatFormsContract.View {
+open class BaseHivFormsActivity : AppCompatActivity(), BaseHivFormsContract.View {
 
-    protected var presenter: BaseNeatFormsContract.Presenter? = null
+    protected var presenter: BaseHivFormsContract.Presenter? = null
     protected var baseEntityId: String? = null
     protected var formName: String? = null
     private var formBuilder: FormBuilder? = null
@@ -110,7 +110,7 @@ open class BaseHivNeatFormsActivity : AppCompatActivity(), BaseNeatFormsContract
             exitFormImageView.setOnClickListener {
                 if (it.id == R.id.exitFormImageView) {
                     AlertDialog.Builder(
-                        this@BaseHivNeatFormsActivity,
+                        this@BaseHivFormsActivity,
                         R.style.AlertDialogTheme
                     )
                         .setTitle(getString(R.string.confirm_form_close))
@@ -190,7 +190,7 @@ open class BaseHivNeatFormsActivity : AppCompatActivity(), BaseNeatFormsContract
     }
 
     override fun presenter() = BaseNeatFormActivityPresenter(
-        baseEntityId!!, this, BaseNeatFormsInteractor()
+        baseEntityId!!, this, BaseHivFormsInteractor()
     )
 
 

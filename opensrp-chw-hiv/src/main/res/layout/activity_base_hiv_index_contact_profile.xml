@@ -197,7 +197,7 @@
                     android:id="@+id/record_hiv_followup_visit"
                     layout="@layout/index_contact_follow_up_visit_view" />
 
-                <include layout="@layout/content_hiv_profile" />
+                <include layout="@layout/content_hiv_index_contact_profile" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

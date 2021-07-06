@@ -26,22 +26,4 @@ open class BaseIndexContactProfileInteractor @VisibleForTesting internal constru
         appExecutors.diskIO().execute(runnable)
     }
 
-    override fun updateProfileHivStatusInfo(
-        memberContactObject: HivIndexContactObject?,
-        callback: InteractorCallback?
-    ) {
-        val runnable = Runnable {
-            appExecutors.mainThread().execute {
-                callback!!.refreshFamilyStatus(AlertStatus.normal)
-                callback.refreshUpComingServicesStatus(
-                    "HIV Followup Visit",
-                    AlertStatus.normal,
-                    Date()
-                )
-                callback.refreshLastVisit(Date())
-            }
-        }
-        appExecutors.diskIO().execute(runnable)
-    }
-
 }
