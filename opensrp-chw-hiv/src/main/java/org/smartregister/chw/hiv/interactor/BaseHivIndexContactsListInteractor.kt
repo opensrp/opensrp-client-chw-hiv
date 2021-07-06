@@ -12,18 +12,13 @@ import timber.log.Timber
 open class BaseHivIndexContactsListInteractor @VisibleForTesting internal constructor(
     var appExecutors: AppExecutors
 ) : BaseIndexClientsContactListContract.Interactor {
-
-    constructor() : this(AppExecutors()) {}
-
     override fun getClientIndexes(
         hivClientBaseEntityId: String?,
         context: Context?,
         callBack: BaseIndexClientsContactListContract.InteractorCallBack?
     ) {
         val runnable = Runnable {
-            val indexClients = getIndexClient(context, hivClientBaseEntityId)
-
-            Timber.d("IndexList = "+ Gson().toJson(indexClients))
+            val indexClients = getIndexClient(hivClientBaseEntityId)
 
             appExecutors.mainThread()
                 .execute { callBack!!.onDataFetched(indexClients) }
@@ -32,7 +27,6 @@ open class BaseHivIndexContactsListInteractor @VisibleForTesting internal constr
     }
 
     protected fun getIndexClient(
-        context: Context?,
         hivClientBaseEntityId: String?
     ): List<HivIndexContactObject?> {
         try {

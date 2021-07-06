@@ -11,9 +11,6 @@ import java.util.*
 open class BaseIndexContactProfileInteractor @VisibleForTesting internal constructor(
     var appExecutors: AppExecutors
 ) : BaseIndexContactProfileContract.Interactor {
-
-    constructor() : this(AppExecutors()) {}
-
     override fun refreshProfileView(
         hivIndexContactObject: HivIndexContactObject?,
         isForEdit: Boolean,
