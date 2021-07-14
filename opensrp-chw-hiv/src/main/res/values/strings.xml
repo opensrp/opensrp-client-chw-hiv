@@ -125,4 +125,5 @@
 
     <string name="client_was_not_tested">Client was not tested</string>
     <string name="register_contacts">Register Contacts</string>
+    <string name="successful_registration">Successful Registation</string>
 </resources>
