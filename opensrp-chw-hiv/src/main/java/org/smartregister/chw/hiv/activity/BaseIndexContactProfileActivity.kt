@@ -26,8 +26,6 @@ import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.HivUtil.getMemberProfileImageResourceIDentifier
 import org.smartregister.helper.ImageRenderHelper
 import org.smartregister.view.activity.BaseProfileActivity
-import timber.log.Timber
-import java.text.SimpleDateFormat
 import java.util.*
 
 open class BaseIndexContactProfileActivity : BaseProfileActivity(),
@@ -198,7 +196,14 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
             getMemberProfileImageResourceIDentifier()
         )
 
-        if (hivIndexContactObject.hasTheContactClientBeenTested.equals("yes", ignoreCase = true)) {
+        if (hivIndexContactObject.hivStatus.equals("positive", ignoreCase = true) && hivIndexContactObject.hasStartedMediation!!) {
+            testResults!!.text = resources.getString(R.string.hiv_positive_status_on_medication)
+            testResults!!.setTextColor(context.resources.getColor(R.color.colorRed))
+        } else if (hivIndexContactObject.hasTheContactClientBeenTested.equals(
+                "yes",
+                ignoreCase = true
+            )
+        ) {
             testResults!!.visibility = View.VISIBLE
             if (hivIndexContactObject.testResults.equals("positive", ignoreCase = true)) {
                 testResults!!.text = resources.getString(R.string.hiv_positive_status)
@@ -256,8 +261,9 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
     }
 
     override fun showFollowUpVisitButton(status: Boolean) {
-        if (status) tvRecordHivFollowUp!!.visibility =
-            View.VISIBLE else tvRecordHivFollowUp!!.visibility = View.GONE
+        if (status)
+            tvRecordHivFollowUp!!.visibility =
+                View.VISIBLE else tvRecordHivFollowUp!!.visibility = View.GONE
     }
 
     override fun hideFollowUpVisitButton() {

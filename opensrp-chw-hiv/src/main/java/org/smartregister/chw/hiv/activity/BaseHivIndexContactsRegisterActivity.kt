@@ -15,7 +15,8 @@ import org.smartregister.helper.BottomNavigationHelper
  */
 
 /***
- * This class is for displaying register for all the hiv index clients
+ * This class is for displaying register for all the hiv index contacts
+ * that were elicited by positive HIV clients, that should be followed up for HIV testing
  * it implements [BaseHivRegisterContract.View]
  */
 open class BaseHivIndexContactsRegisterActivity : BaseHivRegisterActivity(),

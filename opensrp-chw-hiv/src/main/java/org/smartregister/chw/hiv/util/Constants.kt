@@ -36,6 +36,7 @@ object Constants {
     object Tables {
         const val HIV = "ec_hiv_register"
         const val HIV_INDEX = "ec_hiv_index"
+        const val HIV_INDEX_HF = "ec_hiv_index_hf"
         const val HIV_FOLLOW_UP = "ec_hiv_follow_up_visit"
         const val HIV_OUTCOME = "ec_hiv_outcome"
         const val HIV_COMMUNITY_FOLLOWUP = "ec_hiv_community_followup"

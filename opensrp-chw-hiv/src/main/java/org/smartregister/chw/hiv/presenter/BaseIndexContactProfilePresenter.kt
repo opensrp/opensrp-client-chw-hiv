@@ -16,7 +16,7 @@ open class BaseIndexContactProfilePresenter(
     InteractorCallback {
     override fun refreshProfileData() {
         Timber.d("RefreshProfileData")
-        view?.showFollowUpVisitButton(true)
+        view?.setFollowUpButtonDue()
         interactor.refreshProfileView(hivIndexContactObject, false, this)
     }
 

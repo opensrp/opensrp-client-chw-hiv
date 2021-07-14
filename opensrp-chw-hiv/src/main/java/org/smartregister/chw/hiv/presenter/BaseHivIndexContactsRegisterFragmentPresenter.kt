@@ -25,7 +25,7 @@ open class BaseHivIndexContactsRegisterFragmentPresenter(
     override fun getMainCondition() = ""
 
     override fun getDefaultSortQuery() =
-        Constants.Tables.HIV_INDEX + "." + DBConstants.Key.HIV_INDEX_REGISTRATION_DATE + " DESC "
+        getMainTable() + "." + DBConstants.Key.HIV_INDEX_REGISTRATION_DATE + " DESC "
 
     override fun processViewConfigurations() {
         if (StringUtils.isBlank(viewConfigurationIdentifier)) {
@@ -46,7 +46,7 @@ open class BaseHivIndexContactsRegisterFragmentPresenter(
     }
 
     override fun initializeQueries(mainCondition: String) {
-        val tableName = Constants.Tables.HIV_INDEX
+        val tableName = getMainTable()
         val condition =
             if (StringUtils.trim(getMainCondition()) == "") mainCondition else getMainCondition()
         val countSelect = model.countSelect(tableName, condition)
@@ -70,7 +70,7 @@ open class BaseHivIndexContactsRegisterFragmentPresenter(
     override fun getMainTable() = Constants.Tables.HIV_INDEX
 
     override fun getDueFilterCondition() =
-        "${Constants.Tables.HIV_INDEX}.${DBConstants.Key.IS_CLOSED} = 0"
+        "${getMainTable()}.${DBConstants.Key.IS_CLOSED} = 0"
 
     init {
         config = model.defaultRegisterConfiguration()!!

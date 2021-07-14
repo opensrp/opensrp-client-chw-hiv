@@ -97,8 +97,17 @@ object HivIndexDao : AbstractDao() {
                and ec_hiv_index.is_closed = 0
             """
 
+        val sqlHf =
+            """select count(ec_hiv_index_hf.base_entity_id) count
+               from ec_hiv_index_hf
+               where base_entity_id = '${baseEntityID}'
+               and ec_hiv_index_hf.is_closed = 0
+            """
+
         val dataMap = DataMap { cursor: Cursor? -> getCursorIntValue(cursor, "count") }
-        val res = readData(sql, dataMap)
+        var res = readData(sql, dataMap)
+        if (res == null)
+            res = readData(sqlHf, dataMap)
         return if (res == null || res.size != 1) false else res[0]!! > 0
     }
 
@@ -129,7 +138,7 @@ object HivIndexDao : AbstractDao() {
                     pcg.phone_number  pcg_phone_number , mr.* 
                     from ec_family_member m 
                     inner join ec_family f on m.relational_id = f.base_entity_id 
-                    left join ec_hiv_index mr on mr.base_entity_id = m.base_entity_id 
+                    left join ec_hiv_index_hf mr on mr.base_entity_id = m.base_entity_id 
                     left join ec_family_member fh on fh.base_entity_id = f.family_head 
                     left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver 
                     where m.base_entity_id ='${baseEntityID}' """
@@ -167,7 +176,7 @@ object HivIndexDao : AbstractDao() {
                     pcg.phone_number  pcg_phone_number , mr.* 
                     from ec_family_member m 
                     inner join ec_family f on m.relational_id = f.base_entity_id 
-                    inner join ec_hiv_index mr on mr.base_entity_id = m.base_entity_id 
+                    inner join ec_hiv_index_hf mr on mr.base_entity_id = m.base_entity_id 
                     left join ec_family_member fh on fh.base_entity_id = f.family_head 
                     left join ec_family_member pcg on pcg.base_entity_id = f.primary_caregiver 
                     where mr.hiv_client_id ='${baseEntityID}' """

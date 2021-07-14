@@ -71,6 +71,15 @@ class IndexContactsListAdapter(
                         }
 
                     }
+                    client?.hivStatus?.isNotEmpty()!! -> {
+                        if (client.hivStatus!!.toLowerCase(Locale.ROOT) == "positive") {
+                            hivStatus.text = java.text.MessageFormat.format(
+                                context.getString(R.string.separator),
+                                context.getString(R.string.hiv_positive_status)
+                            )
+                            hivStatus.setTextColor(context.resources.getColor(R.color.colorRed))
+                        }
+                    }
                 }
 
 
