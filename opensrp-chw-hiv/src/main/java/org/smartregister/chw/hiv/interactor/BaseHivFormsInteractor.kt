@@ -37,7 +37,8 @@ open class BaseHivFormsInteractor : BaseHivFormsContract.Interactor {
         when {
             jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_OUTCOME ||
                     jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP ||
-                    jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP
+                    jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP ||
+                    jsonObject.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_INDEX_CONTACT_TESTING_FOLLOWUP
             -> event.locationId =
                 HivDao.getSyncLocationId(baseEntityId) //Necessary for syncing the event back to the chw
         }

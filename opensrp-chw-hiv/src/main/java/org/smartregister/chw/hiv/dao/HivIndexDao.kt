@@ -63,15 +63,15 @@ object HivIndexDao : AbstractDao() {
             memberObject.comments =
                 getCursorValue(cursor, DBConstants.Key.COMMENTS, "")
             memberObject.hivTestEligibility =
-                getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("true")
+                getCursorValue(cursor, DBConstants.Key.HIV_TEST_ELIGIBILITY, "").equals("true")
             memberObject.referToChw =
-                getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("true")
+                getCursorValue(cursor, DBConstants.Key.REFER_TO_CHW, "").equals("yes")
             memberObject.followedUpByChw =
-                getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("true")
+                getCursorValue(cursor, DBConstants.Key.FOLLOWED_UP_BY_CHW, "").equals("true")
             memberObject.enrolledToClinic =
-                getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("yes")
+                getCursorValue(cursor, DBConstants.Key.ENROLLED_TO_CLINIC, "").equals("yes")
             memberObject.hasStartedMediation =
-                getCursorValue(cursor, DBConstants.Key.HIV_STATUS, "").equals("yes")
+                getCursorValue(cursor, DBConstants.Key.HAS_STARTED_MEDICATION, "").equals("yes")
             memberObject.hasTheContactClientBeenTested =
                 getCursorValue(cursor, DBConstants.Key.HAS_THE_CONTACT_CLIENT_BEEN_TESTED, "")
             memberObject.isClosed =

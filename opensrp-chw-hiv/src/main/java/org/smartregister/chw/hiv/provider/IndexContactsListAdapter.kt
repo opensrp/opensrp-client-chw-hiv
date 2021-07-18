@@ -42,9 +42,18 @@ class IndexContactsListAdapter(
                 this.patientName.text = kotlin.String.format(
                     java.util.Locale.getDefault(), "%s, %d", patientName, age
                 )
-                textViewGender.text = client?.gender ?: ""
-                val village = client?.address
-                val testResult = client?.testResults
+
+                if (client.gender!!.toLowerCase() == "male"
+                ) {
+                    textViewGender.text =
+                        context.getString(R.string.sex_male)
+                } else {
+                    textViewGender.text =
+                        context.getString(R.string.sex_female)
+                }
+
+                val village = client.address
+                val testResult = client.testResults
                 when {
                     village?.isNotEmpty()!! -> {
                         textViewVillage.text = java.text.MessageFormat.format(
@@ -71,7 +80,7 @@ class IndexContactsListAdapter(
                         }
 
                     }
-                    client?.hivStatus?.isNotEmpty()!! -> {
+                    client.hivStatus?.isNotEmpty()!! -> {
                         if (client.hivStatus!!.toLowerCase(Locale.ROOT) == "positive") {
                             hivStatus.text = java.text.MessageFormat.format(
                                 context.getString(R.string.separator),

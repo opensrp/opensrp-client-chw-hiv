@@ -122,6 +122,12 @@
     <string name="go_to_index_client_contact_list">Fungua orodha wa washirika wa ngono/wakujidunga</string>
     <string name="index_client_has_registered_contacts">Mteja ana washirika wa ngono/wakujidunga</string>
     <string name="client_was_not_tested">Mteja hakupimwa VVU</string>
-    <string name="register_contacts">Washirika waliosajiliwa</string>
+    <string name="register_contacts">Orodhesha Washirika</string>
     <string name="associated_index_client">" Mteja mwenye VVU anayehusishwa"</string>
+    <string name="index_client_re_elicit">Mteja anatakiwa kutaja washirika wengine</string>
+    <string name="index_contact_community_followup_referral_notification_message">Ujumbe: %1$s</string>
+
+    <!--    Sex-->
+    <string name="sex_male">Me</string>
+    <string name="sex_female">Ke</string>
 </resources>
