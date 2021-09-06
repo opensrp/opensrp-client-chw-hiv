@@ -23,14 +23,14 @@ import org.smartregister.commonregistry.CommonPersonObjectClient
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestHivApp::class)
-class BaseNeatFormActivityPresenterTest {
+class BaseHivFormsActivityPresenterTest {
 
     private val hivFormsView: BaseHivFormsContract.View = spyk()
     private val hivFormsInteractor: BaseHivFormsContract.Interactor = spyk()
     private val sampleBaseEntityId = "5a5mple-b35eent"
     private val baseHivFormsPresenter: BaseHivFormsContract.Presenter =
         spyk(
-            BaseNeatFormActivityPresenter(
+            BaseHivFormsActivityPresenter(
                 sampleBaseEntityId, hivFormsView,
                 hivFormsInteractor
             ),
@@ -83,7 +83,7 @@ class BaseNeatFormActivityPresenterTest {
     @Test
     fun `Should update the member object`() {
         baseHivFormsPresenter.initializeMemberObject(hivMemberObject)
-        Assert.assertNotNull((baseHivFormsPresenter as BaseNeatFormActivityPresenter).hivMemberObject)
+        Assert.assertNotNull((baseHivFormsPresenter as BaseHivFormsActivityPresenter).hivMemberObject)
     }
 
     @Test
@@ -94,7 +94,7 @@ class BaseNeatFormActivityPresenterTest {
         verifyAll {
             hivFormsInteractor.saveRegistration(
                 sampleBaseEntityId, valuesHashMap, jsonFormObject,
-                baseHivFormsPresenter as BaseNeatFormActivityPresenter
+                baseHivFormsPresenter as BaseHivFormsActivityPresenter
             )
         }
     }

@@ -8,6 +8,13 @@ import org.smartregister.view.contract.BaseProfileContract
 import timber.log.Timber
 import java.util.*
 
+/**
+ * Created by cozej4 on 2021-07-13.
+ *
+ * @cozej4 https://github.com/cozej4
+ *
+ * This is the presenter for  [org.smartregister.chw.hiv.activity.BaseIndexContactProfileActivity]
+ */
 open class BaseIndexContactProfilePresenter(
     override val view: BaseIndexContactProfileContract.View?,
     val interactor: BaseIndexContactProfileContract.Interactor,

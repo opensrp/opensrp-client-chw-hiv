@@ -10,6 +10,13 @@ import org.smartregister.configurableviews.model.View
 import java.lang.ref.WeakReference
 import java.util.*
 
+/**
+ * Created by cozej4 on 2021-07-13.
+ *
+ * @cozej4 https://github.com/cozej4
+ *
+ * This is the presenter for  [org.smartregister.chw.hiv.fragment.BaseHivIndexContactsRegisterFragment]
+ */
 open class BaseHivIndexContactsRegisterFragmentPresenter(
     view: BaseHivRegisterFragmentContract.View,
     protected var model: BaseHivRegisterFragmentContract.Model,

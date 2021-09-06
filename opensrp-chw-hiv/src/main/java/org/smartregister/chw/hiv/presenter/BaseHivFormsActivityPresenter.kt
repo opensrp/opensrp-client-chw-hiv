@@ -3,6 +3,7 @@ package org.smartregister.chw.hiv.presenter
 import android.app.Activity
 import android.database.sqlite.SQLiteException
 import android.util.Log
+import com.nerdstone.neatandroidstepper.core.domain.StepperActions
 import com.nerdstone.neatformcore.domain.model.NFormViewData
 import org.apache.commons.lang3.tuple.Triple
 import org.json.JSONException
@@ -17,7 +18,14 @@ import timber.log.Timber
 import java.lang.ref.WeakReference
 import java.util.*
 
-open class BaseNeatFormActivityPresenter(
+/**
+ * Created by cozej4 on 2021-07-13.
+ *
+ * @cozej4 https://github.com/cozej4
+ *
+ * This is the presenter for  [org.smartregister.chw.hiv.activity.BaseHivFormsActivity]
+ */
+open class BaseHivFormsActivityPresenter(
     val baseEntityID: String,
     view: BaseHivFormsContract.View,
     protected var interactor: BaseHivFormsContract.Interactor

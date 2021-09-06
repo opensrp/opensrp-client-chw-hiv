@@ -5,6 +5,13 @@ import org.smartregister.chw.hiv.contract.BaseIndexClientsContactListContract
 import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import timber.log.Timber
 
+/**
+ * Created by cozej4 on 2021-07-13.
+ *
+ * @cozej4 https://github.com/cozej4
+ *
+ * This is the presenter for  [org.smartregister.chw.hiv.activity.BaseIndexContactsListActivity]
+ */
 open class BaseHivIndexContactsListPresenter(
     val hivClientBaseEntityId: String,
     val interactor: BaseIndexClientsContactListContract.Interactor,

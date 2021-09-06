@@ -28,7 +28,7 @@ import org.smartregister.chw.hiv.contract.BaseHivFormsContract
 import org.smartregister.chw.hiv.dao.HivDao
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.interactor.BaseHivFormsInteractor
-import org.smartregister.chw.hiv.presenter.BaseNeatFormActivityPresenter
+import org.smartregister.chw.hiv.presenter.BaseHivFormsActivityPresenter
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
 import org.smartregister.chw.hiv.util.JsonFormConstants
@@ -188,7 +188,7 @@ open class BaseHivFormsActivity : AppCompatActivity(), BaseHivFormsContract.View
         }
     }
 
-    override fun presenter() = BaseNeatFormActivityPresenter(
+    override fun presenter() = BaseHivFormsActivityPresenter(
         baseEntityId!!, this, BaseHivFormsInteractor()
     )
 
