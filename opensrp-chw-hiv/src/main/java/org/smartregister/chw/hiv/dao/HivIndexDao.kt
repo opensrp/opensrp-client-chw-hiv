@@ -8,6 +8,13 @@ import org.smartregister.dao.AbstractDao.DataMap
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Created by cozej4 on 2021-07-13.
+ *
+ * @cozej4 https://github.com/cozej4
+ *
+ * This class used for querying data about HIV Index Contacts
+ */
 object HivIndexDao : AbstractDao() {
     private val dataMap =
         DataMap { cursor: Cursor? ->

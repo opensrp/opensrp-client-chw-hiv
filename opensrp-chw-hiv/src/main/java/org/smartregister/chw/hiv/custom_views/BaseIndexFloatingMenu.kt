@@ -10,6 +10,13 @@ import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import org.smartregister.chw.hiv.fragment.BaseHivClientCallDialogFragment.Companion.launchDialog
 import org.smartregister.chw.hiv.util.HivUtil.getFullName
 
+/**
+ * Created by cozej4 on 2021-07-13.
+ *
+ * @cozej4 https://github.com/cozej4
+ *
+ * This is custom view of the FAB view of Index Contact Profile
+ */
 open class BaseIndexFloatingMenu(context: Context?, val hivIndexContactObject: HivIndexContactObject) :
     LinearLayout(context), View.OnClickListener {
 

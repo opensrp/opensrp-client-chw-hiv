@@ -28,6 +28,13 @@ import org.smartregister.helper.ImageRenderHelper
 import org.smartregister.view.activity.BaseProfileActivity
 import java.util.*
 
+/**
+ * Created by cozej4 on 2021-07-13.
+ *
+ * @cozej4 https://github.com/cozej4
+ *
+ * This is the elicited index contact profile activity.
+ */
 open class BaseIndexContactProfileActivity : BaseProfileActivity(),
     BaseIndexContactProfileContract.View {
     private var lastVisitRow: View? = null
@@ -163,9 +170,7 @@ open class BaseIndexContactProfileActivity : BaseProfileActivity(),
         if (visitDone) {
             recordFollowUpVisitLayout!!.visibility = View.GONE
             recordVisitStatusBarLayout!!.visibility = View.VISIBLE
-//            tvEditVisit!!.visibility = View.VISIBLE
         } else {
-//            tvEditVisit!!.visibility = View.GONE
             recordVisitStatusBarLayout!!.visibility = View.GONE
             recordFollowUpVisitLayout!!.visibility = View.VISIBLE
         }

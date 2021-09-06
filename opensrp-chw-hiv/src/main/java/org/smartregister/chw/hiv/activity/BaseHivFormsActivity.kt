@@ -39,8 +39,7 @@ import java.util.*
  * Created by cozej4 on 2020-05-13.
  *
  * @cozej4 https://github.com/cozej4
- */
-/**
+ *
  * This is the activity for loading hiv registration and followup JSON forms. It implements [BaseHivFormsContract.View]
  * and [StepperActions] (which is from the neat form library) that provides callback methods from the
  * form builder. It exposes a method to receiving the data from the views and exiting the activity

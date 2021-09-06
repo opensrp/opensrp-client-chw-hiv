@@ -25,9 +25,15 @@ import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.view.activity.SecuredActivity
 import timber.log.Timber
 
-
+/**
+ * Created by cozej4 on 2021-07-13.
+ *
+ * @cozej4 https://github.com/cozej4
+ *
+ * This is the activity for showing a list of elicited contacts of an hiv index client.
+ */
 open class BaseIndexContactsListActivity : SecuredActivity(),
-    BaseIndexClientsContactListContract.View {
+        BaseIndexClientsContactListContract.View {
     var memberObject: HivMemberObject? = null
     override fun initializePresenter() {
         TODO("Not yet implemented")
@@ -49,7 +55,7 @@ open class BaseIndexContactsListActivity : SecuredActivity(),
         val extras = intent.extras
         if (extras != null) {
             memberObject =
-                intent.getSerializableExtra(Constants.ActivityPayload.HIV_MEMBER_OBJECT) as HivMemberObject
+                    intent.getSerializableExtra(Constants.ActivityPayload.HIV_MEMBER_OBJECT) as HivMemberObject
         }
 
         setUpView()
@@ -67,18 +73,18 @@ open class BaseIndexContactsListActivity : SecuredActivity(),
 
     private fun setUpActionBar() {
         val toolbar =
-            findViewById<Toolbar>(R.id.collapsing_toolbar)
+                findViewById<Toolbar>(R.id.collapsing_toolbar)
         tvTitle =
-            toolbar.findViewById(R.id.toolbar_title)
+                toolbar.findViewById(R.id.toolbar_title)
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             val upArrow =
-                resources.getDrawable(R.drawable.ic_arrow_back_white_24dp)
+                    resources.getDrawable(R.drawable.ic_arrow_back_white_24dp)
             upArrow.setColorFilter(
-                resources.getColor(R.color.text_blue),
-                PorterDuff.Mode.SRC_ATOP
+                    resources.getColor(R.color.text_blue),
+                    PorterDuff.Mode.SRC_ATOP
             )
             actionBar.setHomeAsUpIndicator(upArrow)
         }
@@ -93,16 +99,16 @@ open class BaseIndexContactsListActivity : SecuredActivity(),
 
     private fun setUpView() {
         recyclerView =
-            findViewById(R.id.recyclerView)
+                findViewById(R.id.recyclerView)
         progressBar =
-            findViewById(R.id.progressBarIndexList)
+                findViewById(R.id.progressBarIndexList)
         tvTitle =
-            findViewById(R.id.tvTitle)
+                findViewById(R.id.tvTitle)
 
         with(tvTitle) {
             this!!.text = getString(
-                R.string.back_to,
-                "${memberObject!!.firstName} ${memberObject!!.middleName} ${memberObject!!.lastName}"
+                    R.string.back_to,
+                    "${memberObject!!.firstName} ${memberObject!!.middleName} ${memberObject!!.lastName}"
             )
         }
 
@@ -117,9 +123,9 @@ open class BaseIndexContactsListActivity : SecuredActivity(),
         presenter = memberObject?.baseEntityId?.let { it1 ->
             Timber.d("Base Entity Id = " + memberObject!!.baseEntityId)
             BaseHivIndexContactsListPresenter(
-                it1,
-                BaseHivIndexContactsListInteractor(),
-                this
+                    it1,
+                    BaseHivIndexContactsListInteractor(),
+                    this
             )
         }
         presenter?.initialize();
