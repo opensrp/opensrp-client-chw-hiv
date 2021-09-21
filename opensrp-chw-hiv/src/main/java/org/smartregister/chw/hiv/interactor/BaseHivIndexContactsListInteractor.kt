@@ -38,12 +38,6 @@ open class BaseHivIndexContactsListInteractor @VisibleForTesting internal constr
     protected fun getIndexClient(
             hivClientBaseEntityId: String?
     ): List<HivIndexContactObject?> {
-        try {
-            Thread.sleep(2000)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-
         return hivClientBaseEntityId?.let { HivIndexDao.getIndexContacts(it) }!!
 
     }

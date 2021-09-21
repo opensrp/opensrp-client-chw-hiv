@@ -117,6 +117,9 @@ object DBConstants {
         const val HIV_INDEX_REGISTRATION_DATE = "hiv_index_registration_date"
         const val TEST_RESULTS = "test_results"
         const val PLACE_WHERE_TEST_WAS_CONDUCTED = "place_where_test_was_conducted"
+        const val FAMILY_HEAD_FIRST_NAME = "family_head_first_name"
+        const val FAMILY_HEAD_MIDDLE_NAME = "family_head_middle_name"
+        const val FAMILY_HEAD_LAST_NAME = "family_head_last_name"
     }
 }
 

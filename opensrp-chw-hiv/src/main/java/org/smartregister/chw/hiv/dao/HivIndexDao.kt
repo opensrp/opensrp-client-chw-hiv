@@ -84,11 +84,11 @@ object HivIndexDao : AbstractDao() {
             memberObject.isClosed =
                 getCursorIntValue(cursor, DBConstants.Key.IS_CLOSED, 0) == 1
             var familyHeadName =
-                (getCursorValue(cursor, "family_head_first_name", "") + " "
-                        + getCursorValue(cursor, "family_head_middle_name", ""))
+                (getCursorValue(cursor, DBConstants.Key.FAMILY_HEAD_FIRST_NAME, "") + " "
+                        + getCursorValue(cursor, DBConstants.Key.FAMILY_HEAD_MIDDLE_NAME, ""))
             familyHeadName =
                 (familyHeadName.trim { it <= ' ' } + " " + getCursorValue(
-                    cursor, "family_head_last_name", ""
+                    cursor, DBConstants.Key.FAMILY_HEAD_LAST_NAME, ""
                 )).trim { it <= ' ' }
             memberObject.familyHead = familyHeadName
 
