@@ -40,6 +40,7 @@ data class HivMemberObject(val client: CommonPersonObjectClient?) : Serializable
     var familyMemberEntityType: String? = client?.columnmaps?.get(DBConstants.Key.FAMILY_MEMBER_ENTITY_TYPE)
     var reasonsForIssuingCommunityFollowupReferral: String? = client?.columnmaps?.get(DBConstants.Key.REASONS_FOR_ISSUING_COMMUNITY_REFERRAL)
     var comment: String? = client?.columnmaps?.get(DBConstants.Key.COMMENTS)
+    var clientFollowupStatus: String? = client?.columnmaps?.get(DBConstants.Key.CLIENT_FOLLOWUP_STATUS)
     var isClosed: Boolean? = client?.columnmaps?.get(DBConstants.Key.IS_CLOSED) == "1"
     var communityReferralFormId: String? = client?.columnmaps?.get(DBConstants.Key.COMMUNITY_REFERRAL_FORM_ID)
 }

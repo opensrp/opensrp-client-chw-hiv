@@ -131,4 +131,16 @@
     <!--    Sex-->
     <string name="sex_male">Male</string>
     <string name="sex_female">Female</string>
+
+    <!--Index Contacts Relationships    -->
+    <string name="index_contact_sexual_partner">Sexual partner</string>
+    <string name="index_contact_needle_sharing_partner">Needle Sharing partner</string>
+    <string name="index_contact_biological_mother">Biological Mother</string>
+    <string name="index_contact_biological_father">Biological Father</string>
+    <string name="index_contact_biological_child_under_15">Biological Child Under 15</string>
+    <string name="index_contact_siblings_under_15">Siblings Under 15</string>
+
+    <string name="client_followup_status_deceased">Deceased</string>
+    <string name="client_followup_status_qualified_from_service">Qualified</string>
+
 </resources>

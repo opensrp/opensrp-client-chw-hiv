@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -58,7 +59,7 @@ open class BaseHivFormsActivity : AppCompatActivity(), BaseHivFormsContract.View
     private lateinit var pageTitleTextView: TextView
     private lateinit var clientNameTitleTextView: TextView
     private lateinit var exitFormImageView: ImageView
-    private lateinit var completeButton: ImageView
+    private lateinit var completeButton: TextView
     var hivMemberObject: HivMemberObject? = null
     val hivLibrary by inject<HivLibrary>()
 
@@ -77,7 +78,7 @@ open class BaseHivFormsActivity : AppCompatActivity(), BaseHivFormsContract.View
             baseEntityId = getStringExtra(Constants.ActivityPayload.BASE_ENTITY_ID)
             formName = getStringExtra(Constants.ActivityPayload.HIV_REGISTRATION_FORM_NAME)
             useDefaultNeatFormLayout =
-                getBooleanExtra(Constants.ActivityPayload.USE_DEFAULT_NEAT_FORM_LAYOUT, true)
+                    getBooleanExtra(Constants.ActivityPayload.USE_DEFAULT_NEAT_FORM_LAYOUT, true)
             try {
                 jsonForm = JSONObject(getStringExtra(Constants.ActivityPayload.JSON_FORM))
             } catch (e: JSONException) {
@@ -86,11 +87,11 @@ open class BaseHivFormsActivity : AppCompatActivity(), BaseHivFormsContract.View
             presenter = presenter()
 
             hivMemberObject =
-                if (jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK) {
-                    HivDao.getCommunityFollowupMember(baseEntityId!!)
-                } else {
-                    HivDao.getMember(baseEntityId!!)
-                }
+                    if (jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK) {
+                        HivDao.getCommunityFollowupMember(baseEntityId!!)
+                    } else {
+                        HivDao.getMember(baseEntityId!!)
+                    }
 
             with(presenter) {
                 this?.initializeMemberObject(hivMemberObject!!)
@@ -100,26 +101,26 @@ open class BaseHivFormsActivity : AppCompatActivity(), BaseHivFormsContract.View
             with(hivMemberObject!!) {
                 val age = Period(DateTime(this.age), DateTime()).years
                 clientNameTitleTextView.text =
-                    "${this.firstName} ${this.middleName} ${this.lastName}, $age"
+                        "${this.firstName} ${this.middleName} ${this.lastName}, $age"
 
                 pageTitleTextView.text =
-                    jsonForm?.getJSONArray("steps")?.getJSONObject(0)?.getString("title") ?: ""
+                        jsonForm?.getJSONArray("steps")?.getJSONObject(0)?.getString("title") ?: ""
             }
 
             exitFormImageView.setOnClickListener {
                 if (it.id == R.id.exitFormImageView) {
                     AlertDialog.Builder(
-                        this@BaseHivFormsActivity,
-                        R.style.AlertDialogTheme
+                            this@BaseHivFormsActivity,
+                            R.style.AlertDialogTheme
                     )
-                        .setTitle(getString(R.string.confirm_form_close))
-                        .setMessage(getString(R.string.confirm_form_close_explanation))
-                        .setNegativeButton(R.string.yes) { _: DialogInterface?, _: Int -> finish() }
-                        .setPositiveButton(R.string.no) { _: DialogInterface?, _: Int ->
-                            Timber.d("Do Nothing exit confirm dialog")
-                        }
-                        .create()
-                        .show()
+                            .setTitle(getString(R.string.confirm_form_close))
+                            .setMessage(getString(R.string.confirm_form_close_explanation))
+                            .setNegativeButton(R.string.yes) { _: DialogInterface?, _: Int -> finish() }
+                            .setPositiveButton(R.string.no) { _: DialogInterface?, _: Int ->
+                                Timber.d("Do Nothing exit confirm dialog")
+                            }
+                            .create()
+                            .show()
                 }
             }
 
@@ -133,27 +134,27 @@ open class BaseHivFormsActivity : AppCompatActivity(), BaseHivFormsContract.View
                             if (jsonForm!!.getString(JsonFormConstants.ENCOUNTER_TYPE) == Constants.EventType.HIV_COMMUNITY_FOLLOWUP_FEEDBACK) {
                                 //Saving referral form id
                                 formData[DBConstants.Key.COMMUNITY_REFERRAL_FORM_ID] =
-                                    NFormViewData().apply {
-                                        value = hivMemberObject!!.communityReferralFormId
-                                    }
+                                        NFormViewData().apply {
+                                            value = hivMemberObject!!.communityReferralFormId
+                                        }
 
                                 //Saving chw names
                                 val allSharedPreferences = hivLibrary.context.allSharedPreferences()
                                 formData[DBConstants.Key.CHW_NAME] =
-                                    NFormViewData().apply {
-                                        value = allSharedPreferences.getANMPreferredName(
-                                            allSharedPreferences.fetchRegisteredANM()
-                                        )
-                                    }
+                                        NFormViewData().apply {
+                                            value = allSharedPreferences.getANMPreferredName(
+                                                    allSharedPreferences.fetchRegisteredANM()
+                                            )
+                                        }
                             }
 
                             presenter!!.saveForm(formData, jsonForm!!)
                             Timber.d("Saved Data = %s", Gson().toJson(formData))
                             val intent = Intent()
                             setDataToBePassedBackToCallingActivityAsResults(
-                                intent,
-                                jsonForm!!,
-                                formData
+                                    intent,
+                                    jsonForm!!,
+                                    formData
                             )
                             setResult(Activity.RESULT_OK, intent)
                             finish()
@@ -178,8 +179,8 @@ open class BaseHivFormsActivity : AppCompatActivity(), BaseHivFormsContract.View
 
             formBuilder = JsonFormBuilder(jsonForm.toString(), this)
             JsonFormEmbedded(
-                formBuilder as JsonFormBuilder,
-                formLayout
+                    formBuilder as JsonFormBuilder,
+                    formLayout
             ).buildForm(if (useDefaultNeatFormLayout!!) customLayouts else null)
 
 
@@ -189,15 +190,15 @@ open class BaseHivFormsActivity : AppCompatActivity(), BaseHivFormsContract.View
     }
 
     override fun presenter() = BaseHivFormsActivityPresenter(
-        baseEntityId!!, this, BaseHivFormsInteractor()
+            baseEntityId!!, this, BaseHivFormsInteractor()
     )
 
 
     override fun setProfileViewWithData() = Unit
     override fun setDataToBePassedBackToCallingActivityAsResults(
-        intent: Intent,
-        jsonForm: JSONObject,
-        formData: HashMap<String, NFormViewData>
+            intent: Intent,
+            jsonForm: JSONObject,
+            formData: HashMap<String, NFormViewData>
     ) {
         //TODO to be implemented where required
     }

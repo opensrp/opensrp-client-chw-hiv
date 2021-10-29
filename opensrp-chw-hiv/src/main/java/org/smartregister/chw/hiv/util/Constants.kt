@@ -120,6 +120,7 @@ object DBConstants {
         const val FAMILY_HEAD_FIRST_NAME = "family_head_first_name"
         const val FAMILY_HEAD_MIDDLE_NAME = "family_head_middle_name"
         const val FAMILY_HEAD_LAST_NAME = "family_head_last_name"
+        const val CLIENT_FOLLOWUP_STATUS = "registration_or_followup_status"
     }
 }
 

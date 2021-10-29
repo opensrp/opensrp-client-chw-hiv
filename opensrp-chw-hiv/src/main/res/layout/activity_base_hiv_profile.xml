@@ -14,7 +14,8 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/collapsing_toolbar"
@@ -51,14 +52,46 @@
                 android:paddingTop="10dp"
                 app:layout_collapseMode="parallax">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imageview_profile"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/ic_member"
-                    app:civ_border_color="@color/transparent"
-                    app:civ_border_width="3dp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/imageview_profile_constraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imageview_profile"
+                        android:layout_width="@dimen/client_profile_pic_width"
+                        android:layout_height="@dimen/client_profile_pic_height"
+                        app:civ_border_color="#FFFFFFFF"
+                        app:civ_border_width="1dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <org.smartregister.view.customcontrols.CustomFontTextView
+                        android:id="@+id/textview_status"
+                        style="@style/CustomFontTextViewStyle.ListView.Normal.MultipleLines"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="65dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/risk_label"
+                        android:paddingStart="15dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="15dp"
+                        android:paddingBottom="6dp"
+                        android:text="@string/default_pregnancy_risk_text"
+                        android:textColor="@color/default_risk_text_black"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/imageview_profile"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                     android:id="@+id/textview_name"
@@ -139,6 +172,22 @@
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/register_member_village_size" />
                 </LinearLayout>
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/textview_cbhs_number"
+                    style="@style/CustomFontTextViewStyle.ClientList.Light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/register_list_desc_size"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/profile_dot_separator_margin"
+                    android:layout_marginRight="@dimen/profile_dot_separator_margin"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                 <org.smartregister.view.customcontrols.CustomFontTextView
                     android:id="@+id/hiv_family_head"

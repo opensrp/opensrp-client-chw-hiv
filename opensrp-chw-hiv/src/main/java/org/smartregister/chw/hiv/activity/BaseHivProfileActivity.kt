@@ -33,7 +33,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 open class BaseHivProfileActivity : BaseProfileActivity(),
-    BaseHivProfileContract.View {
+        BaseHivProfileContract.View {
     private var lastVisitRow: View? = null
     private var recordFollowUpVisitLayout: LinearLayout? = null
     protected var recordIndexContactLayout: LinearLayout? = null
@@ -63,21 +63,23 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     private var tvGender: TextView? = null
     private var tvLocation: TextView? = null
     private var tvUniqueID: TextView? = null
+    protected var tvCbhsNumber: TextView? = null
+    protected var tvStatus: TextView? = null
     private var overDueRow: View? = null
     private var familyRow: View? = null
     override fun onCreation() {
         setContentView(R.layout.activity_base_hiv_profile)
         val toolbar =
-            findViewById<Toolbar>(R.id.collapsing_toolbar)
+                findViewById<Toolbar>(R.id.collapsing_toolbar)
         setSupportActionBar(toolbar)
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             val upArrow =
-                resources.getDrawable(R.drawable.ic_arrow_back_white_24dp)
+                    resources.getDrawable(R.drawable.ic_arrow_back_white_24dp)
             upArrow.setColorFilter(
-                resources.getColor(R.color.text_blue),
-                PorterDuff.Mode.SRC_ATOP
+                    resources.getColor(R.color.text_blue),
+                    PorterDuff.Mode.SRC_ATOP
             )
             actionBar.setHomeAsUpIndicator(upArrow)
         }
@@ -87,7 +89,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
             appBarLayout.outlineProvider = null
         }
         hivMemberObject =
-            intent.getSerializableExtra(Constants.ActivityPayload.HIV_MEMBER_OBJECT) as HivMemberObject
+                intent.getSerializableExtra(Constants.ActivityPayload.HIV_MEMBER_OBJECT) as HivMemberObject
         setupViews()
         initializePresenter()
         fetchProfileData()
@@ -100,8 +102,10 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
         tvGender = findViewById(R.id.textview_gender)
         tvLocation = findViewById(R.id.textview_address)
         tvUniqueID = findViewById(R.id.textview_unique_id)
+        tvStatus = findViewById(R.id.textview_status)
+        tvCbhsNumber = findViewById(R.id.textview_cbhs_number)
         recordVisitStatusBarLayout =
-            findViewById(R.id.record_visit_status_bar_layout)
+                findViewById(R.id.record_visit_status_bar_layout)
         recordFollowUpVisitLayout = findViewById(R.id.record_recurring_layout)
         recordIndexContactLayout = findViewById(R.id.record_index_contact_layout)
         lastVisitRow = findViewById(R.id.view_last_visit_row)
@@ -123,7 +127,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
         tvEditVisit = findViewById(R.id.textview_edit)
         tvUndo = findViewById(R.id.textview_undo)
         profileImageView =
-            findViewById(R.id.imageview_profile)
+                findViewById(R.id.imageview_profile)
         tvRecordHivFollowUp = findViewById(R.id.textview_record_reccuring_visit)
         tvUndo?.let { tvUndo?.setOnClickListener(this) }
         tvEditVisit?.let { tvEditVisit?.setOnClickListener(this) }
@@ -138,18 +142,18 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
 
     override fun initializePresenter() {
         hivProfilePresenter =
-            BaseHivProfilePresenter(this, BaseHivProfileInteractor(), hivMemberObject!!)
+                BaseHivProfilePresenter(this, BaseHivProfileInteractor(), hivMemberObject!!)
     }
 
     open fun initializeCallFAB() {
         if (StringUtils.isNotBlank(hivMemberObject!!.phoneNumber)
-            || StringUtils.isNotBlank(hivMemberObject!!.familyHeadPhoneNumber)
+                || StringUtils.isNotBlank(hivMemberObject!!.familyHeadPhoneNumber)
         ) {
             hivFloatingMenu = BaseHivFloatingMenu(this, hivMemberObject!!)
             hivFloatingMenu!!.gravity = Gravity.BOTTOM or Gravity.END
             val linearLayoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
             )
             addContentView(hivFloatingMenu, linearLayoutParams)
         }
@@ -225,31 +229,31 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     }
 
     override fun setUpComingServicesStatus(
-        service: String?,
-        status: AlertStatus?,
-        date: Date?
+            service: String?,
+            status: AlertStatus?,
+            date: Date?
     ) {
         showProgressBar(false)
         val dateFormat =
-            SimpleDateFormat("dd MMM", Locale.getDefault())
+                SimpleDateFormat("dd MMM", Locale.getDefault())
         if (status == AlertStatus.complete) return
         overDueRow!!.visibility = View.VISIBLE
         rlUpcomingServices!!.visibility = View.VISIBLE
         if (status == AlertStatus.upcoming) {
             tvUpComingServices!!.text = fromHtml(
-                getString(
-                    R.string.hiv_upcoming_visit,
-                    service,
-                    dateFormat.format(date)
-                )
+                    getString(
+                            R.string.hiv_upcoming_visit,
+                            service,
+                            dateFormat.format(date)
+                    )
             )
         } else {
             tvUpComingServices!!.text = fromHtml(
-                getString(
-                    R.string.hiv_service_due,
-                    service,
-                    dateFormat.format(date)
-                )
+                    getString(
+                            R.string.hiv_service_due,
+                            service,
+                            dateFormat.format(date)
+                    )
             )
         }
     }
@@ -271,7 +275,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
                     }
                     AlertStatus.urgent -> {
                         tvFamilyStatus!!.text =
-                            fromHtml(getString(R.string.client_has_service_overdue))
+                                fromHtml(getString(R.string.client_has_service_overdue))
                     }
                     else -> {
                         tvFamilyStatus!!.text = getString(R.string.client_has_nothing_due)
@@ -289,7 +293,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
                     }
                     AlertStatus.urgent -> {
                         tvFamilyStatus!!.text =
-                            fromHtml(getString(R.string.family_has_service_overdue))
+                                fromHtml(getString(R.string.family_has_service_overdue))
                     }
                     else -> {
                         tvFamilyStatus!!.text = getString(R.string.family_has_nothing_due)
@@ -302,26 +306,31 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     }
 
     override fun setProfileViewDetails(hivMemberObject: HivMemberObject?) {
+        setupViews()
         val age = Period(
-            DateTime(hivMemberObject!!.age),
-            DateTime()
+                DateTime(hivMemberObject!!.age),
+                DateTime()
         ).years
         tvName!!.text = String.format(
-            Locale.getDefault(), "%s %s %s, %d", hivMemberObject.firstName,
-            hivMemberObject.middleName, hivMemberObject.lastName, age
+                Locale.getDefault(), "%s %s %s, %d", hivMemberObject.firstName,
+                hivMemberObject.middleName, hivMemberObject.lastName, age
         )
         tvGender!!.text = hivMemberObject.gender
         tvLocation!!.text = hivMemberObject.address
         tvUniqueID!!.text = hivMemberObject.uniqueId
+
+        if (!hivMemberObject.cbhsNumber.isNullOrEmpty())
+            tvCbhsNumber!!.text = "CBHS:" + hivMemberObject.cbhsNumber
+
         imageRenderHelper.refreshProfileImage(
-            hivMemberObject.baseEntityId,
-            profileImageView,
-            getMemberProfileImageResourceIDentifier()
+                hivMemberObject.baseEntityId,
+                profileImageView,
+                getMemberProfileImageResourceIDentifier()
         )
         tvHivRow!!.text = String.format(
-            getString(R.string.hiv_client_registered_text),
-            getString(R.string.hiv_on),
-            hivMemberObject.hivRegistrationDate
+                getString(R.string.hiv_client_registered_text),
+                getString(R.string.hiv_on),
+                hivMemberObject.hivRegistrationDate
         )
         if (StringUtils.isNotBlank(hivMemberObject.familyHead) && hivMemberObject.familyHead == hivMemberObject.baseEntityId) {
             findViewById<View>(R.id.hiv_family_head).visibility = View.VISIBLE
@@ -346,11 +355,11 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
         var timePassedString: CharSequence? = null
         try {
             val df =
-                SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                    SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val date = df.parse(dateTime)
             timePassedString =
-                SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-                    .format(date)
+                    SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+                            .format(date)
         } catch (e: Exception) {
             Timber.d(e)
         }
@@ -362,14 +371,14 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
         if (lastVisitDate == null) return
         tvLastVisitDay!!.visibility = View.VISIBLE
         numOfDays = Days.daysBetween(
-            DateTime(lastVisitDate).toLocalDate(),
-            DateTime().toLocalDate()
+                DateTime(lastVisitDate).toLocalDate(),
+                DateTime().toLocalDate()
         ).days
         tvLastVisitDay!!.text = getString(
-            R.string.last_visit_n_days_ago,
-            if (numOfDays <= 1) getString(R.string.less_than_twenty_four) else "$numOfDays " + getString(
-                R.string.days
-            )
+                R.string.last_visit_n_days_ago,
+                if (numOfDays <= 1) getString(R.string.less_than_twenty_four) else "$numOfDays " + getString(
+                        R.string.days
+                )
         )
         rlLastVisitLayout!!.visibility = View.GONE
         lastVisitRow!!.visibility = View.GONE
@@ -388,12 +397,12 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     override fun setFollowUpButtonOverdue() {
         showFollowUpVisitButton(true)
         tvRecordHivFollowUp!!.background =
-            resources.getDrawable(R.drawable.record_hiv_followup_overdue)
+                resources.getDrawable(R.drawable.record_hiv_followup_overdue)
     }
 
     override fun showFollowUpVisitButton(status: Boolean) {
         if (status) tvRecordHivFollowUp!!.visibility =
-            View.VISIBLE else tvRecordHivFollowUp!!.visibility = View.GONE
+                View.VISIBLE else tvRecordHivFollowUp!!.visibility = View.GONE
     }
 
     override fun hideFollowUpVisitButton() {

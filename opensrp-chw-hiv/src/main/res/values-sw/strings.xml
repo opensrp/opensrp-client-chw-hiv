@@ -130,4 +130,13 @@
     <!--    Sex-->
     <string name="sex_male">Me</string>
     <string name="sex_female">Ke</string>
+
+    <!--Index Contacts Relationships    -->
+    <string name="index_contact_sexual_partner">Mshirika wa ngono</string>
+    <string name="index_contact_needle_sharing_partner">Needle Sharing partner</string>
+    <string name="index_contact_biological_mother">Biological Mother</string>
+    <string name="index_contact_biological_father">Biological Father</string>
+    <string name="index_contact_biological_child_under_15">Mtoto wa kuzaa chini ya miaka 15</string>
+    <string name="index_contact_siblings_under_15">Ndugu wa damu chini ya miaka 15</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package org.smartregister.chw.hiv.presenter
 
+import org.smartregister.chw.hiv.activity.BaseHivProfileActivity
 import org.smartregister.chw.hiv.contract.BaseHivProfileContract
 import org.smartregister.chw.hiv.contract.BaseHivProfileContract.InteractorCallback
 import org.smartregister.chw.hiv.domain.HivMemberObject

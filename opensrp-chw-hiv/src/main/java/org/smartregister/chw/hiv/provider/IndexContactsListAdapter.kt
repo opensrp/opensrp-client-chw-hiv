@@ -63,6 +63,25 @@ class IndexContactsListAdapter(
                 }
             }
 
+            when{
+                client.relationship?.isNotEmpty()!! ->{
+                    if(client.relationship.equals("sexual_partner")){
+                        holder.relationship.text = context.getString(R.string.index_contact_sexual_partner)
+                    }else if(client.relationship.equals("needle_sharing_partner")){
+                        holder.relationship.text = context.getString(R.string.index_contact_needle_sharing_partner)
+                    }else if(client.relationship.equals("biological_mother")){
+                        holder.relationship.text = context.getString(R.string.index_contact_biological_mother)
+                    }else if(client.relationship.equals("biological_father")){
+                        holder.relationship.text = context.getString(R.string.index_contact_biological_father)
+                    }else if(client.relationship.equals("biological_child_under_15")){
+                        holder.relationship.text = context.getString(R.string.index_contact_biological_child_under_15)
+                    }else if(client.relationship.equals("siblings_under_15")){
+                        holder.relationship.text = context.getString(R.string.index_contact_siblings_under_15)
+                    }else{
+                        holder.relationship.visibility = View.GONE
+                    }
+                }
+            }
             when {
                 testResult?.isNotEmpty()!! -> {
                     if (testResult.toLowerCase(Locale.ROOT) == "positive") {
@@ -113,12 +132,14 @@ class IndexContactsListAdapter(
         var textViewGender: TextView
         var view: View
         var hivStatus: TextView
+        var relationship: TextView
 
         init {
             patientName = view.findViewById(R.id.patient_name_age)
             textViewVillage = view.findViewById(R.id.text_view_village)
             textViewGender = view.findViewById(R.id.text_view_gender)
             hivStatus = view.findViewById(R.id.hiv_status)
+            relationship = view.findViewById(R.id.relationship)
             this.view = view
         }
     }
