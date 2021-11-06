@@ -299,8 +299,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@+id/index_image"
                 android:layout_toStartOf="@id/iv_index_clients_arrow"
+                android:layout_toEndOf="@+id/index_image"
                 android:text="@string/index_client_has_registered_contacts"
                 android:textColor="@android:color/black" />
 
@@ -311,8 +311,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textview_client_has_registered_indexes"
                 android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@+id/index_image"
                 android:layout_toStartOf="@id/iv_index_clients_arrow"
+                android:layout_toEndOf="@+id/index_image"
                 android:text="@string/go_to_index_client_contact_list"
                 android:textColor="@android:color/darker_gray" />
 

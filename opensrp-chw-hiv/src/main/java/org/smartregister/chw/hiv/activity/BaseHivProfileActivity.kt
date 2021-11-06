@@ -43,7 +43,7 @@ open class BaseHivProfileActivity : BaseProfileActivity(),
     private var tvUndo: TextView? = null
     private var tvVisitDone: TextView? = null
     private var rlLastVisitLayout: RelativeLayout? = null
-    private var rlUpcomingServices: RelativeLayout? = null
+    protected var rlUpcomingServices: RelativeLayout? = null
     private var rlFamilyServicesDue: RelativeLayout? = null
     private var rlIndexClients: RelativeLayout? = null
     private var tvLastVisitDay: TextView? = null
