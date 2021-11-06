@@ -14,6 +14,7 @@ interface BaseHivProfileContract {
         fun openFamilyDueServices()
         fun openHivRegistrationForm()
         fun openFollowUpVisitForm(isEdit: Boolean)
+        fun openIndexClientsList(hivMemberObject: HivMemberObject?)
         fun setUpComingServicesStatus(
             service: String?,
             status: AlertStatus?,
@@ -22,6 +23,7 @@ interface BaseHivProfileContract {
 
         fun setFamilyStatus(status: AlertStatus?)
         fun setProfileViewDetails(hivMemberObject: HivMemberObject?)
+        fun setIndexClientsStatus(boolean: Boolean)
         fun setupFollowupVisitEditViews(isWithin24Hours: Boolean)
         fun updateLastVisitRow(lastVisitDate: Date?)
         fun setFollowUpButtonOverdue()
@@ -30,6 +32,7 @@ interface BaseHivProfileContract {
         fun showFollowUpVisitButton(status: Boolean)
         fun showProgressBar(status: Boolean)
         fun onMemberDetailsReloaded(hivMemberObject: HivMemberObject?)
+        fun openIndexContactRegistration()
     }
 
     interface Presenter {

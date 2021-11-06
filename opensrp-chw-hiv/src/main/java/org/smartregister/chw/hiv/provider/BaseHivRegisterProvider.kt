@@ -111,7 +111,17 @@ open class BaseHivRegisterProvider(
                 this.patientName.text = String.format(
                     Locale.getDefault(), "%s, %d", patientName, age
                 )
-                textViewGender.text = Utils.getValue(pc.columnmaps, DBConstants.Key.GENDER, true)
+
+                if (Utils.getValue(pc.columnmaps, DBConstants.Key.GENDER, true)
+                        .toLowerCase() == "male"
+                ) {
+                    textViewGender.text =
+                        context.getString(R.string.sex_male)
+                } else {
+                    textViewGender.text =
+                        context.getString(R.string.sex_female)
+                }
+
                 val village = Utils.getValue(pc.columnmaps, DBConstants.Key.VILLAGE_TOWN, true)
                 when {
                     village.isNotEmpty() -> {

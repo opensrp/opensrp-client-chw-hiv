@@ -27,6 +27,7 @@ import org.smartregister.chw.hiv.R
 import org.smartregister.chw.hiv.contract.BaseHivClientCallDialogContract
 import org.smartregister.chw.hiv.contract.BaseHivClientCallDialogContract.Dialer
 import org.smartregister.chw.hiv.custom_views.ClipboardDialog
+import org.smartregister.chw.hiv.domain.HivIndexContactObject
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.clientandeventmodel.Event
 import org.smartregister.repository.BaseRepository
@@ -139,6 +140,31 @@ object HivUtil : KoinComponent {
         val firstName = hivMemberObject.firstName
         val lastName = hivMemberObject.lastName
         val middleName = hivMemberObject.middleName
+        when {
+            StringUtils.isNotBlank(firstName) -> {
+                nameBuilder.append(firstName)
+            }
+            StringUtils.isNotBlank(middleName) -> {
+                nameBuilder.append(" ")
+                nameBuilder.append(middleName)
+            }
+            StringUtils.isNotBlank(lastName) -> {
+                nameBuilder.append(" ")
+                nameBuilder.append(lastName)
+            }
+        }
+        return nameBuilder.toString()
+    }
+
+    /**
+     * Used to concantinate names and return the clients full names
+     */
+    @JvmStatic
+    fun getFullName(hivIndexContactObject: HivIndexContactObject): String? {
+        val nameBuilder = StringBuilder()
+        val firstName = hivIndexContactObject.firstName
+        val lastName = hivIndexContactObject.lastName
+        val middleName = hivIndexContactObject.middleName
         when {
             StringUtils.isNotBlank(firstName) -> {
                 nameBuilder.append(firstName)

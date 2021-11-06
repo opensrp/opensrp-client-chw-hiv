@@ -13,17 +13,15 @@ object Constants {
 
     object Configuration {
         const val HIV_REGISTER = "hiv_register"
-    }
-
-    object HivMemberObject {
-        const val MEMBER_OBJECT = "memberObject"
-        const val COMMON_PERSON_OBJECT = "commonPersonObjectClient"
+        const val HIV_INDEX_REGISTER = "hiv_index_register"
     }
 
     object EventType {
         const val REGISTRATION = "HIV Registration"
         const val HIV_OUTCOME = "HIV Outcome"
         const val HIV_COMMUNITY_FOLLOWUP = "HIV Community Followup"
+        const val HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP = "HIV Index Contact Community Followup Referral"
+        const val HIV_INDEX_CONTACT_TESTING_FOLLOWUP = "HIV Index Contact Testing Followup"
         const val HIV_COMMUNITY_FOLLOWUP_FEEDBACK = "HIV Community Followup Feedback"
         const val FOLLOW_UP_VISIT = "HIV Followup"
         const val REFERRAL_FOLLOW_UP_VISIT = "Followup Visit"
@@ -37,6 +35,8 @@ object Constants {
 
     object Tables {
         const val HIV = "ec_hiv_register"
+        const val HIV_INDEX = "ec_hiv_index"
+        const val HIV_INDEX_HF = "ec_hiv_index_hf"
         const val HIV_FOLLOW_UP = "ec_hiv_follow_up_visit"
         const val HIV_OUTCOME = "ec_hiv_outcome"
         const val HIV_COMMUNITY_FOLLOWUP = "ec_hiv_community_followup"
@@ -46,7 +46,7 @@ object Constants {
 
     object ActivityPayload {
         const val BASE_ENTITY_ID = "BASE_ENTITY_ID"
-        const val MEMBER_OBJECT = "MEMBER_OBJECT"
+        const val HIV_MEMBER_OBJECT = "HIV_MEMBER_OBJECT"
         const val ACTION = "ACTION"
         const val HIV_REGISTRATION_FORM_NAME = "HIV_REGISTRATION_FORM_NAME"
         const val USE_DEFAULT_NEAT_FORM_LAYOUT = "use_default_neat_form_layout"
@@ -105,6 +105,22 @@ object DBConstants {
         const val COMMENTS = "comment"
         const val COMMUNITY_REFERRAL_FORM_ID = "community_referral_form_id"
         const val CHW_NAME = "chw_name"
+        const val HIV_CLIENT_ID = "hiv_client_id"
+        const val HIV_TEST_ELIGIBILITY = "hiv_test_eligibility"
+        const val RELATIONSHIP = "relationship"
+        const val HAS_STARTED_MEDICATION = "has_started_medication"
+        const val HOW_TO_NOTIFY_CONTACT_CLIENT = "how_to_notify_the_contact_client"
+        const val HAS_THE_CONTACT_CLIENT_BEEN_TESTED = "has_the_contact_client_been_tested"
+        const val ENROLLED_TO_CLINIC = "enrolled_to_clinic"
+        const val REFER_TO_CHW = "refer_to_chw"
+        const val FOLLOWED_UP_BY_CHW = "client_followed_up_by_chw"
+        const val HIV_INDEX_REGISTRATION_DATE = "hiv_index_registration_date"
+        const val TEST_RESULTS = "test_results"
+        const val PLACE_WHERE_TEST_WAS_CONDUCTED = "place_where_test_was_conducted"
+        const val FAMILY_HEAD_FIRST_NAME = "family_head_first_name"
+        const val FAMILY_HEAD_MIDDLE_NAME = "family_head_middle_name"
+        const val FAMILY_HEAD_LAST_NAME = "family_head_last_name"
+        const val CLIENT_FOLLOWUP_STATUS = "registration_or_followup_status"
     }
 }
 

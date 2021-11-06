@@ -3,6 +3,7 @@
     <string name="error_unable_to_start_form">An error occurred when starting the form</string>
     <string name="error_unable_to_save_form">An error occurred when saving the form</string>
     <string name="hiv_clients">HIV Clients</string>
+    <string name="hiv_index_clients_contacts">Index Clients Contacts</string>
     <string name="hiv_community_followup_clients">Followup Clients</string>
     <string name="followup_referral">HIV Followup Referrals</string>
 
@@ -69,8 +70,11 @@
     <string name="call_hiv_client">Call HIV client</string>
 
     <string name="hiv_return_to_previous_page">Return to all hiv clients</string>
+    <string name="hiv_return_to_index_contacts_page">Return to Index Contacts List</string>
     <string name="record_hiv_followup">Record hiv follow-up visit</string>
+    <string name="record_index_contact_followup">Record HIV Index Contact follow-up visit</string>
     <string name="hiv_visit_done">Hiv follow-up visit done</string>
+    <string name="index_contact_visit_done">Index Contact testing follow-up done</string>
     <string name="hiv_visit_edit">Edit</string>
     <string name="last_visit">Last visit</string>
     <string name="view_hiv_registration">View HIV registration</string>
@@ -112,6 +116,31 @@
     <string name="hiv_outcome_saved">HIV Problem outcome saved</string>
     <string name="hiv_community_followup_feedback_saved">HIV Community followup feedback saved</string>
     <string name="form_saved">Form saved successfully</string>
+    <string name="hiv_positive_status_on_medication">HIV Positive Already on ARV Medication</string>
     <string name="hiv_positive_status">HIV Positive</string>
     <string name="hiv_negative_status">HIV Negative</string>
+    <string name="index_client_has_registered_contacts">Has registered contacts</string>
+    <string name="go_to_index_client_contact_list">View contacts list</string>
+    <string name="associated_index_client">Associated Index Client</string>
+
+    <string name="client_was_not_tested">Client was not tested</string>
+    <string name="register_contacts">Register Contacts</string>
+    <string name="successful_registration">Successful Registration</string>
+    <string name="index_client_re_elicit">The client should re-elicit more contacts</string>
+    <string name="index_contact_community_followup_referral_notification_message">Message: %1$s</string>
+    <!--    Sex-->
+    <string name="sex_male">Male</string>
+    <string name="sex_female">Female</string>
+
+    <!--Index Contacts Relationships    -->
+    <string name="index_contact_sexual_partner">Sexual partner</string>
+    <string name="index_contact_needle_sharing_partner">Needle Sharing partner</string>
+    <string name="index_contact_biological_mother">Biological Mother</string>
+    <string name="index_contact_biological_father">Biological Father</string>
+    <string name="index_contact_biological_child_under_15">Biological Child Under 15</string>
+    <string name="index_contact_siblings_under_15">Siblings Under 15</string>
+
+    <string name="client_followup_status_deceased">Deceased</string>
+    <string name="client_followup_status_qualified_from_service">Qualified</string>
+
 </resources>

@@ -3,12 +3,13 @@ package org.smartregister.chw.hiv.presenter
 import android.app.Activity
 import android.database.sqlite.SQLiteException
 import android.util.Log
+import com.nerdstone.neatandroidstepper.core.domain.StepperActions
 import com.nerdstone.neatformcore.domain.model.NFormViewData
 import org.apache.commons.lang3.tuple.Triple
 import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.chw.hiv.R
-import org.smartregister.chw.hiv.contract.BaseRegisterFormsContract
+import org.smartregister.chw.hiv.contract.BaseHivFormsContract
 import org.smartregister.chw.hiv.domain.HivMemberObject
 import org.smartregister.chw.hiv.util.Constants
 import org.smartregister.chw.hiv.util.DBConstants
@@ -17,16 +18,23 @@ import timber.log.Timber
 import java.lang.ref.WeakReference
 import java.util.*
 
-open class BaseRegisterFormsPresenter(
+/**
+ * Created by cozej4 on 2021-07-13.
+ *
+ * @cozej4 https://github.com/cozej4
+ *
+ * This is the presenter for  [org.smartregister.chw.hiv.activity.BaseHivFormsActivity]
+ */
+open class BaseHivFormsActivityPresenter(
     val baseEntityID: String,
-    view: BaseRegisterFormsContract.View,
-    protected var interactor: BaseRegisterFormsContract.Interactor
-) : BaseRegisterFormsContract.Presenter, BaseRegisterFormsContract.InteractorCallBack {
+    view: BaseHivFormsContract.View,
+    protected var interactor: BaseHivFormsContract.Interactor
+) : BaseHivFormsContract.Presenter, BaseHivFormsContract.InteractorCallBack {
 
     var hivMemberObject: HivMemberObject? = null
     private var viewReference = WeakReference(view)
 
-    override fun getView(): BaseRegisterFormsContract.View? {
+    override fun getView(): BaseHivFormsContract.View? {
         return viewReference.get()
     }
 

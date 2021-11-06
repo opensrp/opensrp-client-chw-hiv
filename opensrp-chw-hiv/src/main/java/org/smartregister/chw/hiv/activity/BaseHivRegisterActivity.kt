@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.MenuRes
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import org.json.JSONObject
 import org.smartregister.chw.hiv.R
@@ -98,7 +99,7 @@ open class BaseHivRegisterActivity : BaseRegisterActivity(),
 
     override fun getRegisterFragment() = BaseHivRegisterFragment()
 
-    override fun getOtherFragments() = arrayOf(BaseHivCommunityFollowupRegisterFragment())
+    override fun getOtherFragments() = arrayOf(Fragment())
 
     override fun presenter() = presenter as BaseHivRegisterContract.Presenter
 }

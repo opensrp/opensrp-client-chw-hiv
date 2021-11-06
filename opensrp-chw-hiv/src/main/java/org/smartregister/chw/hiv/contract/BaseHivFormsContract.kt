@@ -1,5 +1,6 @@
 package org.smartregister.chw.hiv.contract
 
+import android.content.Intent
 import com.nerdstone.neatformcore.domain.model.NFormViewData
 import org.apache.commons.lang3.tuple.Triple
 import org.json.JSONObject
@@ -11,7 +12,7 @@ import java.util.*
 /**
  * Contract for BaseHivRegistrationForms
  */
-interface BaseRegisterFormsContract {
+interface BaseHivFormsContract {
 
     /**
      * defines methods to implement for the view, also extends [KoinComponent]
@@ -27,6 +28,16 @@ interface BaseRegisterFormsContract {
          * passes data pertaining to the client's profile to the [View]
          */
         fun setProfileViewWithData()
+
+
+        /**
+         * passes data back to the source activity's on activity results
+         */
+        fun setDataToBePassedBackToCallingActivityAsResults(
+            intent: Intent,
+            jsonForm: JSONObject,
+            formData: HashMap<String, NFormViewData>
+        )
     }
 
     /**

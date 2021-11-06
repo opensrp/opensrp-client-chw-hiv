@@ -21,7 +21,7 @@ import org.smartregister.view.fragment.BaseRegisterFragment
 import java.util.*
 
 /**
- * This register displays list of all the referred clients, it implements [BaseHivRegisterFragmentContract.View] and extends
+ * This register displays list of all the registered hiv clients, it implements [BaseHivRegisterFragmentContract.View] and extends
  * OpenSRP's [BaseRegisterFragment] which provides common functionality and consistency when creating
  * register.
  *
@@ -31,12 +31,12 @@ open class BaseHivRegisterFragment : BaseRegisterFragment(),
 
     @Suppress("INACCESSIBLE_TYPE")
     override fun initializeAdapter(visibleColumns: Set<View>?) {
-        val referralRegisterProvider = BaseHivRegisterProvider(
+        val hivRegisterProvider = BaseHivRegisterProvider(
             activity as Context, paginationViewHandler, registerActionHandler, visibleColumns
         )
         clientAdapter = RecyclerViewPaginatedAdapter<BaseHivRegisterProvider.RegisterViewHolder>(
             null,
-            referralRegisterProvider as RecyclerViewProvider<RecyclerView.ViewHolder>,
+            hivRegisterProvider as RecyclerViewProvider<RecyclerView.ViewHolder>,
             context().commonrepository(tablename)
         )
         clientAdapter.setCurrentlimit(20)
